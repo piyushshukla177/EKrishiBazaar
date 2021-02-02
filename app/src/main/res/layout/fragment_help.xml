@@ -53,6 +53,7 @@
 
 
             <LinearLayout
+                android:id="@+id/terms_and_condition_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -86,6 +87,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ads_posting_guidelines_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -119,6 +121,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/legal_privacy_policy_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -152,6 +155,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/trust_and_safety_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -185,6 +189,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/buyers_faqs_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -218,6 +223,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/general_faqs_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -251,6 +257,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/be_varified_user_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -284,6 +291,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/about_us_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"
@@ -317,6 +325,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/contact_us_linear"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:gravity="center"

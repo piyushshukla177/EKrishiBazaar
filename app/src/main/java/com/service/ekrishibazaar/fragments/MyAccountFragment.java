@@ -1,19 +1,14 @@
 package com.service.ekrishibazaar.fragments;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.service.ekrishibazaar.LoginActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.ViewProfileActivity;
@@ -22,7 +17,7 @@ import com.service.ekrishibazaar.util.PrefsHelper;
 public class MyAccountFragment extends Fragment {
 
     TextView user_name_tv;
-    LinearLayout sign_in_linear, root_linear, sign_out_linear, my_profile_linear,my_ads_linear;
+    LinearLayout sign_in_linear, root_linear, sign_out_linear, my_profile_linear, my_ads_linear;
     String token, firstName, LastName = "";
 
     @Override
