@@ -1,7 +1,6 @@
 package com.service.ekrishibazaar;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -73,9 +71,9 @@ public class RegistrationActivity extends AppCompatActivity {
         mobile_number_et = findViewById(R.id.mobile_number_et);
         password_et = findViewById(R.id.password_et);
         villege_et = findViewById(R.id.villege_et);
-        state_list.add("Select State");
-        district_list.add("Select District");
-        block_list.add("Select Block");
+        state_list.add(getString(R.string.Select_State));
+        district_list.add(getString(R.string.Select_District));
+        block_list.add(getString(R.string.Select_Block));
         back_image.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

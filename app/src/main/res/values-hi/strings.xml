@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EKrishiBazaar</string>
     <string name="title_activity_dashboard">MainActivity</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">होम</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">सूचनाएं</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -13,12 +13,12 @@
     <string name="Buy_Order">ऑर्डर खरीदें</string>
     <string name="More_Services">अधिक सेवाएँ</string>
     <string name="Buy_Back_Order">वापस ऑर्डर खरीदें</string>
-    <string name="Find_Agriculture_Categories">Find Agriculture Categories</string>
+    <string name="Find_Agriculture_Categories">कृषि श्रेणियाँ खोजें</string>
 
     <string name="Your_Mobile_Number">आपका मोबाइल नंबर *</string>
     <string name="Your_Password">आपका पासवर्ड *</string>
     <string name="Login">लॉग इन करें</string>
-    <string name="Do_not_have_Account">Don\'t have Account ? Sign UP</string>
+    <string name="Do_not_have_Account">खाता नहीं है ? साइन अप करें</string>
     <string name="Change_Location"><u>स्थान बदलें</u>.</string>
     <string name="Your_First_Name">आपका प्रथम नाम *</string>
     <string name="Your_Last_Name">आपका अंतिम नाम *</string>
@@ -26,4 +26,17 @@
     <string name="Register">रजिस्टर करें</string>
     <string name="Let_us_Provide_Information_about_your_area">हमें अपने क्षेत्र के बारे में जानकारी दें</string>
     <string name="No_Message_to_show">दिखाने के लिए कोई संदेश नहीं</string>
+    <string name="Browse_Categories">श्रेणियाँ ब्राउज़ करें</string>
+    <string name="MY_ADS">मेरे विज्ञापन</string>
+    <string name="PROFILE">प्रोफाइल</string>
+    <string name="HELP">मदद</string>
+    <string name="My_Profile">मेरी प्रोफाइल</string>
+    <string name="Settings">सेटिंग्स</string>
+    <string name="Sign_Out">लॉग आउट</string>
+    <string name="Hello">नमस्ते!</string>
+    <string name="Are_you_sure_you_want_to_logout">क्या आप लॉग आउट करना चाहते हैं !!</string>
+    <string name="Already_have_account_Sign_In">पहले से ही खाता है। दाखिल करना</string>
+    <string name="Select_State">राज्य चुनें</string>
+    <string name="Select_District">जिला चुनें</string>
+    <string name="Select_Block">ब्लॉक का चयन करें</string>
 </resources>

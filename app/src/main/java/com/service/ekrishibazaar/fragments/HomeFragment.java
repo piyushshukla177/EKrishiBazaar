@@ -1,12 +1,9 @@
 package com.service.ekrishibazaar.fragments;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -29,11 +25,9 @@ import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.MyGridView;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -66,10 +60,10 @@ public class HomeFragment extends Fragment {
         category_grid = root.findViewById(R.id.category_grid);
         notifiation_imageview = root.findViewById(R.id.notifiation_imageview);
         String token = PrefsHelper.getString(context, "token");
-//        view_all_tv = root.findViewById(R.id.view_all_tv);
-//        cattle_ads_linear = root.findViewById(R.id.cattle_ads_linear);
-//        service_ads_linear = root.findViewById(R.id.service_ads_linear);
-//        agricultire_machinary_linear = root.findViewById(R.id.agricultire_machinary_linear);
+//      view_all_tv = root.findViewById(R.id.view_all_tv);
+//      cattle_ads_linear = root.findViewById(R.id.cattle_ads_linear);
+//      service_ads_linear = root.findViewById(R.id.service_ads_linear);
+//      agricultire_machinary_linear = root.findViewById(R.id.agricultire_machinary_linear);
 
         getAllCategories();
 

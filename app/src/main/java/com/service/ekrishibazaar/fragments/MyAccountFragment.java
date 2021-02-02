@@ -55,8 +55,7 @@ public class MyAccountFragment extends Fragment {
                     public void onClick(View v) {
                         new AlertDialog.Builder(getActivity())
                                 // .setTitle("Delete entry")
-                                .setMessage("Are you sure you want to logout !!")
-
+                                .setMessage(getString(R.string.Are_you_sure_you_want_to_logout))
                                 // Specifying a listener allows you to take an action before dismissing the dialog.
                                 // The dialog is automatically dismissed when a dialog button is clicked.
                                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

@@ -26,4 +26,17 @@
     <string name="Register">Register</string>
     <string name="Let_us_Provide_Information_about_your_area">Let us Provide Information about your area</string>
     <string name="No_Message_to_show">No Message(s) to show</string>
+    <string name="Browse_Categories">Browse Categories</string>
+    <string name="MY_ADS">MY ADS</string>
+    <string name="PROFILE">PROFILE</string>
+    <string name="HELP">HELP</string>
+    <string name="My_Profile">My Profile</string>
+    <string name="Settings">Settings</string>
+    <string name="Sign_Out">Sign Out</string>
+    <string name="Hello">Hello</string>
+    <string name="Are_you_sure_you_want_to_logout">Are you sure you want to logout !!</string>
+    <string name="Already_have_account_Sign_In">Already have account. Sign In</string>
+    <string name="Select_State">Select State</string>
+    <string name="Select_District">Select District</string>
+    <string name="Select_Block">Select Block</string>
 </resources>

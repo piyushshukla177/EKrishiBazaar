@@ -13,15 +13,15 @@
     <item
         android:id="@+id/navigation_my_adds"
         android:icon="@drawable/advertisement"
-        android:title="MY ADDS" />
+        android:title="@string/MY_ADDS" />
 
     <item
         android:id="@+id/navigation_myaccount"
         android:icon="@drawable/account"
-        android:title="PROFILE" />
+        android:title="@string/PROFILE" />
 
     <item
         android:id="@+id/navigation_sell"
         android:icon="@drawable/sell"
-        android:title="HELP" />
+        android:title="@string/HELP" />
 </menu>

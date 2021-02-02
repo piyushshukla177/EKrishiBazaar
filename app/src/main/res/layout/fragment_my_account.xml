@@ -64,7 +64,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello"
+                        android:text="@string/Hello"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp" />
 
@@ -137,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_15sdp"
-                    android:text="My Profile"
+                    android:text="@string/My_Profile"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>
@@ -158,7 +158,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_15sdp"
-                    android:text="My Ads"
+                    android:text="@string/MY_ADS"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_15sdp"
-                    android:text="Settings"
+                    android:text="@string/Settings"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -202,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_15sdp"
-                    android:text="Sign Out"
+                    android:text="@string/Sign_Out"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>

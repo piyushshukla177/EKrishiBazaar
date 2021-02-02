@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_15sdp"
-                android:text="Already have account. Sign In"
+                android:text="@string/Already_have_account_Sign_In"
                 android:textColor="#004FA3"
                 android:textSize="@dimen/_12sdp"
                 android:textStyle="bold" />
