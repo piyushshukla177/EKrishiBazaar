@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SelectLanguageActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/select_lang_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:text="Select Your Language"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/languages_recylerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp" />
+        </LinearLayout>
+</RelativeLayout>
+
+        <!--            <RadioGroup-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content">-->
+
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:id="@+id/english_card"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_50sdp"-->
+        <!--                    android:layout_margin="@dimen/_10sdp"-->
+        <!--                    android:background="@drawable/card_edge"-->
+        <!--                    app:cardCornerRadius="@dimen/_10sdp">-->
+
+        <!--                    <RelativeLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:background="@drawable/card_edge">-->
+
+        <!--                        <RadioButton-->
+        <!--                            android:id="@+id/english_radio"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_centerVertical="true"-->
+        <!--                            android:buttonTint="@color/logo_color"-->
+        <!--                            android:padding="@dimen/_10sdp"-->
+        <!--                            android:text="English"-->
+        <!--                            android:textSize="@dimen/_12sdp" />-->
+        <!--                    </RelativeLayout>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:id="@+id/hindi_cardview"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_50sdp"-->
+        <!--                    android:layout_margin="@dimen/_10sdp"-->
+        <!--                    android:background="@drawable/card_edge"-->
+        <!--                    app:cardCornerRadius="@dimen/_10sdp">-->
+
+        <!--                    <RelativeLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:background="@drawable/card_edge">-->
+
+        <!--                        <RadioButton-->
+        <!--                            android:id="@+id/hindi_radiobtn"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_centerVertical="true"-->
+        <!--                            android:buttonTint="@color/logo_color"-->
+        <!--                            android:padding="@dimen/_10sdp"-->
+        <!--                            android:text="हिंदी"-->
+        <!--                            android:textSize="@dimen/_12sdp" />-->
+        <!--                    </RelativeLayout>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:id="@+id/hinglish_cardview"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_50sdp"-->
+        <!--                    android:layout_margin="@dimen/_10sdp"-->
+        <!--                    android:background="@drawable/card_edge"-->
+        <!--                    app:cardCornerRadius="@dimen/_10sdp">-->
+
+        <!--                    <RelativeLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:background="@drawable/card_edge">-->
+
+        <!--                        <RadioButton-->
+        <!--                            android:id="@+id/hinglish_radio"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_centerVertical="true"-->
+        <!--                            android:buttonTint="@color/logo_color"-->
+        <!--                            android:padding="@dimen/_10sdp"-->
+        <!--                            android:text="Hinglish"-->
+        <!--                            android:textSize="@dimen/_12sdp" />-->
+        <!--                    </RelativeLayout>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:id="@+id/gujrati_cardview"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_50sdp"-->
+        <!--                    android:layout_margin="@dimen/_10sdp"-->
+        <!--                    android:background="@drawable/card_edge"-->
+        <!--                    app:cardCornerRadius="@dimen/_10sdp">-->
+
+        <!--                    <RelativeLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:background="@drawable/card_edge">-->
+
+        <!--                        <RadioButton-->
+        <!--                            android:id="@+id/gujrati_radio"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_centerVertical="true"-->
+        <!--                            android:buttonTint="@color/logo_color"-->
+        <!--                            android:padding="@dimen/_10sdp"-->
+        <!--                            android:text="ગુજરાતી"-->
+        <!--                            android:textSize="@dimen/_12sdp" />-->
+        <!--                    </RelativeLayout>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+
+
+        <!--                <androidx.cardview.widget.CardView-->
+        <!--                    android:id="@+id/kannad_cardview"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="@dimen/_50sdp"-->
+        <!--                    android:layout_margin="@dimen/_10sdp"-->
+        <!--                    android:background="@drawable/card_edge"-->
+        <!--                    app:cardCornerRadius="@dimen/_10sdp">-->
+
+        <!--                    <RelativeLayout-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="match_parent"-->
+        <!--                        android:background="@drawable/card_edge">-->
+
+        <!--                        <RadioButton-->
+        <!--                            android:id="@+id/kannad_radio"-->
+        <!--                            android:layout_width="wrap_content"-->
+        <!--                            android:layout_height="wrap_content"-->
+        <!--                            android:layout_centerVertical="true"-->
+        <!--                            android:buttonTint="@color/logo_color"-->
+        <!--                            android:padding="@dimen/_10sdp"-->
+        <!--                            android:text="ಕನ್ನಡ"-->
+        <!--                            android:textSize="@dimen/_12sdp" />-->
+        <!--                    </RelativeLayout>-->
+
+        <!--                </androidx.cardview.widget.CardView>-->
+        <!--            </RadioGroup>-->
+        <!--        </LinearLayout>-->
+        <!--    </RelativeLayout>-->

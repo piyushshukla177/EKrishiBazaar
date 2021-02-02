@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">EKrishiBazaar</string>
+    <string name="title_activity_dashboard">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">सूचनाएं</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Select_your_State">अपना राज्य चुनें</string>
+    <string name="Select_your_District">अपने जिले का चयन करें</string>
+    <string name="Select_your_Block">अपने ब्लॉक का चयन करें</string>
+    <string name="Next">अगला</string>
+    <string name="Buy_Order">ऑर्डर खरीदें</string>
+    <string name="More_Services">अधिक सेवाएँ</string>
+    <string name="Buy_Back_Order">वापस ऑर्डर खरीदें</string>
+    <string name="Find_Agriculture_Categories">Find Agriculture Categories</string>
+
+    <string name="Your_Mobile_Number">आपका मोबाइल नंबर *</string>
+    <string name="Your_Password">आपका पासवर्ड *</string>
+    <string name="Login">लॉग इन करें</string>
+    <string name="Do_not_have_Account">Don\'t have Account ? Sign UP</string>
+    <string name="Change_Location"><u>स्थान बदलें</u>.</string>
+    <string name="Your_First_Name">आपका प्रथम नाम *</string>
+    <string name="Your_Last_Name">आपका अंतिम नाम *</string>
+    <string name="Village_Name">गाँव का नाम *</string>
+    <string name="Register">रजिस्टर करें</string>
+    <string name="Let_us_Provide_Information_about_your_area">हमें अपने क्षेत्र के बारे में जानकारी दें</string>
+    <string name="No_Message_to_show">दिखाने के लिए कोई संदेश नहीं</string>
+</resources>

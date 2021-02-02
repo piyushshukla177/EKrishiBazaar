@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.service.ekrishibazaar">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EKrishiBazaar"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".NotificationActivity"
+            android:theme="@style/Theme.Splash"></activity>
+        <activity
+            android:name=".ViewProfileActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".FertilizerAdsDetailsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".TreeAdsDetailsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".TreeAndWoodDetailActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".LabourAdDetailsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".OtherAgriAdsDetailActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".MachinaryAdsDetailActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".ServiceInRentDetailActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".CattleDetailsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".AdaDetailsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".AdsListActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity android:name=".AllCategoryList" />
+        <activity
+            android:name=".SelectLanguageActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".DashboardActivity"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.Splash"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".AboutActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".LoginActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
