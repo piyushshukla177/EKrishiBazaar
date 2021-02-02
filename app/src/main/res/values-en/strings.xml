@@ -39,4 +39,6 @@
     <string name="Select_State">Select State</string>
     <string name="Select_District">Select District</string>
     <string name="Select_Block">Select Block</string>
+    <string name="Notification">Notification</string>
+    <string name="Sell">Sell</string>
 </resources>

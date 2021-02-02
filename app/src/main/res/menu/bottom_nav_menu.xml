@@ -13,7 +13,7 @@
     <item
         android:id="@+id/navigation_my_adds"
         android:icon="@drawable/advertisement"
-        android:title="@string/MY_ADDS" />
+        android:title="@string/MY_ADS" />
 
     <item
         android:id="@+id/navigation_myaccount"

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.volley.Request;
@@ -40,7 +39,7 @@ public class HomeFragment extends Fragment {
     TextView view_all_tv;
     LinearLayout cattle_ads_linear, service_ads_linear, agricultire_machinary_linear;
     private CategoryListAdapter mAdapter;
-    ImageView notifiation_imageview;
+    LinearLayout notification_linear;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,12 +57,8 @@ public class HomeFragment extends Fragment {
         context = getActivity();
         search_edittext = root.findViewById(R.id.search_edittext);
         category_grid = root.findViewById(R.id.category_grid);
-        notifiation_imageview = root.findViewById(R.id.notifiation_imageview);
+        notification_linear = root.findViewById(R.id.notification_linear);
         String token = PrefsHelper.getString(context, "token");
-//      view_all_tv = root.findViewById(R.id.view_all_tv);
-//      cattle_ads_linear = root.findViewById(R.id.cattle_ads_linear);
-//      service_ads_linear = root.findViewById(R.id.service_ads_linear);
-//      agricultire_machinary_linear = root.findViewById(R.id.agricultire_machinary_linear);
 
         getAllCategories();
 
@@ -81,45 +76,8 @@ public class HomeFragment extends Fragment {
                 filter(s.toString());
             }
         });
-//        view_all_tv.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        getAllCategories();
-//                    }
-//                }
-//        );
-//        cattle_ads_linear.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(getActivity(), AdsListActivity.class);
-//                        intent.putExtra("category", "Cattle");
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
-//        service_ads_linear.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(getActivity(), AdsListActivity.class);
-//                        intent.putExtra("category", "Service in Rent");
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
-//        agricultire_machinary_linear.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(getActivity(), AdsListActivity.class);
-//                        intent.putExtra("category", "Agriculture machinary");
-//                        startActivity(intent);
-//                    }
-//                }
-//        );
-        notifiation_imageview.setOnClickListener(
+
+        notification_linear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

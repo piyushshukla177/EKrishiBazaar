@@ -16,12 +16,13 @@ import android.widget.TextView;
 
 import com.service.ekrishibazaar.LoginActivity;
 import com.service.ekrishibazaar.R;
+import com.service.ekrishibazaar.ViewProfileActivity;
 import com.service.ekrishibazaar.util.PrefsHelper;
 
 public class MyAccountFragment extends Fragment {
 
     TextView user_name_tv;
-    LinearLayout sign_in_linear, root_linear, sign_out_linear;
+    LinearLayout sign_in_linear, root_linear, sign_out_linear, my_profile_linear,my_ads_linear;
     String token, firstName, LastName = "";
 
     @Override
@@ -39,6 +40,8 @@ public class MyAccountFragment extends Fragment {
 
         sign_in_linear = root.findViewById(R.id.sign_in_linear);
         user_name_tv = root.findViewById(R.id.user_name_tv);
+        my_profile_linear = root.findViewById(R.id.my_profile_linear);
+        my_ads_linear = root.findViewById(R.id.my_ads_linear);
         sign_in_linear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -99,5 +102,25 @@ public class MyAccountFragment extends Fragment {
             root_linear.setVisibility(View.GONE);
             ex.printStackTrace();
         }
+        my_profile_linear.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), ViewProfileActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+        my_ads_linear.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Fragment selectedFragment = new MyAddsFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                                selectedFragment).commit();
+                    }
+                }
+
+        );
     }
 }

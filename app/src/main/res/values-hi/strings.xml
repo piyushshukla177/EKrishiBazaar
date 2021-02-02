@@ -39,4 +39,6 @@
     <string name="Select_State">राज्य चुनें</string>
     <string name="Select_District">जिला चुनें</string>
     <string name="Select_Block">ब्लॉक का चयन करें</string>
+    <string name="Notification">Notification</string>
+    <string name="Sell">Sell</string>
 </resources>
