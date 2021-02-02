@@ -228,7 +228,7 @@ public class RegistrationActivity extends AppCompatActivity {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://ekrishibazaar.com/api/district/",
+                "https://ekrishibazaar.com/api/district/?search=" + state_name,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -294,7 +294,7 @@ public class RegistrationActivity extends AppCompatActivity {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://ekrishibazaar.com/api/block/",
+                "https://ekrishibazaar.com/api/block/?search=" + districtName,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
