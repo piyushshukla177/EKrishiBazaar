@@ -1,7 +1,6 @@
 package com.service.ekrishibazaar;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,7 +15,6 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -25,14 +23,10 @@ import com.service.ekrishibazaar.util.LocaleHelper;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -211,7 +205,7 @@ public class AboutActivity extends AppCompatActivity {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://ekrishibazaar.com/api/district/",
+                "https://ekrishibazaar.com/api/district/?search=" + state_name,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -247,12 +241,12 @@ public class AboutActivity extends AppCompatActivity {
                     }
                 }
         ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("search", state_name);
-                return params;
-            }
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("search", state_name);
+//                return params;
+//            }
         };
         // Add JsonArrayRequest to the RequestQueue
         VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
@@ -278,7 +272,7 @@ public class AboutActivity extends AppCompatActivity {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://ekrishibazaar.com/api/block/",
+                "https://ekrishibazaar.com/api/block/?search=" + districtName,
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -310,16 +304,15 @@ public class AboutActivity extends AppCompatActivity {
                         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, blocks_list);
                         block_spinner.setAdapter(stateAdapter);
                         // Do something when error occurred
-
                     }
                 }
         ) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("search", districtName);
-                return params;
-            }
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("search", districtName);
+//                return params;
+//            }
         };
         // Add JsonArrayRequest to the RequestQueue
         VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
