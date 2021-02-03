@@ -342,6 +342,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -458,6 +459,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -570,6 +572,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -674,12 +677,12 @@ public class AdsListActivity extends AppCompatActivity {
 
         ) {
 
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Accept-Language", language_code);
-//                return params;
-//            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
 
 //            @Override
 //            protected Map<String, String> getParams() {
@@ -707,6 +710,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -823,6 +827,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -939,6 +944,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -1059,6 +1065,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -1170,7 +1177,8 @@ public class AdsListActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.v("response", response);
                         try {
-//                          mProgressDialog.dismiss();
+                         mProgressDialog.dismiss();
+                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
