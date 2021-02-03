@@ -677,12 +677,12 @@ public class AdsListActivity extends AppCompatActivity {
 
         ) {
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Accept-Language", language_code);
-                return params;
-            }
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Accept-Language", language_code);
+//                return params;
+//            }
 
 //            @Override
 //            protected Map<String, String> getParams() {
