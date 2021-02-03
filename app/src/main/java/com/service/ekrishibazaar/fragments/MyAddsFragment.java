@@ -1,7 +1,9 @@
 package com.service.ekrishibazaar.fragments;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -92,6 +94,15 @@ public class MyAddsFragment extends Fragment {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/userads/";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,

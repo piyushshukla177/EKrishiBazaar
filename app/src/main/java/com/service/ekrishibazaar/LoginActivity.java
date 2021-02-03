@@ -1,7 +1,10 @@
 package com.service.ekrishibazaar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -73,6 +76,15 @@ public class LoginActivity extends AppCompatActivity {
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, "https://www.ekrishibazaar.com/api/signin/",

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,6 +80,15 @@ public class NotificationActivity extends AppCompatActivity {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://www.ekrishibazaar.com/api/usernotification/";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
