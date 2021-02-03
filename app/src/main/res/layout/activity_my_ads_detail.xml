@@ -211,11 +211,9 @@
                     android:layout_alignParentLeft="true"
                     android:text="View Profile"
                     android:textAllCaps="false"
-                    android:visibility="gone"
                     android:textSize="@dimen/_8sdp" />
 
                 <Button
-                    android:visibility="gone"
                     android:id="@+id/make_offer_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
@@ -345,7 +343,6 @@
 
 
             <RelativeLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -361,7 +358,6 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"

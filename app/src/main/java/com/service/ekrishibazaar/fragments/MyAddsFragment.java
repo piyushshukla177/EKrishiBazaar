@@ -2,6 +2,7 @@ package com.service.ekrishibazaar.fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,8 +29,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.service.ekrishibazaar.LoginActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.adapter.AgricultureAdsAdapter;
+import com.service.ekrishibazaar.adapter.MyAdsAdapter;
 import com.service.ekrishibazaar.model.AgricultureAdsModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
 
@@ -45,7 +48,7 @@ public class MyAddsFragment extends Fragment {
     Context context;
     RecyclerView myads_recyclerview;
     ArrayList<AgricultureAdsModel> agriculture_list = new ArrayList();
-    private AgricultureAdsAdapter agAdapter;
+    private MyAdsAdapter agAdapter;
     private RecyclerView.LayoutManager LayoutManager;
     TextView no_record_tv;
     LinearLayout sign_in_linear;
@@ -68,11 +71,21 @@ public class MyAddsFragment extends Fragment {
         myads_recyclerview = root.findViewById(R.id.myads_recyclerview);
         sign_in_linear = root.findViewById(R.id.sign_in_linear);
         no_record_tv = root.findViewById(R.id.no_record_tv);
-        if (token==null || token.isEmpty()) {
+        if (token == null || token.isEmpty()) {
             sign_in_linear.setVisibility(View.VISIBLE);
         } else {
             getAgricultureList();
         }
+        sign_in_linear.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        startActivity(intent);
+                        getActivity().getFragmentManager().popBackStack();
+                    }
+                }
+        );
     }
 
     private void getAgricultureList() {
@@ -96,7 +109,6 @@ public class MyAddsFragment extends Fragment {
                                 JSONObject obj = data_array.getJSONObject(i);
                                 Log.e("index==", String.valueOf(i));
 
-//                                if (obj.getString("type").equals("agriculturalads")) {
                                 JSONObject user_obj = obj.getJSONObject("user");
                                 JSONObject user_2_obj = user_obj.getJSONObject("user");
                                 m = new AgricultureAdsModel();
@@ -116,7 +128,7 @@ public class MyAddsFragment extends Fragment {
                                 m.setMobile_number(user_obj.getString("mobile_number"));
                                 m.setPost_id(obj.getString("post_id"));
 
-////                                    JSONObject service_machine_obj = obj.getJSONObject("product");
+////                            JSONObject service_machine_obj = obj.getJSONObject("product");
 //                                    JSONObject product_status_obj = obj.getJSONObject("product_status");
 
 //                                    m.setStatus(product_status_obj.getString("product_status"));
@@ -144,13 +156,11 @@ public class MyAddsFragment extends Fragment {
 //                                    Log.e("catgeory_type", String.valueOf(b));
 //                                    if (catgeory_type.equals(category_obj.getString("category_name"))) {
                                 agriculture_list.add(m);
-//                                    }
-//                                }
                             }
                             if (agriculture_list.size() > 0) {
                                 myads_recyclerview.setHasFixedSize(true);
                                 LayoutManager = new LinearLayoutManager(context);
-                                agAdapter = new AgricultureAdsAdapter(context, agriculture_list);
+                                agAdapter = new MyAdsAdapter(context, agriculture_list);
                                 myads_recyclerview.setLayoutManager(LayoutManager);
                                 myads_recyclerview.setAdapter(agAdapter);
 
@@ -188,7 +198,6 @@ public class MyAddsFragment extends Fragment {
                     }
                 }
         ) {
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
