@@ -1,5 +1,7 @@
 package com.service.ekrishibazaar;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,9 +23,11 @@ import com.service.ekrishibazaar.util.LocaleHelper;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,14 +63,14 @@ public class AboutActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                     if (check()) {
-                        Intent intent = new Intent(AboutActivity.this, DashboardActivity.class);
-                        startActivity(intent);
-                        finish();
-                        PrefsHelper.putString(AboutActivity.this, "state", state_spinner.getText().toString());
-                        PrefsHelper.putString(AboutActivity.this, "distict", district_spinner.getText().toString());
-                        PrefsHelper.putString(AboutActivity.this, "block", block_spinner.getText().toString());
-//                    }
+                        if (check()) {
+                            Intent intent = new Intent(AboutActivity.this, DashboardActivity.class);
+                            startActivity(intent);
+                            finish();
+                            PrefsHelper.putString(AboutActivity.this, "state", state_spinner.getText().toString());
+                            PrefsHelper.putString(AboutActivity.this, "distict", district_spinner.getText().toString());
+                            PrefsHelper.putString(AboutActivity.this, "block", block_spinner.getText().toString());
+                        }
                     }
                 }
         );

@@ -39,8 +39,8 @@
     <string name="Select_State">राज्य चुनें</string>
     <string name="Select_District">जिला चुनें</string>
     <string name="Select_Block">ब्लॉक का चयन करें</string>
-    <string name="Notification">Notification</string>
-    <string name="Sell">Sell</string>
-    <string name="about_us">Nowadays everyone talks about farmers, to increase their income. And as a solution for this, they have two ways, first, increase MSP and second, increase yields but we do not consider both these as complete solutions. We believe that the farmer needs a middleman free market, where he can get his crop sold at his cost. Rural market should be made more powerful and digital so that farmers like cities not only have information but also have a competitive market where they can sell their crops, and buy the goods they need. We have often seen in the village That is very similar to that which is not of the use of the retainer, yet due to lack of proper facility to resell, Former cannot sell it while such a farmer who needs him cannot buy it for lack of information and he has to go to the market and have to fix a higher price due to taking a new one. EKRISHIBAZAAR is the solution to all such problems.</string>
-
+    <string name="Notification">अधिसूचना</string>
+    <string name="Sell">बेचना</string>
+    <string name="about_us">आजकल हर कोई अपनी आय बढ़ाने के लिए किसानों की बात करता है। और इसके लिए एक समाधान के रूप में, उनके पास दो तरीके हैं, पहला, एमएसपी बढ़ाना और दूसरा, पैदावार बढ़ाना लेकिन हम इन दोनों को पूर्ण समाधान नहीं मानते हैं। हम मानते हैं कि किसान को बिचौलिया मुक्त बाजार की जरूरत है, जहां वह अपनी फसल को अपनी लागत पर बेच सकता है। ग्रामीण बाजार को और अधिक शक्तिशाली और डिजिटल बनाया जाना चाहिए ताकि शहरों जैसे किसानों को न केवल जानकारी हो बल्कि एक प्रतिस्पर्धी बाजार भी हो जहां वे अपनी फसल बेच सकें, और अपनी जरूरत का सामान खरीद सकें। हमने अक्सर गाँव में देखा है कि यह बहुत कुछ वैसा ही है, जो रिटेनर के उपयोग के लिए नहीं है, फिर भी रीसेल को उचित सुविधा न होने के कारण, पूर्व इसे नहीं बेच सकता है, जबकि ऐसे किसान जिन्हें उसकी जरूरत नहीं है, वे इसे नहीं खरीद सकते हैं जानकारी और उसे बाजार जाना है और एक नया लेने के कारण अधिक कीमत तय करनी होगी। EKRISHIBAZAAR ऐसी सभी समस्याओं का समाधान है.</string>
+    <string name="Sign_In">लॉग इन करें</string>
 </resources>

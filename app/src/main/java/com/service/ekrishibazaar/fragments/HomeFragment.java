@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.service.ekrishibazaar.AboutActivity;
 import com.service.ekrishibazaar.MoreServicesActivity;
 import com.service.ekrishibazaar.NotificationActivity;
 import com.service.ekrishibazaar.R;
@@ -43,22 +44,23 @@ public class HomeFragment extends Fragment {
     //  ArrayList<CattleAdsModel> fresh_product_list = new ArrayList<>();
     MyGridView category_grid;
     EditText search_edittext;
-    TextView view_all_tv;
-    LinearLayout cattle_ads_linear, service_ads_linear, agricultire_machinary_linear, more_services_linear;
+    TextView location_tv, change_location_tv;
+    LinearLayout more_services_linear;
     private CategoryListAdapter mAdapter;
     LinearLayout notification_linear;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         init(root);
         return root;
     }
 
-    CategoryListModel m;
-    CattleAdsModel f;
+    //
+//    CategoryListModel m;
+//    CattleAdsModel f;
+    String block, state, district;
 
     private void init(View root) {
         context = getActivity();
@@ -66,6 +68,8 @@ public class HomeFragment extends Fragment {
         category_grid = root.findViewById(R.id.category_grid);
         notification_linear = root.findViewById(R.id.notification_linear);
         more_services_linear = root.findViewById(R.id.more_services_linear);
+        location_tv = root.findViewById(R.id.location_tv);
+        change_location_tv = root.findViewById(R.id.change_location_tv);
         String token = PrefsHelper.getString(context, "token");
 
         getAllCategories();
@@ -99,11 +103,25 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
-                        intent.putExtra("url","https://www.ekrishibazaar.in/");
+                        intent.putExtra("url", "https://www.ekrishibazaar.in/");
                         startActivity(intent);
                     }
                 }
         );
+        change_location_tv.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), AboutActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }
+        );
+        block = PrefsHelper.getString(getActivity(), "block");
+        district = PrefsHelper.getString(getActivity(), "distict");
+        state = PrefsHelper.getString(getActivity(), "state");
+        location_tv.setText(block + ", " + district + ", " + state);
     }
 
     private void filter(String text) {

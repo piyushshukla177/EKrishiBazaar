@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,7 @@ public class MyAddsFragment extends Fragment {
     private AgricultureAdsAdapter agAdapter;
     private RecyclerView.LayoutManager LayoutManager;
     TextView no_record_tv;
+    LinearLayout sign_in_linear;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,9 +64,15 @@ public class MyAddsFragment extends Fragment {
     private void init(View root) {
         context = getActivity();
         token = PrefsHelper.getString(context, "token");
+
         myads_recyclerview = root.findViewById(R.id.myads_recyclerview);
+        sign_in_linear = root.findViewById(R.id.sign_in_linear);
         no_record_tv = root.findViewById(R.id.no_record_tv);
-        getAgricultureList();
+        if (token==null || token.isEmpty()) {
+            sign_in_linear.setVisibility(View.VISIBLE);
+        } else {
+            getAgricultureList();
+        }
     }
 
     private void getAgricultureList() {

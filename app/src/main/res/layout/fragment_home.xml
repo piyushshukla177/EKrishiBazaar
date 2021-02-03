@@ -19,11 +19,23 @@
             android:layout_margin="@dimen/_5sdp">
 
             <ImageView
+                android:id="@+id/location_image"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:src="@drawable/location" />
 
             <TextView
+                android:id="@+id/location_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toRightOf="@+id/location_image"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_9sdp" />
+
+            <TextView
+                android:id="@+id/change_location_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -70,13 +82,13 @@
                     android:visibility="gone" />
             </LinearLayout>
 
-<!--            <ImageView-->
-<!--                android:id="@+id/notifiation_imageview"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="@dimen/_20sdp"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_weight="0.2"-->
-<!--                android:src="@drawable/bell" />-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/notifiation_imageview"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="@dimen/_20sdp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:layout_weight="0.2"-->
+            <!--                android:src="@drawable/bell" />-->
         </LinearLayout>
 
         <View

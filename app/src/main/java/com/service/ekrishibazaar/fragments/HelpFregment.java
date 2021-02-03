@@ -70,7 +70,7 @@ public class HelpFregment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
-                        intent.putExtra("url", "https://www.ekrishibazaar.com/legalandprivacypolicym");
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/legalandprivacypolicy");
                         startActivity(intent);
 //                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/legalandprivacypolicym"));
 //                        startActivity(browserIntent);

@@ -1,15 +1,19 @@
 package com.service.ekrishibazaar.adapter;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.SelectLanguageActivity;
 import com.service.ekrishibazaar.model.SelectLanguageModel;
+
 import java.util.ArrayList;
 
 public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAdapter.SelectLanguageViewHolder> {
@@ -51,7 +55,7 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
                     @Override
                     public void onClick(View v) {
                         holder.language_name_radio.setChecked(true);
-                        ((SelectLanguageActivity) context).setLanguage(currentItem.getLang_code(),currentItem.getEng_name());
+                        ((SelectLanguageActivity) context).setLanguage(currentItem.getLang_code(), currentItem.getEng_name());
                     }
                 }
         );
@@ -60,7 +64,7 @@ public class SelectLanguageAdapter extends RecyclerView.Adapter<SelectLanguageAd
                     @Override
                     public void onClick(View v) {
                         holder.language_name_radio.setChecked(true);
-                        ((SelectLanguageActivity) context).setLanguage(currentItem.getLang_code(),currentItem.getEng_name());
+                        ((SelectLanguageActivity) context).setLanguage(currentItem.getLang_code(), currentItem.getEng_name());
                     }
                 }
         );
