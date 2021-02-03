@@ -1,9 +1,12 @@
 package com.service.ekrishibazaar.fragments;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,10 +15,12 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.service.ekrishibazaar.MoreServicesActivity;
 import com.service.ekrishibazaar.NotificationActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.adapter.CategoryListAdapter;
@@ -24,9 +29,11 @@ import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.MyGridView;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -37,7 +44,7 @@ public class HomeFragment extends Fragment {
     MyGridView category_grid;
     EditText search_edittext;
     TextView view_all_tv;
-    LinearLayout cattle_ads_linear, service_ads_linear, agricultire_machinary_linear;
+    LinearLayout cattle_ads_linear, service_ads_linear, agricultire_machinary_linear, more_services_linear;
     private CategoryListAdapter mAdapter;
     LinearLayout notification_linear;
 
@@ -58,6 +65,7 @@ public class HomeFragment extends Fragment {
         search_edittext = root.findViewById(R.id.search_edittext);
         category_grid = root.findViewById(R.id.category_grid);
         notification_linear = root.findViewById(R.id.notification_linear);
+        more_services_linear = root.findViewById(R.id.more_services_linear);
         String token = PrefsHelper.getString(context, "token");
 
         getAllCategories();
@@ -82,6 +90,16 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getActivity(), NotificationActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+        more_services_linear.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url","https://www.ekrishibazaar.in/");
                         startActivity(intent);
                     }
                 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.service.ekrishibazaar">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,8 +13,11 @@
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".AboutusActivity"
+            android:name=".MoreServicesActivity"
             android:theme="@style/Theme.Splash"></activity>
+        <activity
+            android:name=".AboutusActivity"
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".ContactUsActivity"
             android:theme="@style/Theme.Splash" />
@@ -81,4 +86,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

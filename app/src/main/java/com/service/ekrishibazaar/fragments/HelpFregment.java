@@ -1,14 +1,18 @@
 package com.service.ekrishibazaar.fragments;
+
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.service.ekrishibazaar.AboutusActivity;
 import com.service.ekrishibazaar.ContactUsActivity;
+import com.service.ekrishibazaar.MoreServicesActivity;
 import com.service.ekrishibazaar.R;
 
 public class HelpFregment extends Fragment {
@@ -39,8 +43,12 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/terms-to-this-platform"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/terms-to-this-platform");
+                        startActivity(intent);
+
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/terms-to-this-platform"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
@@ -48,8 +56,12 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/adpostingguidelines"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/adpostingguidelines");
+                        startActivity(intent);
+
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/adpostingguidelines"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
@@ -57,8 +69,11 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/legalandprivacypolicym"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/legalandprivacypolicym");
+                        startActivity(intent);
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/legalandprivacypolicym"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
@@ -66,8 +81,11 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/trust-and-safety"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/trust-and-safety");
+                        startActivity(intent);
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/trust-and-safety"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
@@ -75,8 +93,12 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/buyerfaq"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/buyerfaq");
+                        startActivity(intent);
+
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/buyerfaq"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
@@ -84,8 +106,12 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/generalfaq"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/generalfaq");
+                        startActivity(intent);
+
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/generalfaq"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
@@ -93,8 +119,12 @@ public class HelpFregment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/beverifieduser"));
-                        startActivity(browserIntent);
+                        Intent intent = new Intent(getActivity(), MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/beverifieduser");
+                        startActivity(intent);
+
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.ekrishibazaar.com/beverifieduser"));
+//                        startActivity(browserIntent);
                     }
                 }
         );
