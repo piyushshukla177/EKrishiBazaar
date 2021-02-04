@@ -3,7 +3,9 @@
     package="com.service.ekrishibazaar">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,9 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyAdsDetail"
-            android:theme="@style/Theme.Splash"
-            ></activity>
+        <activity
+            android:name=".PostSellAdsActivity"
+            android:theme="@style/Theme.Splash"></activity>
+        <activity
+            android:name=".PostNewAdsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".MyAdsDetail"
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".MoreServicesActivity"
             android:theme="@style/Theme.Splash" />

@@ -1,6 +1,7 @@
 package com.service.ekrishibazaar;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,7 +15,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -23,9 +26,11 @@ import com.service.ekrishibazaar.util.LocaleHelper;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class AboutActivity extends AppCompatActivity {
@@ -36,6 +41,7 @@ public class AboutActivity extends AppCompatActivity {
     ArrayList<String> state_list = new ArrayList();
     ArrayList<String> district_list = new ArrayList();
     ArrayList blocks_list = new ArrayList();
+    CheckBox terms_checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,7 @@ public class AboutActivity extends AppCompatActivity {
         state_spinner = findViewById(R.id.state_spinner);
         district_spinner = findViewById(R.id.district_spinner);
         block_spinner = findViewById(R.id.block_spinner);
+        terms_checkbox = findViewById(R.id.terms_checkbox);
 
         ArrayAdapter<String> blockAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, state_list);
         block_spinner.setAdapter(blockAdapter);
@@ -334,6 +341,11 @@ public class AboutActivity extends AppCompatActivity {
             b = false;
             Toast.makeText(this, "Please Select Block", Toast.LENGTH_SHORT).show();
             block_spinner.requestFocus();
+            return b;
+        } else if (!terms_checkbox.isChecked()) {
+            b = false;
+            Toast.makeText(this, "Please Select Privacy Policy", Toast.LENGTH_SHORT).show();
+            terms_checkbox.requestFocus();
             return b;
         }
         return b;

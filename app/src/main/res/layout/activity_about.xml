@@ -16,9 +16,9 @@
         android:textSize="@dimen/_8sdp"
         android:textStyle="bold"
         app:backgroundTint="@null"
+        app:layout_constraintBottom_toTopOf="@+id/provide_info_tv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/provide_info_tv"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/provide_info_tv"
@@ -28,11 +28,11 @@
         android:layout_marginTop="56dp"
         android:layout_marginRight="@dimen/_30sdp"
         android:gravity="center_horizontal"
+        android:padding="@dimen/_5sdp"
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/dark_green"
         android:textSize="@dimen/_20sdp"
-        android:padding="@dimen/_5sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_language_btn" />
@@ -53,9 +53,9 @@
         android:id="@+id/district_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_15sdp"
         android:hint="@string/Select_your_District"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -66,13 +66,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginRight="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_15sdp"
         android:autofillHints="Select Your District"
         android:hint="@string/Select_your_Block"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/district_spinner" />
+
+    <CheckBox
+        android:id="@+id/terms_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/I_have_read_Term_to_use_and_Privacy_Policy"
+        app:layout_constraintTop_toBottomOf="@+id/block_spinner"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_margin="@dimen/_10sdp" />
 
     <Button
         android:id="@+id/next_btn"
@@ -84,5 +93,5 @@
         app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/block_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/terms_checkbox" />
 </androidx.constraintlayout.widget.ConstraintLayout>

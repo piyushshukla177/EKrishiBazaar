@@ -25,9 +25,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.service.ekrishibazaar.AboutActivity;
 import com.service.ekrishibazaar.MoreServicesActivity;
 import com.service.ekrishibazaar.NotificationActivity;
+import com.service.ekrishibazaar.PostNewAdsActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.adapter.CategoryListAdapter;
-import com.service.ekrishibazaar.model.CattleAdsModel;
 import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.MyGridView;
 import com.service.ekrishibazaar.util.PrefsHelper;
@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
     TextView location_tv, change_location_tv;
     LinearLayout more_services_linear;
     private CategoryListAdapter mAdapter;
-    LinearLayout notification_linear;
+    LinearLayout notification_linear, sell_ads_linear;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,6 +72,7 @@ public class HomeFragment extends Fragment {
         more_services_linear = root.findViewById(R.id.more_services_linear);
         location_tv = root.findViewById(R.id.location_tv);
         change_location_tv = root.findViewById(R.id.change_location_tv);
+        sell_ads_linear = root.findViewById(R.id.sell_ads_linear);
         String token = PrefsHelper.getString(context, "token");
 
         getAllCategories();
@@ -117,6 +118,15 @@ public class HomeFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), AboutActivity.class);
                         startActivity(intent);
                         getActivity().finish();
+                    }
+                }
+        );
+        sell_ads_linear.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), PostNewAdsActivity.class);
+                        startActivity(intent);
                     }
                 }
         );
