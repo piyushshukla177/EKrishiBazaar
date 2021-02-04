@@ -290,7 +290,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
             }
         });
 
-        state_spinner.setText(PrefsHelper.getString());
+//        state_spinner.setText(PrefsHelper.getString());
         getStates();
         getAllCategories();
     }
