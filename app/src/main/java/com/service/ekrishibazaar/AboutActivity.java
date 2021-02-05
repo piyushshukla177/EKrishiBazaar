@@ -39,6 +39,7 @@ public class AboutActivity extends AppCompatActivity {
     ArrayList blocks_list = new ArrayList();
     CheckBox terms_checkbox;
     TextView privacy_textview;
+    String state;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +86,11 @@ public class AboutActivity extends AppCompatActivity {
                     }
                 }
         );
-        if (PrefsHelper.getString(context, "state") != null && !PrefsHelper.getString(context, "state").isEmpty()) {
+        state = PrefsHelper.getString(context, "state");
+        if (state != null && !state.isEmpty()) {
             terms_checkbox.setVisibility(View.GONE);
             privacy_textview.setVisibility(View.GONE);
         }
-
         state_spinner.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -354,7 +355,7 @@ public class AboutActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Select Block", Toast.LENGTH_SHORT).show();
             block_spinner.requestFocus();
             return b;
-        } else if (!terms_checkbox.isChecked()) {
+        } else if (state.isEmpty() && !terms_checkbox.isChecked()) {
             b = false;
             Toast.makeText(this, "Please Select Privacy Policy", Toast.LENGTH_SHORT).show();
             terms_checkbox.requestFocus();
