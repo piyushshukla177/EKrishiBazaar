@@ -69,7 +69,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_ada_details);
+            setContentView(R.layout.activity_my_ads_detail);
 
             init();
         }

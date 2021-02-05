@@ -58,7 +58,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select Product Catgeory"
+                android:hint="@string/Select_Product_Catgeory"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select Product"
+                android:hint="@string/Select_Product"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -84,7 +84,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select Product Breed"
+                android:hint="@string/Select_Product_Breed"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -97,7 +97,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select Product Status"
+                android:hint="@string/Select_Product_Status"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -123,7 +123,7 @@
                         android:id="@+id/quantity_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Quantity"
+                        android:hint="@string/Enter_Quantity"
                         android:inputType="number"
                         android:maxLines="1"
                         android:textSize="@dimen/_12sdp" />
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:hint="Select UOM"
+                    android:hint="@string/Select_UOM"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
@@ -159,7 +159,7 @@
                         android:id="@+id/price_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter Price"
+                        android:hint="@string/Enter_Price"
                         android:inputType="number"
                         android:maxLines="1"
                         android:textSize="@dimen/_12sdp" />
@@ -171,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:hint="Select UOM"
+                    android:hint="@string/Select_UOM"
                     android:textSize="@dimen/_12sdp" />
             </LinearLayout>
 
@@ -202,7 +202,21 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Packaging Availability"
+                android:hint="@string/Packaging_Availability"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/provide_info_tv" />
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/packaging_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:hint="@string/Package_Type"
+                android:visibility="gone"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -215,7 +229,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Who will pay extra charges"
+                android:hint="@string/Who_will_pay_extra_charges"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -229,7 +243,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select State"
+                android:hint="@string/Select_State"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -243,7 +257,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select District"
+                android:hint="@string/Select_District"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -257,7 +271,7 @@
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select Block"
+                android:hint="@string/Select_Block"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -276,7 +290,7 @@
                     android:id="@+id/village_name_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Village Name"
+                    android:hint="@string/Village_Name"
                     android:maxLines="1"
                     android:textSize="@dimen/_12sdp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -294,7 +308,7 @@
                     android:id="@+id/additional_info_et"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Additional Information"
+                    android:hint="@string/Additional_Information"
                     android:maxLines="1"
                     android:textSize="@dimen/_12sdp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -303,7 +317,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_15sdp"
-                android:text="Upload Images"
+                android:text="@string/Upload_Images"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12sdp" />
 
@@ -398,7 +412,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
                 android:background="@drawable/corner_round_btn_shape"
-                android:text="Submit"
+                android:text="@string/Submit"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 app:backgroundTint="@null" />

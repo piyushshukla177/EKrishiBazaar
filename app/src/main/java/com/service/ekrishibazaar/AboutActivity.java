@@ -1,7 +1,5 @@
 package com.service.ekrishibazaar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,8 +14,8 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -26,11 +24,9 @@ import com.service.ekrishibazaar.util.LocaleHelper;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class AboutActivity extends AppCompatActivity {
@@ -42,6 +38,7 @@ public class AboutActivity extends AppCompatActivity {
     ArrayList<String> district_list = new ArrayList();
     ArrayList blocks_list = new ArrayList();
     CheckBox terms_checkbox;
+    TextView privacy_textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +55,7 @@ public class AboutActivity extends AppCompatActivity {
         district_spinner = findViewById(R.id.district_spinner);
         block_spinner = findViewById(R.id.block_spinner);
         terms_checkbox = findViewById(R.id.terms_checkbox);
+        privacy_textview = findViewById(R.id.privacy_textview);
 
         ArrayAdapter<String> blockAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, state_list);
         block_spinner.setAdapter(blockAdapter);
@@ -87,6 +85,10 @@ public class AboutActivity extends AppCompatActivity {
                     }
                 }
         );
+        if (PrefsHelper.getString(context, "state") != null && !PrefsHelper.getString(context, "state").isEmpty()) {
+            terms_checkbox.setVisibility(View.GONE);
+            privacy_textview.setVisibility(View.GONE);
+        }
 
         state_spinner.addTextChangedListener(new TextWatcher() {
             @Override
@@ -123,6 +125,16 @@ public class AboutActivity extends AppCompatActivity {
                 }
             }
         });
+        privacy_textview.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, MoreServicesActivity.class);
+                        intent.putExtra("url", "https://www.ekrishibazaar.com/terms-to-this-platform");
+                        startActivity(intent);
+                    }
+                }
+        );
         district_list.add("Select District");
         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
         district_spinner.setAdapter(stateAdapter);

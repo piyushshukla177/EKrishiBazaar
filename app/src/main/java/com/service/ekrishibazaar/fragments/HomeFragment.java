@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -125,8 +126,12 @@ public class HomeFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(getActivity(), PostNewAdsActivity.class);
-                        startActivity(intent);
+                        if (PrefsHelper.getString(context, "token") != null && !PrefsHelper.getString(context, "token").isEmpty()) {
+                            Intent intent = new Intent(getActivity(), PostNewAdsActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(context, "Sign In to Post Ads", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
         );

@@ -18,16 +18,6 @@ public class MyAdsModel {
     private String posted_on;
     private String post_id;
     private String additional_info;
-//    private String product_name;
-//    private String category_name;
-//    private String category_image;
-//    private String product_breed;
-//    private String product_quantity;
-//    private String product_quantity_by;
-//    private String product_price_by;
-//    private String packaging_cost_bearer;
-//    private String status;
-
 
     public String getUser_first_name() {
         return user_first_name;

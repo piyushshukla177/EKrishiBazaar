@@ -92,7 +92,7 @@
 
 
         <LinearLayout
-            android:id="@+id/notification_linear"
+            android:id="@+id/post_buy_linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Post But Offer"
+                    android:text="Post Buy Offer"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
@@ -170,10 +170,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9sdp"
                     android:textStyle="bold" />
-
             </RelativeLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </RelativeLayout>

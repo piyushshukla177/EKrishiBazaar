@@ -1,8 +1,6 @@
 package com.service.ekrishibazaar;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -32,18 +29,14 @@ import com.service.ekrishibazaar.model.SliderItem;
 import com.service.ekrishibazaar.util.ApiHelper;
 import com.service.ekrishibazaar.util.MakeOfferSheet;
 import com.service.ekrishibazaar.util.PrefsHelper;
-import com.service.ekrishibazaar.util.RetrofitClient;
 import com.smarteist.autoimageslider.SliderView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
