@@ -98,10 +98,10 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
                     android:text=""
-                    android:textStyle="bold"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="14sp"></TextView>
+                    android:textSize="14sp"
+                    android:textStyle="bold"></TextView>
 
                 <!--                <TextView-->
                 <!--                    android:id="@+id/block_textview"-->

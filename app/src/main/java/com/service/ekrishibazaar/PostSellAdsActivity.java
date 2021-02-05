@@ -264,6 +264,10 @@ public class PostSellAdsActivity extends AppCompatActivity {
         ArrayAdapter<String> districtAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
         district_spinner.setAdapter(districtAdapter);
 
+        block_list.add("Select Block");
+        ArrayAdapter<String> blkAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, block_list);
+        block_spinner.setAdapter(blkAdapter);
+
         state_spinner.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
