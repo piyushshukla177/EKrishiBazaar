@@ -338,7 +338,6 @@
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
                         android:layout_margin="@dimen/_10sdp"
-                        app:tint="@color/logo_color"
                         android:src="@drawable/add_image" />
 
                     <ImageView
@@ -364,7 +363,7 @@
                         android:id="@+id/product_image_imageview2"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
-                        app:tint="@color/logo_color"
+
                         android:layout_margin="@dimen/_10sdp"
                         android:src="@drawable/add_image" />
 
@@ -392,7 +391,7 @@
                         android:id="@+id/product_image_imageview3"
                         android:layout_width="@dimen/_100sdp"
                         android:layout_height="@dimen/_100sdp"
-                        app:tint="@color/logo_color"
+
                         android:layout_margin="@dimen/_10sdp"
                         android:src="@drawable/add_image" />
 
