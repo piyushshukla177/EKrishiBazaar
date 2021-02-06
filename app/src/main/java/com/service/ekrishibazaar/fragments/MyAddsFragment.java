@@ -1,16 +1,13 @@
 package com.service.ekrishibazaar.fragments;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -33,11 +29,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.service.ekrishibazaar.LoginActivity;
 import com.service.ekrishibazaar.R;
-import com.service.ekrishibazaar.adapter.AgricultureAdsAdapter;
 import com.service.ekrishibazaar.adapter.MyAdsAdapter;
-import com.service.ekrishibazaar.model.AgricultureAdsModel;
+import com.service.ekrishibazaar.model.MyAdsModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -49,7 +43,7 @@ public class MyAddsFragment extends Fragment {
 
     Context context;
     RecyclerView myads_recyclerview;
-    ArrayList<AgricultureAdsModel> agriculture_list = new ArrayList();
+    ArrayList<MyAdsModel> myads_list = new ArrayList();
     private MyAdsAdapter agAdapter;
     private RecyclerView.LayoutManager LayoutManager;
     TextView no_record_tv;
@@ -115,14 +109,14 @@ public class MyAddsFragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
-                            AgricultureAdsModel m;
+                            MyAdsModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
                                 Log.e("index==", String.valueOf(i));
 
                                 JSONObject user_obj = obj.getJSONObject("user");
                                 JSONObject user_2_obj = user_obj.getJSONObject("user");
-                                m = new AgricultureAdsModel();
+                                m = new MyAdsModel();
                                 m.setUser_first_name(user_2_obj.getString("first_name"));
                                 m.setUser_last_name(user_2_obj.getString("last_name"));
                                 m.setDate_joined(user_2_obj.getString("date_joined"));
@@ -166,12 +160,12 @@ public class MyAddsFragment extends Fragment {
 //                                    String y = catgeory_type;
 //                                    Log.e("catgeory_type", String.valueOf(b));
 //                                    if (catgeory_type.equals(category_obj.getString("category_name"))) {
-                                agriculture_list.add(m);
+                                myads_list.add(m);
                             }
-                            if (agriculture_list.size() > 0) {
+                            if (myads_list.size() > 0) {
                                 myads_recyclerview.setHasFixedSize(true);
                                 LayoutManager = new LinearLayoutManager(context);
-                                agAdapter = new MyAdsAdapter(context, agriculture_list);
+                                agAdapter = new MyAdsAdapter(context, myads_list);
                                 myads_recyclerview.setLayoutManager(LayoutManager);
                                 myads_recyclerview.setAdapter(agAdapter);
 

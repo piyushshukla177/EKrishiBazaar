@@ -355,7 +355,7 @@ public class AboutActivity extends AppCompatActivity {
             Toast.makeText(this, "Please Select Block", Toast.LENGTH_SHORT).show();
             block_spinner.requestFocus();
             return b;
-        } else if (state.isEmpty() && !terms_checkbox.isChecked()) {
+        } else if (state!=null && state.isEmpty() && !terms_checkbox.isChecked()) {
             b = false;
             Toast.makeText(this, "Please Select Privacy Policy", Toast.LENGTH_SHORT).show();
             terms_checkbox.requestFocus();

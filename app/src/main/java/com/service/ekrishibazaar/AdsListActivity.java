@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -330,9 +332,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getCattleList(String super_category) {
         cattle_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -342,7 +353,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -447,9 +458,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getServiceList(String super_category) {
         service_rent_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -459,7 +479,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -560,9 +580,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getAgricultureList(String catgeory_type, String super_category) {
         agriculture_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -572,7 +601,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -698,9 +727,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getLabourinrentsList(String super_category) {
         labour_in_rent_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -710,7 +748,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -815,9 +853,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getOtherAgriProductList(String super_category) {
         other_agri_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -827,7 +874,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -932,9 +979,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getOtherAgriMachinary(String super_category) {
         machinary_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -944,7 +1000,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -1053,9 +1109,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getTreeAndWoodsList(String super_category) {
         tree_and_woods_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -1065,7 +1130,7 @@ public class AdsListActivity extends AppCompatActivity {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 
@@ -1166,9 +1231,18 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void getFertilizersList(String super_category) {
         fertilizer_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -1177,8 +1251,8 @@ public class AdsListActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.v("response", response);
                         try {
-                         mProgressDialog.dismiss();
-                            response=new String(response.getBytes("ISO-8859-1"), "UTF-8");
+                            mProgressDialog.dismiss();
+                            response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
 

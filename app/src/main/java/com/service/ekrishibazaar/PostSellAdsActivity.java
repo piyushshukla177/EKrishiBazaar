@@ -3,6 +3,7 @@ package com.service.ekrishibazaar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -28,13 +29,21 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.service.ekrishibazaar.adapter.NotificationAdapter;
 import com.service.ekrishibazaar.model.CategoryListModel;
+import com.service.ekrishibazaar.model.NotificationModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleyMultipartRequest;
 import com.service.ekrishibazaar.util.VolleySingleton;
@@ -56,6 +65,7 @@ import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
 public class PostSellAdsActivity extends AppCompatActivity {
 
+    String post_id;
     Context context;
     Button submit_btn;
     MaterialBetterSpinner select_product_category_spinner, select_product_spinner, select_product_breed_spinner, select_product_status_spinner, select_uom_spinner_for_qty, packaging_availability_spinner, who_pay_charges_spinner, state_spinner, district_spinner, block_spinner, select_uom_spinner_for_price, packaging_type_spinner;
@@ -94,6 +104,11 @@ public class PostSellAdsActivity extends AppCompatActivity {
         token = PrefsHelper.getString(context, "token");
         checkPermissions();
         super_category = getIntent().getStringExtra("super_category");
+        if (getIntent().hasExtra("post_id")) {
+            post_id = getIntent().getStringExtra("post_id");
+
+            getAdsDetails(post_id);
+        }
         back_image = findViewById(R.id.back_image);
         select_product_category_spinner = findViewById(R.id.select_product_category_spinner);
         select_product_spinner = findViewById(R.id.select_product_spinner);
@@ -361,7 +376,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
                 boolean c = !s.toString().isEmpty();
                 boolean d = s.toString().equals("Yes");
                 if (b && c && d) {
-
                     packaging_type_spinner.setVisibility(View.VISIBLE);
                 } else {
                     packaging_type_spinner.setVisibility(View.GONE);
@@ -373,10 +387,13 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (check()) {
-//                            upload_pic();
-                            Save();
+//                          upload_pic();
+                            if (super_category.equalsIgnoreCase("edit")) {
+                                Edit();
+                            } else {
+                                Save();
+                            }
                         }
-
                     }
                 }
         );
@@ -1052,6 +1069,126 @@ public class PostSellAdsActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(volleyMultipartRequest);
     }
 
+
+    public void Edit() {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/agriads/" + post_id + "/";
+        //our custom volley request
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.PUT, url,
+                new Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        try {
+                            mProgressDialog.hide();
+
+                            JSONObject obj = new JSONObject(new String(response.data));
+                            String id = obj.getString("id");
+                            Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } catch (Exception e) {
+                            Toast.makeText(context, "In Catch", Toast.LENGTH_SHORT).show();
+                            mProgressDialog.hide();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.hide();
+                        Toast.makeText(context, "In Failure", Toast.LENGTH_SHORT).show();
+//
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            /*
+             * If you want to add more parameters with the image
+             * you can do it here
+             * here we have only one parameter with the image
+             * which is tags
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("product_name", select_product_spinner.getText().toString());
+                params.put("product_breed", select_product_breed_spinner.getText().toString());
+                params.put("product_status", select_product_status_spinner.getText().toString());
+                params.put("product_quantity", quantity_et.getText().toString());
+                params.put("product_quantity_by", select_uom_spinner_for_qty.getText().toString());
+                params.put("product_price", price_et.getText().toString());
+                params.put("product_price_by", select_uom_spinner_for_price.getText().toString());
+                params.put("packing_availibility", packaging_availability_spinner.getText().toString());
+                params.put("product_packing_type", packaging_type_spinner.getText().toString());
+                params.put("packing_charges", who_pay_charges_spinner.getText().toString());
+                params.put("additional_information", additional_info_et.getText().toString());
+                params.put("super_category", super_category);
+                params.put("state", state_spinner.getText().toString());
+                params.put("district", district_spinner.getText().toString());
+                params.put("block", block_spinner.getText().toString());
+                params.put("village", village_name_et.getText().toString());
+                Log.e("post_ads_params", params.toString());
+                return params;
+            }
+
+            /*
+             * Here we are passing image by renaming it with a unique name
+             */
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+
+                DataPart dp1 = null, dp2 = null, dp3 = null;
+//                String path1 = FileUtils.getPath(context, uri1);
+                File imgFile1 = new File(uri1.toString());
+                Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
+                if (test_image_bitmap1 != null) {
+                    dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
+                    params.put("photo1", dp1);
+                }
+//              String path2 = FileUtils.getPath(context, uri2);
+                File imgFile2 = new File(uri2.toString());
+                Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
+                if (test_image_bitmap2 != null) {
+                    dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
+                    params.put("photo2", dp2);
+                }
+//              String path3 = FileUtils.getPath(context, uri3);
+                File imgFile3 = new File(uri3.toString());
+                Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
+                if (test_image_bitmap3 != null) {
+                    dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
+                    params.put("photo3", dp3);
+                }
+
+                Log.e("photo_params", params.toString());
+                return params;
+            }
+        };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(10 * DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 0, 0));
+        //adding the request to volley
+        Volley.newRequestQueue(this).add(volleyMultipartRequest);
+    }
+
     public byte[] getFileDataFromDrawable(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
@@ -1059,19 +1196,88 @@ public class PostSellAdsActivity extends AppCompatActivity {
     }
 
 
-    public static String getMimeType(Context context, Uri uri) {
-        String extension;
+    private void getAdsDetails(String post_id) {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
 
-        //Check uri format to avoid null
-        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
-            //If scheme is a content
-            final MimeTypeMap mime = MimeTypeMap.getSingleton();
-            extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uri));
-        } else {
-            //If scheme is a File
-            //This will replace white spaces with %20 and also other special characters. This will avoid returning null values on file name with spaces and special characters.
-            extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uri.getPath())).toString());
-        }
-        return extension;
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/agriads/" + post_id + "/?toedit=" + post_id;
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("response", response);
+                        try {
+                            mProgressDialog.dismiss();
+                            JSONObject obj = new JSONObject(response);
+                            JSONObject product_obj = obj.getJSONObject("product");
+                            JSONObject category_obj = product_obj.getJSONObject("category");
+                            select_product_category_spinner.setText(category_obj.getString("category_name"));
+                            select_product_spinner.setText(product_obj.getString("product_name"));
+
+                            NotificationModel m;
+                            mProgressDialog.dismiss();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        mProgressDialog.dismiss();
+                        String errorCode = "";
+                        if (error instanceof TimeoutError) {
+                            errorCode = "Time out Error";
+                        } else if (error instanceof NoConnectionError) {
+                            errorCode = "No Internet Connection Error";
+                        } else if (error instanceof AuthFailureError) {
+                            errorCode = "Auth Failure Error";
+                        } else if (error instanceof ServerError) {
+                            errorCode = "Server Error";
+                        } else if (error instanceof NetworkError) {
+                            errorCode = "Network Error";
+                        } else if (error instanceof ParseError) {
+                            errorCode = "Parse Error";
+                        }
+                        Toast.makeText(context, "Error.Response: " + errorCode, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("super_category", "Sellads");
+//                Log.v("request", params.toString());
+//                return params;
+//            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(context).add(postRequest);
     }
 }
+
+
+/*
+https://ekrishibazaar.com/api/ads/agriads/106/?toedit=106
+ */
