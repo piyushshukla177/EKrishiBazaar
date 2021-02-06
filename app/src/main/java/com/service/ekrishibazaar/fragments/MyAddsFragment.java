@@ -154,7 +154,7 @@ public class MyAddsFragment extends Fragment {
                                 m.setProduct_image2(obj.getString("product_image2"));
                                 m.setProduct_image3(obj.getString("product_image3"));
                                 m.setAdditional_info(obj.getString("additional_information"));
-                                m.setPost_id(obj.getString("post_id"));
+                                m.setPost_id(obj.getString("id"));
 //                                    boolean b = catgeory_type.equals(category_obj.getString("category_name"));
 //                                    String x = category_obj.getString("category_name");
 //                                    String y = catgeory_type;

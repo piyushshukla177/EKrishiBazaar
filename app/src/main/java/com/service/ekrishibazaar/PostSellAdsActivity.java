@@ -1,14 +1,10 @@
 package com.service.ekrishibazaar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -20,13 +16,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -41,25 +35,21 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.service.ekrishibazaar.adapter.NotificationAdapter;
 import com.service.ekrishibazaar.model.CategoryListModel;
-import com.service.ekrishibazaar.model.NotificationModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleyMultipartRequest;
 import com.service.ekrishibazaar.util.VolleySingleton;
+import com.squareup.picasso.Picasso;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import gun0912.tedbottompicker.TedBottomPicker;
 import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
@@ -953,7 +943,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
     public void Save() {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setMessage("Posting Ads...");
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
@@ -977,7 +967,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
                             Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         } catch (Exception e) {
-                            Toast.makeText(context, "In Catch", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context, "In Catch", Toast.LENGTH_SHORT).show();
                             mProgressDialog.hide();
                             e.printStackTrace();
                         }
@@ -987,7 +977,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.hide();
-                        Toast.makeText(context, "In Failure", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "In Failure", Toast.LENGTH_SHORT).show();
 //
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -1069,11 +1059,10 @@ public class PostSellAdsActivity extends AppCompatActivity {
         Volley.newRequestQueue(this).add(volleyMultipartRequest);
     }
 
-
     public void Edit() {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setMessage("Updating Ads...");
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
@@ -1094,10 +1083,9 @@ public class PostSellAdsActivity extends AppCompatActivity {
 
                             JSONObject obj = new JSONObject(new String(response.data));
                             String id = obj.getString("id");
-                            Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Ad Updated Successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         } catch (Exception e) {
-                            Toast.makeText(context, "In Catch", Toast.LENGTH_SHORT).show();
                             mProgressDialog.hide();
                             e.printStackTrace();
                         }
@@ -1107,8 +1095,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.hide();
-                        Toast.makeText(context, "In Failure", Toast.LENGTH_SHORT).show();
-//
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -1146,6 +1132,15 @@ public class PostSellAdsActivity extends AppCompatActivity {
                 params.put("block", block_spinner.getText().toString());
                 params.put("village", village_name_et.getText().toString());
                 Log.e("post_ads_params", params.toString());
+                if (imageFile1 == null) {
+                    params.put("photo1", "undefined");
+                }
+                if (imageFile2 == null) {
+                    params.put("photo2", "undefined");
+                }
+                if (imageFile3 == null) {
+                    params.put("photo3", "undefined");
+                }
                 return params;
             }
 
@@ -1158,26 +1153,29 @@ public class PostSellAdsActivity extends AppCompatActivity {
                 long imagename = System.currentTimeMillis();
 
                 DataPart dp1 = null, dp2 = null, dp3 = null;
-//                String path1 = FileUtils.getPath(context, uri1);
-                File imgFile1 = new File(uri1.toString());
-                Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
-                if (test_image_bitmap1 != null) {
-                    dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
-                    params.put("photo1", dp1);
+
+                if (imageFile1 != null) {
+                    Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
+                    if (test_image_bitmap1 != null) {
+                        dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
+                        params.put("photo1", dp1);
+                    }
                 }
-//              String path2 = FileUtils.getPath(context, uri2);
-                File imgFile2 = new File(uri2.toString());
-                Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
-                if (test_image_bitmap2 != null) {
-                    dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
-                    params.put("photo2", dp2);
+
+                if (imageFile2 != null) {
+                    Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
+                    if (test_image_bitmap2 != null) {
+                        dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
+                        params.put("photo2", dp2);
+                    }
                 }
-//              String path3 = FileUtils.getPath(context, uri3);
-                File imgFile3 = new File(uri3.toString());
-                Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
-                if (test_image_bitmap3 != null) {
-                    dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
-                    params.put("photo3", dp3);
+
+                if (imageFile3 != null) {
+                    Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
+                    if (test_image_bitmap3 != null) {
+                        dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
+                        params.put("photo3", dp3);
+                    }
                 }
 
                 Log.e("photo_params", params.toString());
@@ -1221,10 +1219,42 @@ public class PostSellAdsActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             JSONObject product_obj = obj.getJSONObject("product");
                             JSONObject category_obj = product_obj.getJSONObject("category");
+                            JSONObject product_breed_obj = obj.getJSONObject("product_breed");
+                            JSONObject product_status_obj = obj.getJSONObject("product_status");
+                            JSONObject product_packaging_type_obj = obj.getJSONObject("product_packaging_type");
+                            JSONObject state_obj = obj.getJSONObject("state");
+                            JSONObject district_obj = obj.getJSONObject("district");
+                            JSONObject block_obj = obj.getJSONObject("block");
+
                             select_product_category_spinner.setText(category_obj.getString("category_name"));
                             select_product_spinner.setText(product_obj.getString("product_name"));
-
-                            NotificationModel m;
+                            select_product_breed_spinner.setText(product_breed_obj.getString("product_breed"));
+                            select_product_status_spinner.setText(product_status_obj.getString("product_status"));
+                            quantity_et.setText(obj.getString("product_quantity"));
+                            price_et.setText(obj.getString("price"));
+                            select_uom_spinner_for_qty.setText(obj.getString("product_quantity_by"));
+                            select_uom_spinner_for_price.setText(obj.getString("product_price_by"));
+                            packaging_availability_spinner.setText(obj.getString("product_packaging_available"));
+                            packaging_type_spinner.setText(product_packaging_type_obj.getString("product_packaging_type"));
+                            state_spinner.setText(state_obj.getString("state_name"));
+                            district_spinner.setText(district_obj.getString("district_name"));
+                            block_spinner.setText(block_obj.getString("block_name"));
+                            village_name_et.setText(obj.getString("village"));
+                            additional_info_et.setText(obj.getString("additional_information"));
+                            who_pay_charges_spinner.setText(obj.getString("packaging_cost_bearer"));
+                            Picasso.get().load(obj.getString("product_image1")).resize(60, 60).into(product_image_imageview1);
+                            Picasso.get().load(obj.getString("product_image2")).resize(60, 60).into(product_image_imageview2);
+                            Picasso.get().load(obj.getString("product_image3")).resize(60, 60).into(product_image_imageview3);
+                            try {
+                                uri1 = Uri.parse(obj.getString("product_image1"));
+                                uri2 = Uri.parse(obj.getString("product_image2"));
+                                uri3 = Uri.parse(obj.getString("product_image3"));
+//                                imageFile1 = new File(uri1.getPath());
+//                                imageFile2 = new File(uri2.getPath());
+//                                imageFile3 = new File(uri3.getPath());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -1276,8 +1306,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
         Volley.newRequestQueue(context).add(postRequest);
     }
 }
-
-
 /*
 https://ekrishibazaar.com/api/ads/agriads/106/?toedit=106
  */

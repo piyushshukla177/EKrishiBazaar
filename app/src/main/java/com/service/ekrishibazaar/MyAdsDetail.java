@@ -1,10 +1,11 @@
 package com.service.ekrishibazaar;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,300 +33,205 @@ import com.service.ekrishibazaar.model.SliderItem;
 import com.service.ekrishibazaar.util.ApiHelper;
 import com.service.ekrishibazaar.util.MakeOfferSheet;
 import com.service.ekrishibazaar.util.PrefsHelper;
-import com.service.ekrishibazaar.util.RetrofitClient;
 import com.smarteist.autoimageslider.SliderView;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+public class MyAdsDetail extends AppCompatActivity {
+    private ApiHelper apiHelper;
+    Context context;
 
-    public class MyAdsDetail extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
-        private ApiHelper apiHelper;
+    ArrayList<SliderItem> slider_list = new ArrayList();
+    String token;
 
-        String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state,
-                price, district, block, village, post_id;
-        Context context;
-
-        ArrayList<SliderItem> slider_list = new ArrayList();
-        String token;
-
-        ImageView back_image, profile_imageview;
-        TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, product_name_tv, product_breed_tv, product_status_tv,
-                product_quantity_tv, packing_avialable_tv;
-        Button view_profile_btn, make_offer_btn;
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_my_ads_detail);
-
-            init();
-        }
-
-        MakeOfferSheet bottomSheet;
-
-        void init() {
-            context = this;
-
-            back_image = findViewById(R.id.back_image);
-            profile_imageview = findViewById(R.id.profile_imageview);
-            name_tv = findViewById(R.id.name_tv);
-            vid_tv = findViewById(R.id.vid_tv);
-            mobile_number_tv = findViewById(R.id.mobile_number_tv);
-            joined_tv = findViewById(R.id.joined_tv);
-            state_tv = findViewById(R.id.state_tv);
-            district_tv = findViewById(R.id.district_tv);
-            block_tv = findViewById(R.id.block_tv);
-            village_tv = findViewById(R.id.village_tv);
-            product_name_tv = findViewById(R.id.product_name_tv);
-            product_breed_tv = findViewById(R.id.product_breed_tv);
-            product_status_tv = findViewById(R.id.product_status_tv);
-            product_quantity_tv = findViewById(R.id.product_quantity_tv);
-            packing_avialable_tv = findViewById(R.id.packing_avialable_tv);
-            view_profile_btn = findViewById(R.id.view_profile_btn);
-            make_offer_btn = findViewById(R.id.make_offer_btn);
-            token = PrefsHelper.getString(context, "token");
-            back_image.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            MyAdsDetail.super.onBackPressed();
-                        }
-                    }
-            );
-
-            view_profile_btn.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(MyAdsDetail.this, ViewProfileActivity.class);
-                            intent.putExtra("profile_url", profile_image);
-                            intent.putExtra("name", name_tv.getText());
-                            intent.putExtra("vid", vid_tv.getText());
-                            intent.putExtra("mobile_number", mobile_number_tv.getText());
-                            intent.putExtra("block", block_tv.getText());
-                            intent.putExtra("district", district_tv.getText());
-                            intent.putExtra("state", state_tv.getText());
-                            startActivity(intent);
-                        }
-                    }
-            );
-
-            Intent intent = getIntent();
-            category_type = intent.getStringExtra("category_type");
-            image1 = intent.getStringExtra("image1");
-            image2 = intent.getStringExtra("image2");
-            image3 = intent.getStringExtra("image3");
-            user_first_name = intent.getStringExtra("user_first_name");
-            user_last_name = intent.getStringExtra("user_last_name");
-            user_mobile_no = intent.getStringExtra("mobile");
-            vid = intent.getStringExtra("vid");
-            date_joined = intent.getStringExtra("joined_on");
-            profile_image = intent.getStringExtra("profile_image");
-            state = intent.getStringExtra("state");
-            district = intent.getStringExtra("district");
-            block = intent.getStringExtra("block");
-            village = intent.getStringExtra("village");
-            post_id = intent.getStringExtra("post_id");
-            SliderItem s = new SliderItem();
-            s.setDescription("");
-            s.setImageUrl(image1);
-            slider_list.add(s);
-
-            SliderItem s1 = new SliderItem();
-            s1.setDescription("");
-            s1.setImageUrl(image2);
-            slider_list.add(s1);
-
-            SliderItem s2 = new SliderItem();
-            s2.setDescription("");
-            s2.setImageUrl(image3);
-            slider_list.add(s2);
-
-            SliderView sliderView = findViewById(R.id.imageSlider);
-            sliderView.setSliderAdapter(new SliderAdapterExample(MyAdsDetail.this, slider_list));
-            sliderView.run();
-            Glide.with(context)
-                    .load(profile_image)
-                    .fitCenter()
-                    .into(profile_imageview);
-
-            name_tv.setText(user_first_name + "" + user_last_name);
-            vid_tv.setText(vid);
-            mobile_number_tv.setText(user_mobile_no);
-            if (date_joined != null && date_joined.length() > 10) {
-                joined_tv.setText(date_joined.substring(0, 10));
-            }
-            state_tv.setText(state);
-            district_tv.setText(district);
-            block_tv.setText(block);
-            village_tv.setText(village);
-            product_name_tv.setText(intent.getStringExtra("product_name"));
-            product_breed_tv.setText(intent.getStringExtra("product_breed"));
-            product_status_tv.setText(intent.getStringExtra("product_status"));
-            product_quantity_tv.setText(intent.getStringExtra("quantity"));
-            packing_avialable_tv.setText(intent.getStringExtra("pacakging"));
-
-            make_offer_btn.setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            MakeOfferSheet.actual_price = intent.getStringExtra("price");
-                            bottomSheet = new MakeOfferSheet();
-                            bottomSheet.show(getSupportFragmentManager(), "exampleBottomSheet");
-
-                        }
-                    }
-            );
-        }
-
-        String phone, actual_price, offer_price;
-
-        @Override
-        public void onMakeOffer(String phone, String actual_price, String offer_price) {
-            LoginApi(phone, actual_price, offer_price);
-            phone = this.phone;
-            actual_price = actual_price;
-        }
-
-        private void MakeOffer(String phone, String actual_price, String offer_price) {
-            final ProgressDialog mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setIndeterminate(true);
-            mProgressDialog.setMessage("Loading...");
-            mProgressDialog.show();
-
-            StringRequest postRequest = new StringRequest(Request.Method.POST, "https://ekrishibazaar.com/api/ads/offer/",
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                Log.e("response", response.toString());
-                                mProgressDialog.dismiss();
-                                Object json = new JSONTokener(response).nextValue();
-                                if (json instanceof JSONObject) {
-                                    JSONObject obj = new JSONObject(response);
-                                    Toast.makeText(getApplicationContext(), obj.getString("detail"), Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-                                    bottomSheet.dismiss();
-                                }
-                                JSONObject jsonObject = new JSONObject(response);
-                                Log.e("Response", response.toString());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            error.printStackTrace();
-                            mProgressDialog.dismiss();
-                            String errorCode = "";
-                            if (error instanceof TimeoutError) {
-                                errorCode = "Time out Error";
-                            } else if (error instanceof NoConnectionError) {
-                                errorCode = "No Internet Connection Error";
-                            } else if (error instanceof AuthFailureError) {
-                                errorCode = "Auth Failure Error";
-                            } else if (error instanceof ServerError) {
-                                errorCode = "Server Error";
-                            } else if (error instanceof NetworkError) {
-                                errorCode = "Network Error";
-                            } else if (error instanceof ParseError) {
-                                errorCode = "Parse Error";
-                            }
-                            Toast.makeText(context, "Enter Valid Details", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-            ) {
+    ImageView back_image, profile_imageview;
+    TextView additional_info_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, product_name_tv, product_breed_tv, product_status_tv,
+            product_quantity_tv, packing_avialable_tv, price_tv;
 
 
-                @Override
-                protected Map<String, String> getParams() {
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("postid ", post_id);
-                    params.put("category", category_type);
-                    params.put("price", actual_price);
-                    params.put("offered_price", offer_price);
-                    params.put("phonenumber", user_mobile_no);
-                    params.put("vid", vid_tv.getText().toString());
-                    Log.e("params", params.toString());
-                    return params;
-                }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_my_ads_detail);
 
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    HashMap<String, String> headers = new HashMap<>();
-                    headers.put("Authorization", "Token " + token);
-                    return headers;
-                }
-            };
-            postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            Volley.newRequestQueue(this).add(postRequest);
-        }
-
-        private void LoginApi(String phone, String actual_price, String offer_price) {
-
-            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-                @Override
-                public okhttp3.Response intercept(Chain chain) throws IOException {
-                    okhttp3.Request newRequest = chain.request().newBuilder()
-                            .addHeader("Authorization", "Token " + token)
-                            .build();
-                    return chain.proceed(newRequest);
-                }
-            }).build();
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .client(client)
-                    .baseUrl("https://ekrishibazaar.com/api/ads/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            apiHelper = retrofit.create(ApiHelper.class);
-            Call<String> loginCall = apiHelper.getLoginInfo(post_id, "123456", actual_price, offer_price, user_mobile_no, vid);
-            loginCall.enqueue(new Callback<String>() {
-
-                @Override
-                public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-
-                    if (response.body() instanceof String) {
-                        String x = response.body();
-                        Toast.makeText(MyAdsDetail.this, x, Toast.LENGTH_SHORT).show();
-                        bottomSheet.dismiss();
-                    }
-
-//                if(response.isSuccessful()){
-//
-//                }else {
-//
-//                }
-                }
-
-                @Override
-                public void onFailure(@NonNull Call<String> call,
-                                      @NonNull Throwable t) {
-                    Toast.makeText(MyAdsDetail.this, "Offer is already sent", Toast.LENGTH_SHORT).show();
-                    if (!call.isCanceled()) {
-                    }
-                    t.printStackTrace();
-                }
-            });
-        }
+        init();
     }
+
+    MakeOfferSheet bottomSheet;
+
+    void init() {
+        context = this;
+
+        back_image = findViewById(R.id.back_image);
+        profile_imageview = findViewById(R.id.profile_imageview);
+//        name_tv = findViewById(R.id.name_tv);
+//        vid_tv = findViewById(R.id.vid_tv);
+//        mobile_number_tv = findViewById(R.id.mobile_number_tv);
+//        joined_tv = findViewById(R.id.joined_tv);
+        state_tv = findViewById(R.id.state_tv);
+        additional_info_tv = findViewById(R.id.additional_info_tv);
+        district_tv = findViewById(R.id.district_tv);
+        block_tv = findViewById(R.id.block_tv);
+        village_tv = findViewById(R.id.village_tv);
+        product_name_tv = findViewById(R.id.product_name_tv);
+        product_breed_tv = findViewById(R.id.product_breed_tv);
+        product_status_tv = findViewById(R.id.product_status_tv);
+        product_quantity_tv = findViewById(R.id.product_quantity_tv);
+        packing_avialable_tv = findViewById(R.id.packing_avialable_tv);
+//        view_profile_btn = findViewById(R.id.view_profile_btn);
+//        make_offer_btn = findViewById(R.id.make_offer_btn);
+        price_tv = findViewById(R.id.price_tv);
+        token = PrefsHelper.getString(context, "token");
+        back_image.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        MyAdsDetail.super.onBackPressed();
+                    }
+                }
+        );
+
+        Intent intent = getIntent();
+
+        String post_id = intent.getStringExtra("post_id");
+        getAdsDetails(post_id);
+    }
+
+    private void getAdsDetails(String post_id) {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/agriads/" + post_id + "/?toedit=" + post_id;
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("response", response);
+                        try {
+                            mProgressDialog.dismiss();
+                            JSONObject obj = new JSONObject(response);
+                            JSONObject product_obj = obj.getJSONObject("product");
+                            JSONObject category_obj = product_obj.getJSONObject("category");
+                            JSONObject product_breed_obj = obj.getJSONObject("product_breed");
+                            JSONObject product_status_obj = obj.getJSONObject("product_status");
+                            JSONObject product_packaging_type_obj = obj.getJSONObject("product_packaging_type");
+                            JSONObject state_obj = obj.getJSONObject("state");
+                            JSONObject district_obj = obj.getJSONObject("district");
+                            JSONObject block_obj = obj.getJSONObject("block");
+
+                            String category_name = category_obj.getString("category_name");
+                            product_name_tv.setText(product_obj.getString("product_name"));
+
+                            String product_status = product_status_obj.getString("product_status");
+                            String quantity = obj.getString("product_quantity");
+                            price_tv.setText(obj.getString("price") + " / " + obj.getString("product_price_by"));
+                            product_quantity_tv.setText(quantity + " / " + obj.getString("product_quantity_by"));
+                            packing_avialable_tv.setText(obj.getString("product_packaging_available") + " ," + product_packaging_type_obj.getString("product_packaging_type"));
+
+                            state_tv.setText(state_obj.getString("state_name"));
+                            district_tv.setText(district_obj.getString("district_name"));
+                            block_tv.setText(block_obj.getString("block_name"));
+                            village_tv.setText(obj.getString("village"));
+                            product_breed_tv.setText(product_breed_obj.getString("product_breed"));
+                            product_status_tv.setText(product_status);
+                            additional_info_tv.setText(obj.getString("additional_information"));
+//                            who_pay_charges_spinner.setText(obj.getString("packaging_cost_bearer"));
+//                            Picasso.get().load(obj.getString("product_image1")).resize(60, 60).into(product_image_imageview1);
+//                            Picasso.get().load(obj.getString("product_image2")).resize(60, 60).into(product_image_imageview2);
+//                            Picasso.get().load(obj.getString("product_image3")).resize(60, 60).into(product_image_imageview3);
+
+//                            product_status_tv.setText(intent.getStringExtra("product_status"));
+//                            product_quantity_tv.setText(intent.getStringExtra("quantity"));
+//                            packing_avialable_tv.setText(intent.getStringExtra("pacakging"));
+
+                            startSlider(obj.getString("product_image1"), obj.getString("product_image2"), obj.getString("product_image3"));
+                            mProgressDialog.dismiss();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        mProgressDialog.dismiss();
+                        String errorCode = "";
+                        if (error instanceof TimeoutError) {
+                            errorCode = "Time out Error";
+                        } else if (error instanceof NoConnectionError) {
+                            errorCode = "No Internet Connection Error";
+                        } else if (error instanceof AuthFailureError) {
+                            errorCode = "Auth Failure Error";
+                        } else if (error instanceof ServerError) {
+                            errorCode = "Server Error";
+                        } else if (error instanceof NetworkError) {
+                            errorCode = "Network Error";
+                        } else if (error instanceof ParseError) {
+                            errorCode = "Parse Error";
+                        }
+                        Toast.makeText(context, "Error.Response: " + errorCode, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("super_category", "Sellads");
+//                Log.v("request", params.toString());
+//                return params;
+//            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(context).add(postRequest);
+    }
+
+    void startSlider(String image1, String image2, String image3) {
+        SliderItem s = new SliderItem();
+        s.setDescription("");
+        s.setImageUrl(image1);
+        slider_list.add(s);
+
+        SliderItem s1 = new SliderItem();
+        s1.setDescription("");
+        s1.setImageUrl(image2);
+        slider_list.add(s1);
+
+        SliderItem s2 = new SliderItem();
+        s2.setDescription("");
+        s2.setImageUrl(image3);
+        slider_list.add(s2);
+
+        SliderView sliderView = findViewById(R.id.imageSlider);
+        sliderView.setSliderAdapter(new SliderAdapterExample(MyAdsDetail.this, slider_list));
+        sliderView.run();
+    }
+}
 
 /*
 {"detail":"You already made similar offer"}
