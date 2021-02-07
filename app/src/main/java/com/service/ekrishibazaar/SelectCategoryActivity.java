@@ -58,7 +58,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s != null && !s.toString().isEmpty()&&s.equals("")) {
+                if (s != null && !s.toString().isEmpty()) {
                     Intent intent = new Intent(context, PostSellAdsActivity.class);
                     intent.putExtra("super_category", super_category);
                     intent.putExtra("category", s.toString());
