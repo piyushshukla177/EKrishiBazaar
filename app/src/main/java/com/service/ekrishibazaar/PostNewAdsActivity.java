@@ -13,7 +13,10 @@ public class PostNewAdsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_new_ads);
+        init();
+    }
 
+    void init() {
         post_sell_ads_linear = findViewById(R.id.post_sell_ads_linear);
         more_services_linear = findViewById(R.id.more_services_linear);
         post_buy_linear = findViewById(R.id.post_buy_linear);
@@ -21,7 +24,7 @@ public class PostNewAdsActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(PostNewAdsActivity.this, PostSellAdsActivity.class);
+                        Intent intent = new Intent(PostNewAdsActivity.this, SelectCategoryActivity.class);
                         intent.putExtra("super_category", "Sellads");
                         startActivity(intent);
                     }
@@ -31,7 +34,7 @@ public class PostNewAdsActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(PostNewAdsActivity.this, PostSellAdsActivity.class);
+                        Intent intent = new Intent(PostNewAdsActivity.this, SelectCategoryActivity.class);
                         intent.putExtra("super_category", "BuyOffer");
                         startActivity(intent);
                     }
@@ -41,7 +44,7 @@ public class PostNewAdsActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(PostNewAdsActivity.this, PostSellAdsActivity.class);
+                        Intent intent = new Intent(PostNewAdsActivity.this, SelectCategoryActivity.class);
                         intent.putExtra("super_category", "BuyBackOffer");
                         startActivity(intent);
                     }

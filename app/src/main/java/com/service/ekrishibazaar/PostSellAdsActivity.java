@@ -1,7 +1,9 @@
 package com.service.ekrishibazaar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -21,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -35,21 +38,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleyMultipartRequest;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.squareup.picasso.Picasso;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import gun0912.tedbottompicker.TedBottomPicker;
 import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
@@ -58,10 +63,10 @@ public class PostSellAdsActivity extends AppCompatActivity {
     String post_id;
     Context context;
     Button submit_btn;
-    MaterialBetterSpinner select_product_category_spinner, select_product_spinner, select_product_breed_spinner, select_product_status_spinner, select_uom_spinner_for_qty, packaging_availability_spinner, who_pay_charges_spinner, state_spinner, district_spinner, block_spinner, select_uom_spinner_for_price, packaging_type_spinner;
+    MaterialBetterSpinner select_product_spinner, select_product_breed_spinner, select_product_status_spinner, select_uom_spinner_for_qty, packaging_availability_spinner, who_pay_charges_spinner, state_spinner, district_spinner, block_spinner, select_uom_spinner_for_price, packaging_type_spinner;
     EditText quantity_et, price_et, village_name_et, additional_info_et;
     ImageView back_image, product_image_imageview1, product_image_imageview2, product_image_imageview3, clear_imageview1, clear_imageview2, clear_imageview3;
-    ArrayList category_list = new ArrayList();
+
     ArrayList product_list = new ArrayList();
     ArrayList product_breed_list = new ArrayList();
     ArrayList product_status_list = new ArrayList();
@@ -76,7 +81,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
 //  public File imageFile;
 
     String[] appPermissions = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-    String super_category;
+    String super_category, category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,11 +101,12 @@ public class PostSellAdsActivity extends AppCompatActivity {
         super_category = getIntent().getStringExtra("super_category");
         if (getIntent().hasExtra("post_id")) {
             post_id = getIntent().getStringExtra("post_id");
-
             getAdsDetails(post_id);
         }
+        if (getIntent().hasExtra("category")) {
+            category = getIntent().getStringExtra("category");
+        }
         back_image = findViewById(R.id.back_image);
-        select_product_category_spinner = findViewById(R.id.select_product_category_spinner);
         select_product_spinner = findViewById(R.id.select_product_spinner);
         select_product_breed_spinner = findViewById(R.id.select_product_breed_spinner);
         select_product_status_spinner = findViewById(R.id.select_product_status_spinner);
@@ -219,9 +225,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     }
                 }
         );
-        category_list.add("Select Product Category");
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-        select_product_category_spinner.setAdapter(categoryAdapter);
+
 
         product_list.add("Select Product");
         ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
@@ -309,24 +313,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
             }
         });
 
-        select_product_category_spinner.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s != null && !s.toString().isEmpty()) {
-                    getProducts(s.toString());
-                }
-            }
-        });
 
         select_product_spinner.addTextChangedListener(new TextWatcher() {
             @Override
@@ -391,8 +377,9 @@ public class PostSellAdsActivity extends AppCompatActivity {
         district_spinner.setText(PrefsHelper.getString(context, "distict"));
         block_spinner.setText(PrefsHelper.getString(context, "block"));
 //      state_spinner.setText(PrefsHelper.getString());
+        getProducts(category);
         getStates();
-        getAllCategories();
+//        getAllCategories();
     }
 
     public int PERMISSION_CODE = 100;
@@ -605,71 +592,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
         VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
-    void getAllCategories() {
-        category_list.clear();
-//      view_all_tv.setVisibility(View.GONE);
-        product_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                // DO SOME STUFF HERE
-            }
-        });
-        mProgressDialog.show();
-        // Initialize a new JsonArrayRequest instance
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET,
-                " https://ekrishibazaar.com/api/ads/allcategory/",
-                null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        // Do something with response
-                        //mTextView.setText(response.toString());
-                        // Process the JSON
-                        try {
-                            mProgressDialog.dismiss();
-                            // Loop through the array elements
-                            CategoryListModel m;
-                            for (int i = 0; i < response.length(); i++) {
-                                // Get current json object
-                                m = new CategoryListModel();
-                                JSONObject obj = response.getJSONObject(i);
-                                category_list.add((obj.getString("category_name")));
-//                                m.setProduct_image(obj.getString("image"));
-//                                product_list.add(m);
-                            }
-                            ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-                            select_product_category_spinner.setAdapter(categoryAdapter);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            category_list.add("Select Product Category");
-                            ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-                            select_product_category_spinner.setAdapter(categoryAdapter);
-                            mProgressDialog.dismiss();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        mProgressDialog.dismiss();
-                        category_list.add("Select Product Category");
-                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-                        select_product_category_spinner.setAdapter(categoryAdapter);
-                        // Do something when error occurred
-                    }
-                }
-        );
-        // Add JsonArrayRequest to the RequestQueue
-        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
-    }
 
     void getProducts(String category_name) {
         product_list.clear();
@@ -721,9 +643,9 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.dismiss();
-                        category_list.add("Select Product Category");
-                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-                        select_product_category_spinner.setAdapter(categoryAdapter);
+                        product_list.add("Select Product");
+                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
+                        select_product_spinner.setAdapter(categoryAdapter);
                         // Do something when error occurred
                     }
                 }
@@ -781,9 +703,9 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.dismiss();
-                        category_list.add("Select Product Category");
-                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-                        select_product_category_spinner.setAdapter(categoryAdapter);
+                        product_breed_list.add("Select Product Breed");
+                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_breed_list);
+                        select_product_breed_spinner.setAdapter(categoryAdapter);
                         // Do something when error occurred
                     }
                 }
@@ -840,9 +762,9 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.dismiss();
-                        category_list.add("Select Product Category");
-                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, category_list);
-                        select_product_category_spinner.setAdapter(categoryAdapter);
+                        product_status_list.add("Select Product Status");
+                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_status_list);
+                        select_product_status_spinner.setAdapter(categoryAdapter);
                         // Do something when error occurred
                     }
                 }
@@ -853,13 +775,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
 
     boolean check() {
         boolean b = true;
-        if (select_product_category_spinner.getText().toString().isEmpty()) {
-            b = false;
-            select_product_category_spinner.setError("Required");
-            select_product_category_spinner.requestFocus();
-            Toast.makeText(this, "Select Category", Toast.LENGTH_SHORT).show();
-            return b;
-        } else if (select_product_spinner.getText().toString().isEmpty()) {
+        if (select_product_spinner.getText().toString().isEmpty()) {
             b = false;
             select_product_spinner.setError("Required");
             select_product_spinner.requestFocus();
@@ -1192,8 +1108,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
-
-
     private void getAdsDetails(String post_id) {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
@@ -1225,8 +1139,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
                             JSONObject state_obj = obj.getJSONObject("state");
                             JSONObject district_obj = obj.getJSONObject("district");
                             JSONObject block_obj = obj.getJSONObject("block");
-
-                            select_product_category_spinner.setText(category_obj.getString("category_name"));
+//                          select_product_category_spinner.setText(category_obj.getString("category_name"));
                             select_product_spinner.setText(product_obj.getString("product_name"));
                             select_product_breed_spinner.setText(product_breed_obj.getString("product_breed"));
                             select_product_status_spinner.setText(product_status_obj.getString("product_status"));

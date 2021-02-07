@@ -1,13 +1,16 @@
 package com.service.ekrishibazaar.fragments;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -32,6 +36,7 @@ import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.adapter.MyAdsAdapter;
 import com.service.ekrishibazaar.model.MyAdsModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,6 +53,7 @@ public class MyAddsFragment extends Fragment {
     private RecyclerView.LayoutManager LayoutManager;
     TextView no_record_tv;
     LinearLayout sign_in_linear;
+    public static MyAddsFragment mmm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +67,7 @@ public class MyAddsFragment extends Fragment {
     String token;
 
     private void init(View root) {
+        mmm = this;
         context = getActivity();
         token = PrefsHelper.getString(context, "token");
 
@@ -85,6 +92,7 @@ public class MyAddsFragment extends Fragment {
     }
 
     private void getAgricultureList() {
+        myads_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
@@ -133,20 +141,6 @@ public class MyAddsFragment extends Fragment {
                                 m.setMobile_number(user_obj.getString("mobile_number"));
                                 m.setPost_id(obj.getString("post_id"));
 
-////                            JSONObject service_machine_obj = obj.getJSONObject("product");
-//                                    JSONObject product_status_obj = obj.getJSONObject("product_status");
-
-//                                    m.setStatus(product_status_obj.getString("product_status"));
-//                                    JSONObject product_breed_obj = obj.getJSONObject("product_breed");
-//                                    m.setProduct_breed(product_breed_obj.getString("product_breed"));
-//                                    JSONObject category_obj = service_machine_obj.getJSONObject("category");
-//                                    m.setCategory_name(category_obj.getString("category_name"));
-//                                    m.setCategory_image(category_obj.getString("image"));
-//                                    m.setProduct_quantity(obj.getString("product_quantity"));
-//                                    m.setProduct_quantity_by(obj.getString("product_quantity_by"));
-//                                    m.setProduct_name(service_machine_obj.getString("product_name"));
-//                                    m.setProduct_price_by(obj.getString("product_price_by"));
-//                                    m.setPackaging_cost_bearer(obj.getString("packaging_cost_bearer"));
                                 m.setPosted_on(obj.getString("posted_on"));
                                 m.setPrice(obj.getString("price"));
 
@@ -155,11 +149,6 @@ public class MyAddsFragment extends Fragment {
                                 m.setProduct_image3(obj.getString("product_image3"));
                                 m.setAdditional_info(obj.getString("additional_information"));
                                 m.setPost_id(obj.getString("id"));
-//                                    boolean b = catgeory_type.equals(category_obj.getString("category_name"));
-//                                    String x = category_obj.getString("category_name");
-//                                    String y = catgeory_type;
-//                                    Log.e("catgeory_type", String.valueOf(b));
-//                                    if (catgeory_type.equals(category_obj.getString("category_name"))) {
                                 myads_list.add(m);
                             }
                             if (myads_list.size() > 0) {
@@ -221,4 +210,152 @@ public class MyAddsFragment extends Fragment {
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
     }
+
+    public void MarkAsSold(String post_id) {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/agriads/" + post_id + "/";
+        StringRequest postRequest = new StringRequest(Request.Method.PUT, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("response", response);
+                        try {
+                            mProgressDialog.dismiss();
+                            JSONObject obj = new JSONObject(response);
+                            Toast.makeText(context, obj.getString("result"), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        mProgressDialog.dismiss();
+                        String errorCode = "";
+                        if (error instanceof TimeoutError) {
+                            errorCode = "Time out Error";
+                        } else if (error instanceof NoConnectionError) {
+                            errorCode = "No Internet Connection Error";
+                        } else if (error instanceof AuthFailureError) {
+                            errorCode = "Auth Failure Error";
+                        } else if (error instanceof ServerError) {
+                            errorCode = "Server Error";
+                        } else if (error instanceof NetworkError) {
+                            errorCode = "Network Error";
+                        } else if (error instanceof ParseError) {
+                            errorCode = "Parse Error";
+                        }
+                        Toast.makeText(context, "Error.Response: " + errorCode, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("sold", "true");
+                return params;
+            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(context).add(postRequest);
+    }
+
+    public void DeleteAds(String post_id) {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/agriads/" + post_id + "/";
+        StringRequest postRequest = new StringRequest(Request.Method.DELETE, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("response", response);
+                        try {
+                            mProgressDialog.dismiss();
+                            getAgricultureList();
+                            JSONObject obj = new JSONObject(response);
+                            Toast.makeText(context, obj.getString("message"), Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        mProgressDialog.dismiss();
+                        String errorCode = "";
+                        if (error instanceof TimeoutError) {
+                            errorCode = "Time out Error";
+                        } else if (error instanceof NoConnectionError) {
+                            errorCode = "No Internet Connection Error";
+                        } else if (error instanceof AuthFailureError) {
+                            errorCode = "Auth Failure Error";
+                        } else if (error instanceof ServerError) {
+                            errorCode = "Server Error";
+                        } else if (error instanceof NetworkError) {
+                            errorCode = "Network Error";
+                        } else if (error instanceof ParseError) {
+                            errorCode = "Parse Error";
+                        }
+                        Toast.makeText(context, "Error.Response: " + errorCode, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+//                params.put("sold", "true");
+                return params;
+            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(context).add(postRequest);
+    }
 }
+
+/*
+
+{"message":"deleted successfully"}
+ */

@@ -51,18 +51,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/select_product_category_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:hint="@string/Select_Product_Catgeory"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/provide_info_tv" />
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:id="@+id/select_product_spinner"
