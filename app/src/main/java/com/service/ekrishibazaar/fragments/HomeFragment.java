@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,18 +30,16 @@ import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.MyGridView;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     Context context;
     ArrayList<CategoryListModel> product_list = new ArrayList<>();
-    //  ArrayList<CattleAdsModel> fresh_product_list = new ArrayList<>();
+//  ArrayList<CattleAdsModel> fresh_product_list = new ArrayList<>();
     MyGridView category_grid;
     EditText search_edittext;
     TextView location_tv, change_location_tv;

@@ -5,7 +5,7 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.service.ekrishibazaar.fragments.HomeFragment;
 import com.service.ekrishibazaar.fragments.MyAccountFragment;
-import com.service.ekrishibazaar.fragments.MyAddsFragment;
+import com.service.ekrishibazaar.fragments.MyAdsFragment;
 import com.service.ekrishibazaar.fragments.HelpFregment;
 import com.service.ekrishibazaar.util.LocaleHelper;
 import androidx.annotation.NonNull;
@@ -47,7 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
                             selectedFragment = new HelpFregment();
                             break;
                         case R.id.navigation_my_adds:
-                            selectedFragment = new MyAddsFragment();
+                            selectedFragment = new MyAdsFragment();
                             break;
                         case R.id.navigation_myaccount:
                             selectedFragment = new MyAccountFragment();

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,9 +13,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.service.ekrishibazaar.MyAdsDetail;
+import com.service.ekrishibazaar.PostCattleAdsActivity;
 import com.service.ekrishibazaar.PostSellAdsActivity;
 import com.service.ekrishibazaar.R;
-import com.service.ekrishibazaar.fragments.MyAddsFragment;
+import com.service.ekrishibazaar.fragments.MyAdsFragment;
 import com.service.ekrishibazaar.model.MyAdsModel;
 import com.squareup.picasso.Picasso;
 
@@ -28,9 +28,8 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
 
     public class AgricultureViewHolder extends RecyclerView.ViewHolder {
         public TextView address_textview, price_textview;
-        ImageView category_image;
+        ImageView category_image, delete_icon, edit_icon, sold_icon;
         CardView cardview;
-        Button edit_btn, sold_btn, delete_btn;
 
         public AgricultureViewHolder(View itemView) {
             super(itemView);
@@ -38,9 +37,9 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
             address_textview = itemView.findViewById(R.id.address_textview);
             price_textview = itemView.findViewById(R.id.price_textview);
             cardview = itemView.findViewById(R.id.cardview);
-            edit_btn = itemView.findViewById(R.id.edit_btn);
-            sold_btn = itemView.findViewById(R.id.sold_btn);
-            delete_btn = itemView.findViewById(R.id.delete_btn);
+            delete_icon = itemView.findViewById(R.id.delete_icon);
+            edit_icon = itemView.findViewById(R.id.edit_icon);
+            sold_icon = itemView.findViewById(R.id.sold_icon);
         }
     }
 
@@ -64,30 +63,37 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
 //      Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
         holder.address_textview.setText(currentItem.getBlock() + ", " + currentItem.getDistrict());
         holder.price_textview.setText("Price  " + "₹ " + currentItem.getPrice());
-        holder.edit_btn.setOnClickListener(
+        holder.edit_icon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, PostSellAdsActivity.class);
-                        intent.putExtra("super_category", "edit");
-                        intent.putExtra("post_id", currentItem.getPost_id());
-                        context.startActivity(intent);
+                        if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
+                            Intent intent = new Intent(context, PostCattleAdsActivity.class);
+                            intent.putExtra("super_category", "edit");
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            context.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(context, PostSellAdsActivity.class);
+                            intent.putExtra("super_category", "edit");
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            context.startActivity(intent);
+                        }
                     }
                 }
         );
-        holder.delete_btn.setOnClickListener(
+        holder.delete_icon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MyAddsFragment.mmm.DeleteAds(currentItem.getPost_id());
+                        MyAdsFragment.mmm.DeleteAds(currentItem.getPost_id());
                     }
                 }
         );
-        holder.sold_btn.setOnClickListener(
+        holder.sold_icon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MyAddsFragment.mmm.MarkAsSold(currentItem.getPost_id());
+                        MyAdsFragment.mmm.MarkAsSold(currentItem.getPost_id());
                     }
                 }
         );

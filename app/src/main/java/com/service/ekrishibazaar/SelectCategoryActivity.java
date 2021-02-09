@@ -1,7 +1,5 @@
 package com.service.ekrishibazaar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -11,7 +9,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,11 +16,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 public class SelectCategoryActivity extends AppCompatActivity {
@@ -59,17 +54,23 @@ public class SelectCategoryActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s != null && !s.toString().isEmpty()) {
-                    Intent intent = new Intent(context, PostSellAdsActivity.class);
-                    intent.putExtra("super_category", super_category);
-                    intent.putExtra("category", s.toString());
-                    startActivity(intent);
+                    if (s.toString().equals("Fruits") || s.toString().equals("Pulses") || s.toString().equals("Medicinal plants") || s.toString().equals("Dairy Product") || s.toString().equals("Vegetable") || s.toString().equals("Grains")
+                            || s.toString().equals("Flower") || s.toString().equals("oilseeds")) {
+                        Intent intent = new Intent(context, PostSellAdsActivity.class);
+                        intent.putExtra("super_category", super_category);
+                        intent.putExtra("category", s.toString());
+                        startActivity(intent);
+                    } else if (s.toString().equals("Cattle")) {
+                        Intent intent = new Intent(context, PostCattleAdsActivity.class);
+                        intent.putExtra("Cattle", super_category);
+                        intent.putExtra("category", s.toString());
+                        startActivity(intent);
+                    }
                 }
-
             }
         });
         getAllCategories();
     }
-
 
     void getAllCategories() {
         category_list.clear();

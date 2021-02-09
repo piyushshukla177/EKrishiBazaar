@@ -595,7 +595,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
 
     void getProducts(String category_name) {
         product_list.clear();
-        product_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
@@ -879,11 +878,15 @@ public class PostSellAdsActivity extends AppCompatActivity {
                             mProgressDialog.hide();
 
                             JSONObject obj = new JSONObject(new String(response.data));
-                            String id = obj.getString("id");
-                            Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
-                            finish();
+                            if (obj.has("id")) {
+                                Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else if (obj.has("detail")) {
+                                Toast.makeText(context, obj.getString("detail"), Toast.LENGTH_SHORT).show();
+                            }
+//                          String id = obj.getString("id");
+
                         } catch (Exception e) {
-//                            Toast.makeText(context, "In Catch", Toast.LENGTH_SHORT).show();
                             mProgressDialog.hide();
                             e.printStackTrace();
                         }
@@ -932,6 +935,15 @@ public class PostSellAdsActivity extends AppCompatActivity {
                 params.put("block", block_spinner.getText().toString());
                 params.put("village", village_name_et.getText().toString());
                 Log.e("post_ads_params", params.toString());
+                if (imageFile1 == null) {
+                    params.put("photo1", "undefined");
+                }
+                if (imageFile2 == null) {
+                    params.put("photo2", "undefined");
+                }
+                if (imageFile3 == null) {
+                    params.put("photo3", "undefined");
+                }
                 return params;
             }
 
@@ -965,7 +977,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
                     params.put("photo3", dp3);
                 }
-
                 Log.e("photo_params", params.toString());
                 return params;
             }
@@ -1108,6 +1119,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
+
     private void getAdsDetails(String post_id) {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
@@ -1175,7 +1187,6 @@ public class PostSellAdsActivity extends AppCompatActivity {
                         }
                     }
                 },
-
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -1199,26 +1210,18 @@ public class PostSellAdsActivity extends AppCompatActivity {
                     }
                 }
         ) {
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "Token " + token);
                 return params;
             }
-
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", "Sellads");
-//                Log.v("request", params.toString());
-//                return params;
-//            }
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
     }
 }
+
 /*
 https://ekrishibazaar.com/api/ads/agriads/106/?toedit=106
  */

@@ -18,6 +18,7 @@ public class MyAdsModel {
     private String posted_on;
     private String post_id;
     private String additional_info;
+    private String category_name;
 
     public String getUser_first_name() {
         return user_first_name;
@@ -153,5 +154,13 @@ public class MyAdsModel {
 
     public void setAdditional_info(String additional_info) {
         this.additional_info = additional_info;
+    }
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 }

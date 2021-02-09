@@ -1,16 +1,13 @@
 package com.service.ekrishibazaar.fragments;
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -36,15 +32,13 @@ import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.adapter.MyAdsAdapter;
 import com.service.ekrishibazaar.model.MyAdsModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyAddsFragment extends Fragment {
+public class MyAdsFragment extends Fragment {
 
     Context context;
     RecyclerView myads_recyclerview;
@@ -53,19 +47,17 @@ public class MyAddsFragment extends Fragment {
     private RecyclerView.LayoutManager LayoutManager;
     TextView no_record_tv;
     LinearLayout sign_in_linear;
-    public static MyAddsFragment mmm;
+    public static MyAdsFragment mmm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_my_adds, container, false);
         init(root);
         return root;
     }
 
     String token;
-
     private void init(View root) {
         mmm = this;
         context = getActivity();
@@ -77,7 +69,7 @@ public class MyAddsFragment extends Fragment {
         if (token == null || token.isEmpty()) {
             sign_in_linear.setVisibility(View.VISIBLE);
         } else {
-            getAgricultureList();
+            getMyAds();
         }
         sign_in_linear.setOnClickListener(
                 new View.OnClickListener() {
@@ -91,7 +83,7 @@ public class MyAddsFragment extends Fragment {
         );
     }
 
-    private void getAgricultureList() {
+    private void getMyAds() {
         myads_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
@@ -99,7 +91,6 @@ public class MyAddsFragment extends Fragment {
         mProgressDialog.setCancelable(false);
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
-
             @Override
             public void onCancel(DialogInterface dialog) {
                 // DO SOME STUFF HERE
@@ -149,6 +140,16 @@ public class MyAddsFragment extends Fragment {
                                 m.setProduct_image3(obj.getString("product_image3"));
                                 m.setAdditional_info(obj.getString("additional_information"));
                                 m.setPost_id(obj.getString("id"));
+
+                                if (obj.getString("type").equalsIgnoreCase("agriculturalads")) {
+                                    JSONObject product_obj = obj.getJSONObject("product");
+                                    JSONObject category_obj = product_obj.getJSONObject("category");
+                                    m.setCategory_name(category_obj.getString("category_name"));
+                                } else if (obj.getString("type").equalsIgnoreCase("cattleads")) {
+                                    JSONObject product_obj = obj.getJSONObject("cattle_type");
+                                    JSONObject category_obj = product_obj.getJSONObject("category");
+                                    m.setCategory_name(category_obj.getString("category_name"));
+                                }
                                 myads_list.add(m);
                             }
                             if (myads_list.size() > 0) {
@@ -198,7 +199,6 @@ public class MyAddsFragment extends Fragment {
                 params.put("Authorization", "Token " + token);
                 return params;
             }
-
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -304,7 +304,7 @@ public class MyAddsFragment extends Fragment {
                         Log.v("response", response);
                         try {
                             mProgressDialog.dismiss();
-                            getAgricultureList();
+                            getMyAds();
                             JSONObject obj = new JSONObject(response);
                             Toast.makeText(context, obj.getString("message"), Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
@@ -356,6 +356,5 @@ public class MyAddsFragment extends Fragment {
 }
 
 /*
-
 {"message":"deleted successfully"}
  */

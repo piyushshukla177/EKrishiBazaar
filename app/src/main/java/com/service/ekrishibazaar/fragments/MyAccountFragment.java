@@ -114,7 +114,7 @@ public class MyAccountFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Fragment selectedFragment = new MyAddsFragment();
+                        Fragment selectedFragment = new MyAdsFragment();
                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 selectedFragment).commit();
                     }
