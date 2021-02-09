@@ -798,7 +798,6 @@ public class PostCattleAdsActivity extends AppCompatActivity {
                                 Toast.makeText(context, obj.getString("detail"), Toast.LENGTH_SHORT).show();
                             }
 //                          String id = obj.getString("id");
-
                         } catch (Exception e) {
                             mProgressDialog.hide();
                             e.printStackTrace();
@@ -886,8 +885,6 @@ public class PostCattleAdsActivity extends AppCompatActivity {
                         params.put("photo1", dp1);
                     }
                 }
-
-
                 File imgFile2;
                 if (uri2 != null) {
                     imgFile2 = new File(uri2.toString());
