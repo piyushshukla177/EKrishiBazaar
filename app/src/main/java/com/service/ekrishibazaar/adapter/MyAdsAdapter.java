@@ -85,7 +85,11 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MyAdsFragment.mmm.DeleteAds(currentItem.getPost_id());
+                        if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
+                            MyAdsFragment.mmm.DeleteCattleAds(currentItem.getPost_id());
+                        } else {
+                            MyAdsFragment.mmm.DeleteAds(currentItem.getPost_id());
+                        }
                     }
                 }
         );
@@ -93,7 +97,11 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        MyAdsFragment.mmm.MarkAsSold(currentItem.getPost_id());
+                        if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
+                            MyAdsFragment.mmm.MarkCattleAsSold(currentItem.getPost_id());
+                        } else {
+                            MyAdsFragment.mmm.MarkAsSold(currentItem.getPost_id());
+                        }
                     }
                 }
         );
@@ -120,3 +128,8 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
         notifyDataSetChanged();
     }
 }
+
+/*
+2021-02-08 17:17:44.898 10910-11941/? E/post_ads_params: {cattle_breed=Jamunapari, number_of_child=1, cattle_name=Goat, product_price=1222, milk_produced=2 Liter, if_preganent=1222, super_category=null, additional_information=dddddd, price_status=Fixed, district=Lakshadweep, preganency_month=2, block=Kalpeni, state=Lakshadweep, category=Cattle, village=sddddd}
+2021-02-08 17:17:52.950 10910-11941/? E/photo_params: {}
+ */

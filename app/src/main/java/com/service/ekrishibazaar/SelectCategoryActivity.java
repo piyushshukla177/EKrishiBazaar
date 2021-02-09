@@ -62,7 +62,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else if (s.toString().equals("Cattle")) {
                         Intent intent = new Intent(context, PostCattleAdsActivity.class);
-                        intent.putExtra("Cattle", super_category);
+                        intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);
                     }
