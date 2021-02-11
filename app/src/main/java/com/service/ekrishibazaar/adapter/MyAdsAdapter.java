@@ -71,11 +71,13 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             Intent intent = new Intent(context, PostCattleAdsActivity.class);
                             intent.putExtra("super_category", "edit");
                             intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
                         } else {
                             Intent intent = new Intent(context, PostSellAdsActivity.class);
                             intent.putExtra("super_category", "edit");
                             intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
                         }
                     }
@@ -110,9 +112,17 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, MyAdsDetail.class);
-                        intent.putExtra("post_id", currentItem.getPost_id());
-                        context.startActivity(intent);
+                        if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
+                            Intent intent = new Intent(context, MyAdsDetail.class);
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
+                            context.startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(context, MyAdsDetail.class);
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
+                            context.startActivity(intent);
+                        }
                     }
                 }
         );

@@ -244,7 +244,6 @@ public class PostCattleAdsActivity extends AppCompatActivity {
         ArrayAdapter<String> statausAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, price_type_list);
         price_type_spinner.setAdapter(statausAdapter);
 
-        milk_produced_per_day_list.add("1 Liter");
         milk_produced_per_day_list.add("2 Liter");
         milk_produced_per_day_list.add("3 Liter");
         milk_produced_per_day_list.add("4 Liter");
@@ -367,9 +366,8 @@ public class PostCattleAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (check()) {
-//                          upload_pic();
                             if (super_category != null && super_category.equalsIgnoreCase("edit")) {
-//                                Edit();
+                                Edit();
                             } else {
                                 Save();
                             }
@@ -912,6 +910,145 @@ public class PostCattleAdsActivity extends AppCompatActivity {
         //adding the request to volley
         Volley.newRequestQueue(this).add(volleyMultipartRequest);
     }
+
+
+    public void Edit() {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Updating Ads...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+
+        String url = "https://ekrishibazaar.com/api/ads/cattleads/" + post_id + "/";
+        //our custom volley request
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.PUT, url,
+                new Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        try {
+                            mProgressDialog.hide();
+
+                            JSONObject obj = new JSONObject(new String(response.data));
+                            String id = obj.getString("id");
+                            Toast.makeText(context, "Ad Updated Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } catch (Exception e) {
+                            mProgressDialog.hide();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.hide();
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            /*
+             * If you want to add more parameters with the image
+             * you can do it here
+             * here we have only one parameter with the image
+             * which is tags
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("category", category);
+                params.put("cattle_name", select_cattle_type_spinner.getText().toString());
+                params.put("cattle_breed", select_cattle_breed_spinner.getText().toString());
+
+                if (!number_of_births_et.getText().toString().isEmpty()) {
+                    params.put("number_of_child", number_of_births_et.getText().toString());
+                } else {
+                    params.put("number_of_child", String.valueOf(0));
+                }
+                params.put("milk_produced", milk_produced_spinner.getText().toString());
+                params.put("product_price", price_et.getText().toString());
+                params.put("if_preganent", price_et.getText().toString());
+                if (!pregnancy_month_et.getText().toString().isEmpty()) {
+                    params.put("preganency_month", pregnancy_month_et.getText().toString());
+                } else {
+                    params.put("preganency_month", String.valueOf(0));
+                }
+                params.put("price_status", price_type_spinner.getText().toString());
+                params.put("additional_information", additional_info_et.getText().toString());
+                params.put("super_category", super_category);
+                params.put("state", state_spinner.getText().toString());
+                params.put("district", district_spinner.getText().toString());
+                params.put("block", block_spinner.getText().toString());
+                params.put("village", village_name_et.getText().toString());
+                Log.e("post_ads_params", params.toString());
+                if (imageFile1 == null) {
+                    params.put("photo1", "undefined");
+                }
+                if (imageFile2 == null) {
+                    params.put("photo2", "undefined");
+                }
+                if (imageFile3 == null) {
+                    params.put("photo3", "undefined");
+                }
+                return params;
+            }
+
+            /*
+             * Here we are passing image by renaming it with a unique name
+             */
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+
+                DataPart dp1 = null, dp2 = null, dp3 = null;
+
+                if (imageFile1 != null) {
+                    Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
+                    if (test_image_bitmap1 != null) {
+                        dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
+                        params.put("photo1", dp1);
+                    }
+                }
+
+                if (imageFile2 != null) {
+                    Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
+                    if (test_image_bitmap2 != null) {
+                        dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
+                        params.put("photo2", dp2);
+                    }
+                }
+
+                if (imageFile3 != null) {
+                    Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
+                    if (test_image_bitmap3 != null) {
+                        dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
+                        params.put("photo3", dp3);
+                    }
+                }
+
+                Log.e("photo_params", params.toString());
+                return params;
+            }
+        };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(10 * DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 0, 0));
+        //adding the request to volley
+        Volley.newRequestQueue(this).add(volleyMultipartRequest);
+    }
+
 
     private void getAdsDetails(String post_id) {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);

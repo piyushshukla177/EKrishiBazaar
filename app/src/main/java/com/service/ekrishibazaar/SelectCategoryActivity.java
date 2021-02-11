@@ -1,5 +1,7 @@
 package com.service.ekrishibazaar;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -16,9 +19,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.service.ekrishibazaar.model.CategoryListModel;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class SelectCategoryActivity extends AppCompatActivity {
@@ -62,6 +67,11 @@ public class SelectCategoryActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else if (s.toString().equals("Cattle")) {
                         Intent intent = new Intent(context, PostCattleAdsActivity.class);
+                        intent.putExtra("super_category", super_category);
+                        intent.putExtra("category", s.toString());
+                        startActivity(intent);
+                    } else if (s.toString().equals("Fertilizers and Pesticides")) {
+                        Intent intent = new Intent(context, PostFertilizerAdsActivity.class);
                         intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);

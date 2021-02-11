@@ -10,8 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +45,15 @@ import java.util.Map;
 public class MyAdsDetail extends AppCompatActivity {
     private ApiHelper apiHelper;
     Context context;
-
+    LinearLayout agricultural_ads_linear, cattle_ads_linear;
     ArrayList<SliderItem> slider_list = new ArrayList();
     String token;
 
     ImageView back_image, profile_imageview;
     TextView additional_info_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, product_name_tv, product_breed_tv, product_status_tv,
-            product_quantity_tv, packing_avialable_tv, price_tv;
+            product_quantity_tv, packing_avialable_tv, price_tv,
+
+    cattle_name_tv, cattle_breed_tv, cattle_price_tv, number_of_births_tv, milk_per_day_tv;
 
 
     @Override
@@ -69,10 +71,6 @@ public class MyAdsDetail extends AppCompatActivity {
 
         back_image = findViewById(R.id.back_image);
         profile_imageview = findViewById(R.id.profile_imageview);
-//        name_tv = findViewById(R.id.name_tv);
-//        vid_tv = findViewById(R.id.vid_tv);
-//        mobile_number_tv = findViewById(R.id.mobile_number_tv);
-//        joined_tv = findViewById(R.id.joined_tv);
         state_tv = findViewById(R.id.state_tv);
         additional_info_tv = findViewById(R.id.additional_info_tv);
         district_tv = findViewById(R.id.district_tv);
@@ -83,9 +81,14 @@ public class MyAdsDetail extends AppCompatActivity {
         product_status_tv = findViewById(R.id.product_status_tv);
         product_quantity_tv = findViewById(R.id.product_quantity_tv);
         packing_avialable_tv = findViewById(R.id.packing_avialable_tv);
-//        view_profile_btn = findViewById(R.id.view_profile_btn);
-//        make_offer_btn = findViewById(R.id.make_offer_btn);
         price_tv = findViewById(R.id.price_tv);
+        cattle_name_tv = findViewById(R.id.cattle_name_tv);
+        cattle_breed_tv = findViewById(R.id.cattle_breed_tv);
+        cattle_price_tv = findViewById(R.id.cattle_price_tv);
+        number_of_births_tv = findViewById(R.id.number_of_births_tv);
+        milk_per_day_tv = findViewById(R.id.milk_per_day_tv);
+        agricultural_ads_linear = findViewById(R.id.agricultural_ads_linear);
+        cattle_ads_linear = findViewById(R.id.cattle_ads_linear);
         token = PrefsHelper.getString(context, "token");
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -97,9 +100,14 @@ public class MyAdsDetail extends AppCompatActivity {
         );
 
         Intent intent = getIntent();
-
-        String post_id = intent.getStringExtra("post_id");
-        getAdsDetails(post_id);
+        if (intent.getStringExtra("category").equalsIgnoreCase("Cattle")) {
+            agricultural_ads_linear.setVisibility(View.GONE);
+            String post_id = intent.getStringExtra("post_id");
+            getCattleDetails(post_id);
+        } else {
+            String post_id = intent.getStringExtra("post_id");
+            getAdsDetails(post_id);
+        }
     }
 
     private void getAdsDetails(String post_id) {
@@ -150,6 +158,112 @@ public class MyAdsDetail extends AppCompatActivity {
                             product_breed_tv.setText(product_breed_obj.getString("product_breed"));
                             product_status_tv.setText(product_status);
                             additional_info_tv.setText(obj.getString("additional_information"));
+//                            who_pay_charges_spinner.setText(obj.getString("packaging_cost_bearer"));
+//                            Picasso.get().load(obj.getString("product_image1")).resize(60, 60).into(product_image_imageview1);
+//                            Picasso.get().load(obj.getString("product_image2")).resize(60, 60).into(product_image_imageview2);
+//                            Picasso.get().load(obj.getString("product_image3")).resize(60, 60).into(product_image_imageview3);
+
+//                            product_status_tv.setText(intent.getStringExtra("product_status"));
+//                            product_quantity_tv.setText(intent.getStringExtra("quantity"));
+//                            packing_avialable_tv.setText(intent.getStringExtra("pacakging"));
+
+                            startSlider(obj.getString("product_image1"), obj.getString("product_image2"), obj.getString("product_image3"));
+                            mProgressDialog.dismiss();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        mProgressDialog.dismiss();
+                        String errorCode = "";
+                        if (error instanceof TimeoutError) {
+                            errorCode = "Time out Error";
+                        } else if (error instanceof NoConnectionError) {
+                            errorCode = "No Internet Connection Error";
+                        } else if (error instanceof AuthFailureError) {
+                            errorCode = "Auth Failure Error";
+                        } else if (error instanceof ServerError) {
+                            errorCode = "Server Error";
+                        } else if (error instanceof NetworkError) {
+                            errorCode = "Network Error";
+                        } else if (error instanceof ParseError) {
+                            errorCode = "Parse Error";
+                        }
+                        Toast.makeText(context, "Error.Response: " + errorCode, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("super_category", "Sellads");
+//                Log.v("request", params.toString());
+//                return params;
+//            }
+        };
+        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Volley.newRequestQueue(context).add(postRequest);
+    }
+
+    private void getCattleDetails(String post_id) {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/cattleads/" + post_id + "/?toedit=" + post_id;
+        StringRequest postRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.v("response", response);
+                        try {
+                            mProgressDialog.dismiss();
+                            JSONObject obj = new JSONObject(response);
+                            JSONObject cattle_type_obj = obj.getJSONObject("cattle_type");
+                            JSONObject category_obj = cattle_type_obj.getJSONObject("category");
+                            JSONObject cattle_breed_obj = obj.getJSONObject("cattle_breed");
+                            JSONObject milk_produced_obj = obj.getJSONObject("milk_produced");
+
+                            JSONObject state_obj = obj.getJSONObject("state");
+                            JSONObject district_obj = obj.getJSONObject("district");
+                            JSONObject block_obj = obj.getJSONObject("block");
+
+                            String category_name = category_obj.getString("category_name");
+                            cattle_name_tv.setText(cattle_type_obj.getString("cattle_name"));
+
+                            cattle_price_tv.setText(obj.getString("price"));
+
+                            state_tv.setText(state_obj.getString("state_name"));
+                            district_tv.setText(district_obj.getString("district_name"));
+                            block_tv.setText(block_obj.getString("block_name"));
+                            village_tv.setText(obj.getString("village"));
+                            cattle_breed_tv.setText(cattle_breed_obj.getString("cattle_breed"));
+                            milk_per_day_tv.setText(milk_produced_obj.getString("milk_per_day"));
+                            additional_info_tv.setText(obj.getString("additional_information"));
+                            number_of_births_tv.setText(obj.getString("number_of_child"));
 //                            who_pay_charges_spinner.setText(obj.getString("packaging_cost_bearer"));
 //                            Picasso.get().load(obj.getString("product_image1")).resize(60, 60).into(product_image_imageview1);
 //                            Picasso.get().load(obj.getString("product_image2")).resize(60, 60).into(product_image_imageview2);
