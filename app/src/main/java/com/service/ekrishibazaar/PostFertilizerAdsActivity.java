@@ -91,7 +91,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject obj = response.getJSONObject(i);
-                                product_type_list.add((obj.getString("cattle_name")));
+                                product_type_list.add((obj.getString("type_of_chemical")));
                             }
                             ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_type_list);
                             select_product_type_spinner.setAdapter(productAdapter);
