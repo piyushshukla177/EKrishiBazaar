@@ -1,5 +1,4 @@
 package com.service.ekrishibazaar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -807,7 +806,6 @@ public class PostCattleAdsActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.hide();
 //                        Toast.makeText(context, "In Failure", Toast.LENGTH_SHORT).show();
-//
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
