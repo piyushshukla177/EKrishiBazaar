@@ -58,18 +58,18 @@ import java.util.Map;
 import gun0912.tedbottompicker.TedBottomPicker;
 import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
-public class PostFertilizerAdsActivity extends AppCompatActivity {
-
+public class PostLabourAdsActivity extends AppCompatActivity {
     String post_id;
     Context context;
     Button submit_btn;
-    MaterialBetterSpinner select_product_type_spinner, type_of_fertilizer_spinner, paking_type_spinner, state_spinner, district_spinner, block_spinner;
+    MaterialBetterSpinner no_of_labour_spinner, labour_expertise_spinner, reaching_time_spinner, price_option_spinner, state_spinner, district_spinner, block_spinner;
     EditText paking_et, price_et, village_name_et, additional_info_et;
     ImageView back_image, product_image_imageview1, product_image_imageview2, product_image_imageview3, clear_imageview1, clear_imageview2, clear_imageview3;
 
-    ArrayList product_type_list = new ArrayList();
-    ArrayList type_of_fertilizer_list = new ArrayList();
-    ArrayList paking_type_list = new ArrayList();
+    ArrayList labour_expertise_list = new ArrayList();
+    ArrayList reaching_time_list = new ArrayList();
+    ArrayList number_of_labour_list = new ArrayList();
+    ArrayList pricing_options_list = new ArrayList();
     ArrayList state_list = new ArrayList();
     ArrayList district_list = new ArrayList();
     ArrayList block_list = new ArrayList();
@@ -80,7 +80,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_fertilizer_ads);
+        setContentView(R.layout.activity_post_labour_ads);
         init();
     }
 
@@ -100,9 +100,10 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         if (getIntent().hasExtra("category")) {
             category = getIntent().getStringExtra("category");
         }
-        select_product_type_spinner = findViewById(R.id.select_product_type_spinner);
-        type_of_fertilizer_spinner = findViewById(R.id.type_of_fertilizer_spinner);
-        paking_type_spinner = findViewById(R.id.paking_type_spinner);
+        no_of_labour_spinner = findViewById(R.id.no_of_labour_spinner);
+        labour_expertise_spinner = findViewById(R.id.labour_expertise_spinner);
+        reaching_time_spinner = findViewById(R.id.reaching_time_spinner);
+        price_option_spinner = findViewById(R.id.price_option_spinner);
         state_spinner = findViewById(R.id.state_spinner);
         district_spinner = findViewById(R.id.district_spinner);
         block_spinner = findViewById(R.id.block_spinner);
@@ -124,7 +125,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (checkPermissions()) {
-                            TedBottomPicker.with(PostFertilizerAdsActivity.this)
+                            TedBottomPicker.with(PostLabourAdsActivity.this)
                                     .show(new TedBottomSheetDialogFragment.OnImageSelectedListener() {
                                         @Override
                                         public void onImageSelected(Uri uri) {
@@ -143,7 +144,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PostFertilizerAdsActivity.super.onBackPressed();
+                        PostLabourAdsActivity.super.onBackPressed();
                     }
                 }
         );
@@ -161,7 +162,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (checkPermissions()) {
-                            TedBottomPicker.with(PostFertilizerAdsActivity.this)
+                            TedBottomPicker.with(PostLabourAdsActivity.this)
                                     .show(new TedBottomSheetDialogFragment.OnImageSelectedListener() {
                                         @Override
                                         public void onImageSelected(Uri uri) {
@@ -191,7 +192,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (checkPermissions()) {
-                            TedBottomPicker.with(PostFertilizerAdsActivity.this)
+                            TedBottomPicker.with(PostLabourAdsActivity.this)
                                     .show(new TedBottomSheetDialogFragment.OnImageSelectedListener() {
                                         @Override
                                         public void onImageSelected(Uri uri) {
@@ -215,35 +216,40 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                 }
         );
 
-        paking_type_list.add("Gram");
-        paking_type_list.add("ml");
-        paking_type_list.add("Kg");
-        paking_type_list.add("litre");
-        paking_type_list.add("Pieces");
+//        number_of_labour_list.add("Less than 5");
+//        number_of_labour_list.add("Less than 10");
+//        number_of_labour_list.add("More than 10");
+//        number_of_labour_list.add("More than 20");
+//
+//
+//        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, number_of_labour_list);
+//        no_of_labour_spinner.setAdapter(productAdapter);
 
+//        reaching_time_list.add("Next Day");
+//        reaching_time_list.add("Within 48 hours");
+//        reaching_time_list.add("Within 72 hours");
+//
+//        ArrayAdapter<String> reachingtimeAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, reaching_time_list);
+//        reaching_time_spinner.setAdapter(reachingtimeAdapter);
 
-        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, paking_type_list);
-        paking_type_spinner.setAdapter(productAdapter);
-
-
-        select_product_type_spinner.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s != null && !s.toString().isEmpty() && !s.equals("Select Chemical Type")) {
-                    getChemicalTypeList(s.toString());
-                }
-            }
-        });
+//        select_product_type_spinner.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (s != null && !s.toString().isEmpty() && !s.equals("Select Chemical Type")) {
+//                    getChemicalTypeList(s.toString());
+//                }
+//            }
+//        });
         state_spinner.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -285,7 +291,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (check()) {
                             if (super_category != null && super_category.equalsIgnoreCase("edit")) {
-                              Edit();
+                                Edit();
                             } else {
                                 Save();
                             }
@@ -297,13 +303,15 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         state_spinner.setText(PrefsHelper.getString(this, "state"));
         district_spinner.setText(PrefsHelper.getString(context, "distict"));
         block_spinner.setText(PrefsHelper.getString(context, "block"));
-        getProductTypeList();
+        getLabourExperstiseList();
         getStates();
-
+        getPricingOptoins();
+        getReachingTimeStatus();
+        getNumberoflabour();
     }
 
-    void getProductTypeList() {
-        product_type_list.clear();
+    void getLabourExperstiseList() {
+        labour_expertise_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
@@ -319,7 +327,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://ekrishibazaar.com/api/ads/chemicaltypes/",
+                "https://ekrishibazaar.com/api/ads/labourexpertise/",
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -333,10 +341,10 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject obj = response.getJSONObject(i);
-                                product_type_list.add((obj.getString("type_of_chemical")));
+                                labour_expertise_list.add((obj.getString("expertise")));
                             }
-                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_type_list);
-                            select_product_type_spinner.setAdapter(productAdapter);
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, labour_expertise_list);
+                            labour_expertise_spinner.setAdapter(productAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -347,9 +355,9 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        product_type_list.add("Select Chemical Type");
-                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_type_list);
-                        select_product_type_spinner.setAdapter(productAdapter);
+                        labour_expertise_list.add("Select Chemical Type");
+                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, labour_expertise_list);
+                        labour_expertise_spinner.setAdapter(productAdapter);
                         mProgressDialog.dismiss();
                         // Do something when error occurred
                     }
@@ -359,8 +367,8 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
-    void getChemicalTypeList(String chemical_type) {
-        type_of_fertilizer_list.clear();
+    void getPricingOptoins() {
+        pricing_options_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
@@ -376,7 +384,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         // Initialize a new JsonArrayRequest instance
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                "https://ekrishibazaar.com/api/ads/chemicalproducts/?search=" + chemical_type,
+                "https://ekrishibazaar.com/api/ads/labourcharges/",
                 null,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -390,16 +398,16 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject obj = response.getJSONObject(i);
-                                type_of_fertilizer_list.add((obj.getString("chemical_product_name")));
+                                pricing_options_list.add((obj.getString("per")));
                             }
-                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, type_of_fertilizer_list);
-                            type_of_fertilizer_spinner.setAdapter(productAdapter);
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, pricing_options_list);
+                            price_option_spinner.setAdapter(productAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            type_of_fertilizer_list.add("Select Chemical Type");
-                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, type_of_fertilizer_list);
-                            type_of_fertilizer_spinner.setAdapter(productAdapter);
+                            pricing_options_list.add("Select Pricing Options");
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, pricing_options_list);
+                            price_option_spinner.setAdapter(productAdapter);
                             mProgressDialog.dismiss();
                         }
                     }
@@ -407,9 +415,123 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        product_type_list.add("Select Product Type");
-                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_type_list);
-                        select_product_type_spinner.setAdapter(productAdapter);
+                        pricing_options_list.add("Select Pricing Options");
+                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, pricing_options_list);
+                        price_option_spinner.setAdapter(productAdapter);
+                        mProgressDialog.dismiss();
+                    }
+                }
+        );
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
+    void getNumberoflabour() {
+        number_of_labour_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://ekrishibazaar.com/api/ads/labouravailable/",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                number_of_labour_list.add((obj.getString("available_labour")));
+                            }
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, number_of_labour_list);
+                            no_of_labour_spinner.setAdapter(productAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        number_of_labour_list.add("Select Number of Labour");
+                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, number_of_labour_list);
+                        no_of_labour_spinner.setAdapter(productAdapter);
+                        mProgressDialog.dismiss();
+                    }
+                }
+        );
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
+    void getReachingTimeStatus() {
+        reaching_time_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://ekrishibazaar.com/api/ads/labourreachingtimeonsite/",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                reaching_time_list.add((obj.getString("reaching_time_status")));
+                            }
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, reaching_time_list);
+                            reaching_time_spinner.setAdapter(productAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        reaching_time_list.add("Select Reaching Time");
+                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, reaching_time_list);
+                        reaching_time_spinner.setAdapter(productAdapter);
                         mProgressDialog.dismiss();
                     }
                 }
@@ -624,7 +746,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/fertilizersandpestisides/";
+        String url = "https://ekrishibazaar.com/api/ads/labourinrentads/";
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, url,
                 new Response.Listener<NetworkResponse>() {
@@ -671,12 +793,12 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("chemical_product", type_of_fertilizer_spinner.getText().toString());
-                params.put("chemical_type", select_product_type_spinner.getText().toString());
-                params.put("packing", paking_et.getText().toString());
+                params.put("labour_expertise", labour_expertise_spinner.getText().toString());
+                params.put("available_labour", no_of_labour_spinner.getText().toString());
+                params.put("reaching_on_time", reaching_time_spinner.getText().toString());
 
                 params.put("product_price", price_et.getText().toString());
-                params.put("unit_per", paking_type_spinner.getText().toString());
+                params.put("'price_by", price_option_spinner.getText().toString());
                 params.put("additional_information", additional_info_et.getText().toString());
                 params.put("super_category", super_category);
                 params.put("state", state_spinner.getText().toString());
@@ -745,29 +867,29 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
 
     boolean check() {
         boolean b = true;
-        if (select_product_type_spinner.getText().toString().isEmpty()) {
+        if (no_of_labour_spinner.getText().toString().isEmpty()) {
             b = false;
-            select_product_type_spinner.setError("Required");
-            select_product_type_spinner.requestFocus();
-            Toast.makeText(this, "Select Product Type", Toast.LENGTH_SHORT).show();
+            no_of_labour_spinner.setError("Required");
+            no_of_labour_spinner.requestFocus();
+            Toast.makeText(this, "Select Numbero Labour", Toast.LENGTH_SHORT).show();
             return b;
-        } else if (type_of_fertilizer_spinner.getText().toString().isEmpty()) {
+        } else if (labour_expertise_spinner.getText().toString().isEmpty()) {
             b = false;
-            type_of_fertilizer_spinner.setError("Required");
-            type_of_fertilizer_spinner.requestFocus();
-            Toast.makeText(this, "Select Fertilizer Type", Toast.LENGTH_SHORT).show();
+            labour_expertise_spinner.setError("Required");
+            labour_expertise_spinner.requestFocus();
+            Toast.makeText(this, "SelectLabour Expertise", Toast.LENGTH_SHORT).show();
             return b;
-        } else if (paking_type_spinner.getText().toString().isEmpty()) {
+        } else if (reaching_time_spinner.getText().toString().isEmpty()) {
             b = false;
-            paking_type_spinner.setError("Required");
-            paking_type_spinner.requestFocus();
-            Toast.makeText(this, "Select Packing Type", Toast.LENGTH_SHORT).show();
+            reaching_time_spinner.setError("Required");
+            reaching_time_spinner.requestFocus();
+            Toast.makeText(this, "Select Reaching Time", Toast.LENGTH_SHORT).show();
             return b;
-        } else if (paking_et.getText().toString().isEmpty()) {
+        } else if (price_option_spinner.getText().toString().isEmpty()) {
             b = false;
-            paking_et.setError("Required");
-            paking_et.requestFocus();
-            Toast.makeText(this, "Enter Packing", Toast.LENGTH_SHORT).show();
+            price_option_spinner.setError("Required");
+            price_option_spinner.requestFocus();
+            Toast.makeText(this, "Enter Pricing Options", Toast.LENGTH_SHORT).show();
             return b;
         } else if (price_et.getText().toString().isEmpty()) {
             b = false;
@@ -831,7 +953,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/fertilizersandpestisides/"+post_id+"/";
+        String url = "https://ekrishibazaar.com/api/ads/labourinrentads/" + post_id + "/";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -840,17 +962,17 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
                         try {
                             mProgressDialog.dismiss();
                             JSONObject obj = new JSONObject(response);
-                            JSONObject chemical_product_obj = obj.getJSONObject("chemical_product");
-                            JSONObject chemical_type_obj = obj.getJSONObject("chemical_type");
+                            JSONObject labour_expertise_obj = obj.getJSONObject("labour_expertise");
+                            JSONObject price_by_obj = obj.getJSONObject("price_by");
+                            JSONObject available_labour_obj = obj.getJSONObject("available_labour");
 
                             JSONObject state_obj = obj.getJSONObject("state");
                             JSONObject district_obj = obj.getJSONObject("district");
                             JSONObject block_obj = obj.getJSONObject("block");
-                            type_of_fertilizer_spinner.setText(chemical_product_obj.getString("chemical_product_name"));
-                            select_product_type_spinner.setText(chemical_type_obj.getString("type_of_chemical"));
-
-                            paking_et.setText(obj.getString("packing"));
-                            paking_type_spinner.setText(obj.getString("per_unit"));
+                            labour_expertise_spinner.setText(labour_expertise_obj.getString("expertise"));
+                            reaching_time_spinner.setText(obj.getString("reaching_time_on_site"));
+                            price_option_spinner.setText(price_by_obj.getString("per"));
+                            no_of_labour_spinner.setText(available_labour_obj.getString("available_labour"));
                             price_et.setText(obj.getString("price"));
 
 
@@ -926,8 +1048,7 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         });
         mProgressDialog.show();
 
-        String url ="https://ekrishibazaar.com/api/ads/fertilizersandpestisides/"+post_id+"/?toedit=optm/";
-
+        String url = "https://ekrishibazaar.com/api/ads/labourinrentads/" + post_id + "/?toedit=optm/";
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.PUT, url,
                 new Response.Listener<NetworkResponse>() {
@@ -970,19 +1091,19 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> params = new HashMap<>();
-                params.put("category", category);
-                params.put("chemical_product", type_of_fertilizer_spinner.getText().toString());
-                params.put("chemical_type", select_product_type_spinner.getText().toString());
-                params.put("packing", paking_et.getText().toString());
+                params.put("labour_expertise", labour_expertise_spinner.getText().toString());
+                params.put("available_labour", no_of_labour_spinner.getText().toString());
+                params.put("reaching_on_time", reaching_time_spinner.getText().toString());
 
                 params.put("product_price", price_et.getText().toString());
-                params.put("unit_per", paking_type_spinner.getText().toString());
+                params.put("'price_by", price_option_spinner.getText().toString());
                 params.put("additional_information", additional_info_et.getText().toString());
                 params.put("super_category", super_category);
                 params.put("state", state_spinner.getText().toString());
                 params.put("district", district_spinner.getText().toString());
                 params.put("block", block_spinner.getText().toString());
                 params.put("village", village_name_et.getText().toString());
+
                 if (imageFile1 == null) {
                     params.put("photo1", "undefined");
                 }
@@ -1039,5 +1160,4 @@ public class PostFertilizerAdsActivity extends AppCompatActivity {
         //adding the request to volley
         Volley.newRequestQueue(this).add(volleyMultipartRequest);
     }
-
 }

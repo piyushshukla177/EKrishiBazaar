@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.service.ekrishibazaar.MyAdsDetail;
 import com.service.ekrishibazaar.PostCattleAdsActivity;
+import com.service.ekrishibazaar.PostFertilizerAdsActivity;
 import com.service.ekrishibazaar.PostSellAdsActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.fragments.MyAdsFragment;
@@ -73,13 +74,21 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             intent.putExtra("post_id", currentItem.getPost_id());
                             intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
-                        } else {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Fertilizers and Pesticides")) {
+                            Intent intent = new Intent(context, PostFertilizerAdsActivity.class);
+                            intent.putExtra("super_category", "edit");
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
+                            context.startActivity(intent);
+                        } else if (currentItem.getCategory_name().equals("Fruits") || currentItem.getCategory_name().equals("Pulses") || currentItem.getCategory_name().equals("Medicinal plants") || currentItem.getCategory_name().equals("Dairy Product") || currentItem.getCategory_name().equals("Vegetable") || currentItem.getCategory_name().equals("Grains")
+                                || currentItem.getCategory_name().equals("Flower") || currentItem.getCategory_name().equals("oilseeds")) {
                             Intent intent = new Intent(context, PostSellAdsActivity.class);
                             intent.putExtra("super_category", "edit");
                             intent.putExtra("post_id", currentItem.getPost_id());
                             intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
                         }
+
                     }
                 }
         );
@@ -89,8 +98,15 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                     public void onClick(View v) {
                         if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
                             MyAdsFragment.mmm.DeleteCattleAds(currentItem.getPost_id());
-                        } else {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Fertilizers and Pesticides")) {
+                            MyAdsFragment.mmm.DeleteFertilizerAds(currentItem.getPost_id());
+                        } else if (currentItem.getCategory_name().equals("Fruits") || currentItem.getCategory_name().equals("Pulses") || currentItem.getCategory_name().equals("Medicinal plants") || currentItem.getCategory_name().equals("Dairy Product") || currentItem.getCategory_name().equals("Vegetable") || currentItem.getCategory_name().equals("Grains")
+                                || currentItem.getCategory_name().equals("Flower") || currentItem.getCategory_name().equals("oilseeds")) {
                             MyAdsFragment.mmm.DeleteAds(currentItem.getPost_id());
+                        }
+                        else if(currentItem.getCategory_name().equalsIgnoreCase("Labour in Rent"))
+                        {
+                            MyAdsFragment.mmm.DeleteLabourinRentAds(currentItem.getPost_id());
                         }
                     }
                 }
@@ -101,8 +117,13 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                     public void onClick(View v) {
                         if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
                             MyAdsFragment.mmm.MarkCattleAsSold(currentItem.getPost_id());
-                        } else {
+                        } else if (currentItem.getCategory_name().equals("Fruits") || currentItem.getCategory_name().equals("Pulses") || currentItem.getCategory_name().equals("Medicinal plants") || currentItem.getCategory_name().equals("Dairy Product") || currentItem.getCategory_name().equals("Vegetable") || currentItem.getCategory_name().equals("Grains")
+                                || currentItem.getCategory_name().equals("Flower") || currentItem.getCategory_name().equals("oilseeds")) {
                             MyAdsFragment.mmm.MarkAsSold(currentItem.getPost_id());
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Fertilizers and Pesticides")) {
+                            MyAdsFragment.mmm.MarkFertilizerAsSold(currentItem.getPost_id());
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Labour in Rent")) {
+                            MyAdsFragment.mmm.MarkLabourinRentAsSold(currentItem.getPost_id());
                         }
                     }
                 }
