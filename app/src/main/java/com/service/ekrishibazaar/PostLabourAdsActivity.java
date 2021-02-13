@@ -3,7 +3,6 @@ package com.service.ekrishibazaar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -216,40 +215,6 @@ public class PostLabourAdsActivity extends AppCompatActivity {
                 }
         );
 
-//        number_of_labour_list.add("Less than 5");
-//        number_of_labour_list.add("Less than 10");
-//        number_of_labour_list.add("More than 10");
-//        number_of_labour_list.add("More than 20");
-//
-//
-//        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, number_of_labour_list);
-//        no_of_labour_spinner.setAdapter(productAdapter);
-
-//        reaching_time_list.add("Next Day");
-//        reaching_time_list.add("Within 48 hours");
-//        reaching_time_list.add("Within 72 hours");
-//
-//        ArrayAdapter<String> reachingtimeAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, reaching_time_list);
-//        reaching_time_spinner.setAdapter(reachingtimeAdapter);
-
-//        select_product_type_spinner.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (s != null && !s.toString().isEmpty() && !s.equals("Select Chemical Type")) {
-//                    getChemicalTypeList(s.toString());
-//                }
-//            }
-//        });
         state_spinner.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -798,7 +763,7 @@ public class PostLabourAdsActivity extends AppCompatActivity {
                 params.put("reaching_on_time", reaching_time_spinner.getText().toString());
 
                 params.put("product_price", price_et.getText().toString());
-                params.put("'price_by", price_option_spinner.getText().toString());
+                params.put("price_by", price_option_spinner.getText().toString());
                 params.put("additional_information", additional_info_et.getText().toString());
                 params.put("super_category", super_category);
                 params.put("state", state_spinner.getText().toString());
@@ -871,13 +836,13 @@ public class PostLabourAdsActivity extends AppCompatActivity {
             b = false;
             no_of_labour_spinner.setError("Required");
             no_of_labour_spinner.requestFocus();
-            Toast.makeText(this, "Select Numbero Labour", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select Number of Labours", Toast.LENGTH_SHORT).show();
             return b;
         } else if (labour_expertise_spinner.getText().toString().isEmpty()) {
             b = false;
             labour_expertise_spinner.setError("Required");
             labour_expertise_spinner.requestFocus();
-            Toast.makeText(this, "SelectLabour Expertise", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Select Labour Expertise", Toast.LENGTH_SHORT).show();
             return b;
         } else if (reaching_time_spinner.getText().toString().isEmpty()) {
             b = false;
@@ -965,12 +930,13 @@ public class PostLabourAdsActivity extends AppCompatActivity {
                             JSONObject labour_expertise_obj = obj.getJSONObject("labour_expertise");
                             JSONObject price_by_obj = obj.getJSONObject("price_by");
                             JSONObject available_labour_obj = obj.getJSONObject("available_labour");
+                            JSONObject reaching_time_on_site_obj = obj.getJSONObject("reaching_time_on_site");
 
                             JSONObject state_obj = obj.getJSONObject("state");
                             JSONObject district_obj = obj.getJSONObject("district");
                             JSONObject block_obj = obj.getJSONObject("block");
                             labour_expertise_spinner.setText(labour_expertise_obj.getString("expertise"));
-                            reaching_time_spinner.setText(obj.getString("reaching_time_on_site"));
+                            reaching_time_spinner.setText(reaching_time_on_site_obj.getString("reaching_time_status"));
                             price_option_spinner.setText(price_by_obj.getString("per"));
                             no_of_labour_spinner.setText(available_labour_obj.getString("available_labour"));
                             price_et.setText(obj.getString("price"));
@@ -1096,7 +1062,7 @@ public class PostLabourAdsActivity extends AppCompatActivity {
                 params.put("reaching_on_time", reaching_time_spinner.getText().toString());
 
                 params.put("product_price", price_et.getText().toString());
-                params.put("'price_by", price_option_spinner.getText().toString());
+                params.put("price_by", price_option_spinner.getText().toString());
                 params.put("additional_information", additional_info_et.getText().toString());
                 params.put("super_category", super_category);
                 params.put("state", state_spinner.getText().toString());
