@@ -931,12 +931,14 @@ public class PostCattleAdsActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(NetworkResponse response) {
                         try {
-                            mProgressDialog.hide();
 
                             JSONObject obj = new JSONObject(new String(response.data));
-                            String id = obj.getString("id");
-                            Toast.makeText(context, "Ad Updated Successfully", Toast.LENGTH_SHORT).show();
-                            finish();
+                            if (obj.has("id")) {
+                                Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else if (obj.has("detail")) {
+                                Toast.makeText(context, obj.getString("detail"), Toast.LENGTH_SHORT).show();
+                            }
                         } catch (Exception e) {
                             mProgressDialog.hide();
                             e.printStackTrace();

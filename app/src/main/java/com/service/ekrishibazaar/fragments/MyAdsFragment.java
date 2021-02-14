@@ -166,12 +166,20 @@ public class MyAdsFragment extends Fragment {
                                     JSONObject product_obj = obj.getJSONObject("labour_expertise");
                                     JSONObject category_obj = product_obj.getJSONObject("category");
                                     m.setCategory_name(category_obj.getString("category_name"));
-                                } else if (obj.getString("type").equalsIgnoreCase("machinaryads")) {
+                                }
+                                else if (obj.getString("type").equalsIgnoreCase("machinaryads")) {
                                     JSONObject product_obj = obj.getJSONObject("machine");
                                     JSONObject category_obj = product_obj.getJSONObject("category");
                                     m.setCategory_name(category_obj.getString("category_name"));
-                                } else if (obj.getString("type").equalsIgnoreCase("Other Agri Product")) {
-                                    JSONObject product_obj = obj.getJSONObject("types");
+                                }
+                                else if (obj.getString("type").equalsIgnoreCase("otheragriads")) {
+//                                    JSONObject product_obj = obj.getJSONObject("types");
+//                                    JSONObject category_obj = product_obj.getJSONObject("category");
+//                                    m.setCategory_name(category_obj.getString("category_name"));
+                                    m.setCategory_name("Other Agri Product");
+                                }
+                                else if (obj.getString("type").equalsIgnoreCase("serviceinrentads")) {
+                                    JSONObject product_obj = obj.getJSONObject("select_work");
                                     JSONObject category_obj = product_obj.getJSONObject("category");
                                     m.setCategory_name(category_obj.getString("category_name"));
                                 }

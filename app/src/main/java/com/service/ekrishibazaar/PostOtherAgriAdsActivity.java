@@ -542,7 +542,7 @@ public class PostOtherAgriAdsActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/agricultralmachinaryads/";
+        String url = "https://ekrishibazaar.com/api/ads/otheragriproducts/";
         //our custom volley request
         VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, url,
                 new Response.Listener<NetworkResponse>() {
@@ -741,7 +741,7 @@ public class PostOtherAgriAdsActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/agricultralmachinaryads/" + post_id + "/";
+        String url = "https://ekrishibazaar.com/api/ads/otheragriproducts/" + post_id + "/";
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -840,11 +840,13 @@ public class PostOtherAgriAdsActivity extends AppCompatActivity {
                     public void onResponse(NetworkResponse response) {
                         try {
                             mProgressDialog.hide();
-
                             JSONObject obj = new JSONObject(new String(response.data));
-                            String id = obj.getString("id");
-                            Toast.makeText(context, "Ad Updated Successfully", Toast.LENGTH_SHORT).show();
-                            finish();
+                            if (obj.has("id")) {
+                                Toast.makeText(context, "Ad Posted Successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else if (obj.has("detail")) {
+                                Toast.makeText(context, obj.getString("detail"), Toast.LENGTH_SHORT).show();
+                            }
                         } catch (Exception e) {
                             mProgressDialog.hide();
                             e.printStackTrace();
@@ -880,7 +882,7 @@ public class PostOtherAgriAdsActivity extends AppCompatActivity {
                 params.put("quantity", packing_et.getText().toString());
                 params.put("per_unit", packing_as_spinner.getText().toString());
                 params.put("product_price", price_et.getText().toString());
-                params.put("super_category", super_category);
+//                params.put("super_category", super_category);
                 params.put("additional_information", additional_info_et.getText().toString());
                 params.put("state", state_spinner.getText().toString());
                 params.put("district", district_spinner.getText().toString());
@@ -895,7 +897,6 @@ public class PostOtherAgriAdsActivity extends AppCompatActivity {
                 if (imageFile3 == null) {
                     params.put("photo3", "undefined");
                 }
-
                 Log.e("post_ads_params", params.toString());
                 return params;
             }

@@ -20,6 +20,7 @@ import com.service.ekrishibazaar.PostFertilizerAdsActivity;
 import com.service.ekrishibazaar.PostLabourAdsActivity;
 import com.service.ekrishibazaar.PostOtherAgriAdsActivity;
 import com.service.ekrishibazaar.PostSellAdsActivity;
+import com.service.ekrishibazaar.PostServiceInRentAdsActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.fragments.MyAdsFragment;
 import com.service.ekrishibazaar.model.MyAdsModel;
@@ -90,22 +91,25 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             intent.putExtra("post_id", currentItem.getPost_id());
                             intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
                             Intent intent = new Intent(context, PostAgriculturalMachinaryAdsActivity.class);
                             intent.putExtra("super_category", "edit");
                             intent.putExtra("post_id", currentItem.getPost_id());
                             intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             Intent intent = new Intent(context, PostOtherAgriAdsActivity.class);
                             intent.putExtra("super_category", "edit");
                             intent.putExtra("post_id", currentItem.getPost_id());
                             intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
-                        }
-                        else if (currentItem.getCategory_name().equals("Fruits") || currentItem.getCategory_name().equals("Pulses") || currentItem.getCategory_name().equals("Medicinal plants") || currentItem.getCategory_name().equals("Dairy Product") || currentItem.getCategory_name().equals("Vegetable") || currentItem.getCategory_name().equals("Grains")
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
+                            Intent intent = new Intent(context, PostServiceInRentAdsActivity.class);
+                            intent.putExtra("super_category", "edit");
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
+                            context.startActivity(intent);
+                        } else if (currentItem.getCategory_name().equals("Fruits") || currentItem.getCategory_name().equals("Pulses") || currentItem.getCategory_name().equals("Medicinal plants") || currentItem.getCategory_name().equals("Dairy Product") || currentItem.getCategory_name().equals("Vegetable") || currentItem.getCategory_name().equals("Grains")
                                 || currentItem.getCategory_name().equals("Flower") || currentItem.getCategory_name().equals("oilseeds")) {
                             Intent intent = new Intent(context, PostSellAdsActivity.class);
                             intent.putExtra("super_category", "edit");
@@ -129,10 +133,9 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             MyAdsFragment.mmm.DeleteAds(currentItem.getPost_id());
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Labour in Rent")) {
                             MyAdsFragment.mmm.DeleteLabourinRentAds(currentItem.getPost_id());
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
                             MyAdsFragment.mmm.DeleteAgriMachinary(currentItem.getPost_id());
-                        }else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             MyAdsFragment.mmm.DeleteOtherAgriProduct(currentItem.getPost_id());
                         }
                     }
@@ -151,11 +154,9 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             MyAdsFragment.mmm.MarkFertilizerAsSold(currentItem.getPost_id());
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Labour in Rent")) {
                             MyAdsFragment.mmm.MarkLabourinRentAsSold(currentItem.getPost_id());
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
                             MyAdsFragment.mmm.MarkAgriMachinarytAsSold(currentItem.getPost_id());
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             MyAdsFragment.mmm.MarkOtherAgriProductAsSold(currentItem.getPost_id());
                         }
                     }

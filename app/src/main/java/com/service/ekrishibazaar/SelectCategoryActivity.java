@@ -80,9 +80,18 @@ public class SelectCategoryActivity extends AppCompatActivity {
                         intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);
-                    }
-                    else if (s.toString().equalsIgnoreCase("Other Agri Product")) {
+                    } else if (s.toString().equalsIgnoreCase("Other Agri Product")) {
                         Intent intent = new Intent(context, PostOtherAgriAdsActivity.class);
+                        intent.putExtra("super_category", super_category);
+                        intent.putExtra("category", s.toString());
+                        startActivity(intent);
+                    } else if (s.toString().equalsIgnoreCase("Service in Rent")) {
+                        Intent intent = new Intent(context, PostServiceInRentAdsActivity.class);
+                        intent.putExtra("super_category", super_category);
+                        intent.putExtra("category", s.toString());
+                        startActivity(intent);
+                    } else if (s.toString().equalsIgnoreCase("Tree and Woods")) {
+                        Intent intent = new Intent(context, PostTreeAndWoodsAdsActivity.class);
                         intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);

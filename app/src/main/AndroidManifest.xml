@@ -15,9 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PostOtherAgriAdsActivity"
-            android:theme="@style/Theme.Splash"
-            ></activity>
+        <activity
+            android:name=".PostTreeAndWoodsAdsActivity"
+            android:theme="@style/Theme.Splash"></activity>
+        <activity
+            android:name=".PostServiceInRentAdsActivity"
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".PostOtherAgriAdsActivity"
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostAgriculturalMachinaryAdsActivity"
             android:theme="@style/Theme.Splash" />

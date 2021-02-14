@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PostOtherAgriAdsActivity">
+    tools:context=".PostServiceInRentAdsActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear_toolbar"
@@ -52,19 +52,43 @@
             android:orientation="vertical">
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                android:id="@+id/product_type_spinner"
+                android:id="@+id/service_type_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
-                android:hint="Select Type of Product"
+                android:hint="Select Service Type"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/provide_info_tv" />
 
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/select_work_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:hint="Select Work"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/provide_info_tv" />
 
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/reaching_time_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:hint="Select Reaching Time"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/provide_info_tv" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,45 +107,25 @@
                     app:boxBackgroundColor="@android:color/transparent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/packing_et"
+                        android:id="@+id/price_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Enter packing"
+                        android:hint="Enter Price"
                         android:inputType="number"
                         android:maxLines="1"
                         android:textSize="@dimen/_12sdp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
-                    android:id="@+id/packing_as_spinner"
+                    android:id="@+id/pricing_option_spinner"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:hint="Available As"
+                    android:hint="Pricing Option"
                     android:textSize="@dimen/_12sdp" />
-
-
+                
             </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_9sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_9sdp"
-                android:background="@android:color/transparent"
-                app:boxBackgroundColor="@android:color/transparent">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/price_et"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Price"
-                    android:maxLines="1"
-                    android:inputType="numberDecimal"
-                    android:textSize="@dimen/_12sdp" />
-            </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
