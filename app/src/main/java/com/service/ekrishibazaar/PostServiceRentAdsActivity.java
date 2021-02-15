@@ -58,7 +58,7 @@ import java.util.Map;
 import gun0912.tedbottompicker.TedBottomPicker;
 import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 
-public class PostServiceInRentAdsActivity extends AppCompatActivity {
+public class PostServiceRentAdsActivity extends AppCompatActivity {
 
     String post_id;
     Context context;
@@ -126,7 +126,7 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (checkPermissions()) {
-                            TedBottomPicker.with(PostServiceInRentAdsActivity.this)
+                            TedBottomPicker.with(PostServiceRentAdsActivity.this)
                                     .show(new TedBottomSheetDialogFragment.OnImageSelectedListener() {
                                         @Override
                                         public void onImageSelected(Uri uri) {
@@ -145,7 +145,7 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        PostServiceInRentAdsActivity.super.onBackPressed();
+                        PostServiceRentAdsActivity.super.onBackPressed();
                     }
                 }
         );
@@ -163,7 +163,7 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (checkPermissions()) {
-                            TedBottomPicker.with(PostServiceInRentAdsActivity.this)
+                            TedBottomPicker.with(PostServiceRentAdsActivity.this)
                                     .show(new TedBottomSheetDialogFragment.OnImageSelectedListener() {
                                         @Override
                                         public void onImageSelected(Uri uri) {
@@ -193,7 +193,7 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (checkPermissions()) {
-                            TedBottomPicker.with(PostServiceInRentAdsActivity.this)
+                            TedBottomPicker.with(PostServiceRentAdsActivity.this)
                                     .show(new TedBottomSheetDialogFragment.OnImageSelectedListener() {
                                         @Override
                                         public void onImageSelected(Uri uri) {
@@ -274,7 +274,7 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         if (check()) {
                             if (super_category != null && super_category.equalsIgnoreCase("edit")) {
-                                Edit();
+                                EdiTS();
                             } else {
                                 Save();
                             }
@@ -1012,7 +1012,7 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
     }
-
+/*
     public void Edit() {
         final ProgressDialog mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setIndeterminate(true);
@@ -1052,22 +1052,27 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         mProgressDialog.hide();
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
-            /*
+            *//*
              * If you want to add more parameters with the image
              * you can do it here
              * here we have only one parameter with the image
              * which is tags
-             * */
+             * *//*
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Authorization", "Token " + token);
+//                return params;
+//            }
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "Token " + token);
                 return params;
             }
-
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
@@ -1097,9 +1102,9 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                 return params;
             }
 
-            /*
+            *//*
              * Here we are passing image by renaming it with a unique name
-             */
+             *//*
             @Override
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
@@ -1130,7 +1135,129 @@ public class PostServiceInRentAdsActivity extends AppCompatActivity {
                         params.put("photo3", dp3);
                     }
                 }
+                Log.e("photo_params", params.toString());
+                return params;
+            }
+        };
+        volleyMultipartRequest.setRetryPolicy(new DefaultRetryPolicy(10 * DefaultRetryPolicy.DEFAULT_TIMEOUT_MS, 0, 0));
+        //adding the request to volley
+        Volley.newRequestQueue(this).add(volleyMultipartRequest);
+    }*/
 
+    public void EdiTS() {
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Upating Ads...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        String url = "https://ekrishibazaar.com/api/ads/serviceinrent/"+post_id+"/?toedit=optm/";
+        //our custom volley request
+        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.PUT, url,
+                new Response.Listener<NetworkResponse>() {
+                    @Override
+                    public void onResponse(NetworkResponse response) {
+                        try {
+                            mProgressDialog.hide();
+
+                            JSONObject obj = new JSONObject(new String(response.data));
+                            if (obj.has("id")) {
+                                Toast.makeText(context, "Ad Updated Successfully", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else if (obj.has("detail")) {
+                                Toast.makeText(context, obj.getString("detail"), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            mProgressDialog.hide();
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.hide();
+                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            /*
+             * If you want to add more parameters with the image
+             * you can do it here
+             * here we have only one parameter with the image
+             * which is tags
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Token " + token);
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> params = new HashMap<>();
+                params.put("select_work", select_work_spinner.getText().toString());
+                params.put("service_machine_name", service_type_spinner.getText().toString());
+                params.put("reaching_on_time", reaching_time_spinner.getText().toString());
+                params.put("product_price", price_et.getText().toString());
+                params.put("price_per", pricing_option_spinner.getText().toString());
+//                params.put("super_category", super_category);
+                params.put("additional_information", additional_info_et.getText().toString());
+                params.put("state", state_spinner.getText().toString());
+                params.put("district", district_spinner.getText().toString());
+                params.put("block", block_spinner.getText().toString());
+                params.put("village", village_name_et.getText().toString());
+                Log.e("post_ads_params", params.toString());
+                if (imageFile1 == null) {
+                    params.put("photo1", "undefined");
+                }
+                if (imageFile2 == null) {
+                    params.put("photo2", "undefined");
+                }
+                if (imageFile3 == null) {
+                    params.put("photo3", "undefined");
+                }
+                return params;
+            }
+            /*
+             * Here we are passing image by renaming it with a unique name
+             */
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                long imagename = System.currentTimeMillis();
+
+                DataPart dp1 = null, dp2 = null, dp3 = null;
+                if (imageFile1 != null) {
+                    Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
+                    if (test_image_bitmap1 != null) {
+                        dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
+                        params.put("photo1", dp1);
+                    }
+                }
+
+                if (imageFile2 != null) {
+                    Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
+                    if (test_image_bitmap2 != null) {
+                        dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
+                        params.put("photo2", dp2);
+                    }
+                }
+
+                if (imageFile3 != null) {
+                    Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
+                    if (test_image_bitmap3 != null) {
+                        dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
+                        params.put("photo3", dp3);
+                    }
+                }
                 Log.e("photo_params", params.toString());
                 return params;
             }

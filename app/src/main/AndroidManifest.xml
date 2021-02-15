@@ -19,7 +19,7 @@
             android:name=".PostTreeAndWoodsAdsActivity"
             android:theme="@style/Theme.Splash"></activity>
         <activity
-            android:name=".PostServiceInRentAdsActivity"
+            android:name=".PostServiceRentAdsActivity"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostOtherAgriAdsActivity"

@@ -86,7 +86,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
                         intent.putExtra("category", s.toString());
                         startActivity(intent);
                     } else if (s.toString().equalsIgnoreCase("Service in Rent")) {
-                        Intent intent = new Intent(context, PostServiceInRentAdsActivity.class);
+                        Intent intent = new Intent(context, PostServiceRentAdsActivity.class);
                         intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);

@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.service.ekrishibazaar.LabourAdDetailsActivity;
 import com.service.ekrishibazaar.MyAdsDetail;
 import com.service.ekrishibazaar.PostAgriculturalMachinaryAdsActivity;
 import com.service.ekrishibazaar.PostCattleAdsActivity;
@@ -20,7 +19,8 @@ import com.service.ekrishibazaar.PostFertilizerAdsActivity;
 import com.service.ekrishibazaar.PostLabourAdsActivity;
 import com.service.ekrishibazaar.PostOtherAgriAdsActivity;
 import com.service.ekrishibazaar.PostSellAdsActivity;
-import com.service.ekrishibazaar.PostServiceInRentAdsActivity;
+import com.service.ekrishibazaar.PostServiceRentAdsActivity;
+import com.service.ekrishibazaar.PostTreeAndWoodsAdsActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.fragments.MyAdsFragment;
 import com.service.ekrishibazaar.model.MyAdsModel;
@@ -104,7 +104,13 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             intent.putExtra("category", currentItem.getCategory_name());
                             context.startActivity(intent);
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
-                            Intent intent = new Intent(context, PostServiceInRentAdsActivity.class);
+                            Intent intent = new Intent(context, PostServiceRentAdsActivity.class);
+                            intent.putExtra("super_category", "edit");
+                            intent.putExtra("post_id", currentItem.getPost_id());
+                            intent.putExtra("category", currentItem.getCategory_name());
+                            context.startActivity(intent);
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
+                            Intent intent = new Intent(context, PostTreeAndWoodsAdsActivity.class);
                             intent.putExtra("super_category", "edit");
                             intent.putExtra("post_id", currentItem.getPost_id());
                             intent.putExtra("category", currentItem.getCategory_name());
@@ -138,6 +144,11 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             MyAdsFragment.mmm.DeleteOtherAgriProduct(currentItem.getPost_id());
                         }
+                        else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
+                            MyAdsFragment.mmm.DeleteServiceInRent(currentItem.getPost_id());
+                        }else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
+                            MyAdsFragment.mmm.DeleteServiceInRent(currentItem.getPost_id());
+                        }
                     }
                 }
         );
@@ -158,6 +169,11 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             MyAdsFragment.mmm.MarkAgriMachinarytAsSold(currentItem.getPost_id());
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             MyAdsFragment.mmm.MarkOtherAgriProductAsSold(currentItem.getPost_id());
+                        }
+                        else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
+                            MyAdsFragment.mmm.MarkServiceInRentAsSold(currentItem.getPost_id());
+                        }else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
+                            MyAdsFragment.mmm.MarkTreeeAndWoodsAsSold(currentItem.getPost_id());
                         }
                     }
                 }
