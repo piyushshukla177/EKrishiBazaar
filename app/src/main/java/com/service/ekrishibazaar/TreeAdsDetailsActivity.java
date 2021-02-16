@@ -3,7 +3,10 @@ package com.service.ekrishibazaar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -177,7 +180,19 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
     }
 
     private void MakeOfferApi(String phone, String actual_price, String offer_price) {
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Making Offer...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
 
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
             public okhttp3.Response intercept(Chain chain) throws IOException {
@@ -200,7 +215,7 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
 
             @Override
             public void onResponse(Call<String> call, retrofit2.Response<String> response) {
-
+                mProgressDialog.hide();
                 if (response.body() instanceof String) {
                     String x = response.body();
                     Toast.makeText(TreeAdsDetailsActivity.this, x, Toast.LENGTH_SHORT).show();
@@ -217,6 +232,7 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
             @Override
             public void onFailure(@NonNull Call<String> call,
                                   @NonNull Throwable t) {
+                mProgressDialog.hide();
                 Toast.makeText(TreeAdsDetailsActivity.this, "Offer is already sent", Toast.LENGTH_SHORT).show();
                 if (!call.isCanceled()) {
                 }
