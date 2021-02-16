@@ -16,8 +16,11 @@
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".PostTreeAndWoodsAdsActivity"
+            android:name=".ServiceAdsDetailActivity"
             android:theme="@style/Theme.Splash"></activity>
+        <activity
+            android:name=".PostTreeAndWoodsAdsActivity"
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostServiceRentAdsActivity"
             android:theme="@style/Theme.Splash" />

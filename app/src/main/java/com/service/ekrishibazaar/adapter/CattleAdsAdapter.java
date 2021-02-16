@@ -30,11 +30,7 @@ public class CattleAdsAdapter extends RecyclerView.Adapter<CattleAdsAdapter.Fres
             address_textview = itemView.findViewById(R.id.address_textview);
             price_textview = itemView.findViewById(R.id.price_textview);
             cardview = itemView.findViewById(R.id.cardview);
-//          state_textview = itemView.findViewById(R.id.state_textview);
-//          district_textview = itemView.findViewById(R.id.district_textview);
-//          block_textview = itemView.findViewById(R.id.block_textview);
-//          posted_on_textview = itemView.findViewById(R.id.posted_on_textview);
-//          view_ads_btn = itemView.findViewById(R.id.view_ads_btn);
+
         }
     }
 
@@ -57,11 +53,6 @@ public class CattleAdsAdapter extends RecyclerView.Adapter<CattleAdsAdapter.Fres
         Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
         holder.address_textview.setText(currentItem.getBlock() + ", " + currentItem.getDistrict());
         holder.price_textview.setText("Price  " + "₹ " + currentItem.getPrice());
-//      holder.milk_textview.setText("Milk : " + currentItem.getMilk_per_day());
-//      holder.state_textview.setText("State : " + currentItem.getState());
-//      holder.district_textview.setText("District : " + currentItem.getDistrict());
-//      holder.block_textview.setText("Block " + currentItem.getBlock());
-//      holder.posted_on_textview.setText("Posted On : " + currentItem.getPosted_on());
         holder.cardview.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

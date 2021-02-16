@@ -143,11 +143,10 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             MyAdsFragment.mmm.DeleteAgriMachinary(currentItem.getPost_id());
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             MyAdsFragment.mmm.DeleteOtherAgriProduct(currentItem.getPost_id());
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
                             MyAdsFragment.mmm.DeleteServiceInRent(currentItem.getPost_id());
-                        }else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
-                            MyAdsFragment.mmm.DeleteServiceInRent(currentItem.getPost_id());
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
+                            MyAdsFragment.mmm.DeleteTreeAndWoods(currentItem.getPost_id());
                         }
                     }
                 }
@@ -169,10 +168,9 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                             MyAdsFragment.mmm.MarkAgriMachinarytAsSold(currentItem.getPost_id());
                         } else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
                             MyAdsFragment.mmm.MarkOtherAgriProductAsSold(currentItem.getPost_id());
-                        }
-                        else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
                             MyAdsFragment.mmm.MarkServiceInRentAsSold(currentItem.getPost_id());
-                        }else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
+                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
                             MyAdsFragment.mmm.MarkTreeeAndWoodsAsSold(currentItem.getPost_id());
                         }
                     }
@@ -183,17 +181,50 @@ public class MyAdsAdapter extends RecyclerView.Adapter<MyAdsAdapter.AgricultureV
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
-                            Intent intent = new Intent(context, MyAdsDetail.class);
-                            intent.putExtra("post_id", currentItem.getPost_id());
-                            intent.putExtra("category", currentItem.getCategory_name());
-                            context.startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(context, MyAdsDetail.class);
-                            intent.putExtra("post_id", currentItem.getPost_id());
-                            intent.putExtra("category", currentItem.getCategory_name());
-                            context.startActivity(intent);
-                        }
+//                        if (currentItem.getCategory_name().equalsIgnoreCase("Cattle")) {
+                        Intent intent = new Intent(context, MyAdsDetail.class);
+                        intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("category", currentItem.getCategory_name());
+                        context.startActivity(intent);
+//                        else if (currentItem.getCategory_name().equals("Fruits") || currentItem.getCategory_name().equals("Pulses") || currentItem.getCategory_name().equals("Medicinal plants") || currentItem.getCategory_name().equals("Dairy Product") || currentItem.getCategory_name().equals("Vegetable") || currentItem.getCategory_name().equals("Grains")
+//                                || currentItem.getCategory_name().equals("Flower") || currentItem.getCategory_name().equals("oilseeds")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Fertilizers and Pesticides")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Labour in Rent")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        } else if (currentItem.getCategory_name().equalsIgnoreCase("Agricultural machinary")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        }
+//                        else if (currentItem.getCategory_name().equalsIgnoreCase("Other Agri Product")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        }else if (currentItem.getCategory_name().equalsIgnoreCase("Service in Rent")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        }
+//                        else if (currentItem.getCategory_name().equalsIgnoreCase("Tree and Woods")) {
+//                            Intent intent = new Intent(context, MyAdsDetail.class);
+//                            intent.putExtra("post_id", currentItem.getPost_id());
+//                            intent.putExtra("category", currentItem.getCategory_name());
+//                            context.startActivity(intent);
+//                        }
                     }
                 }
         );

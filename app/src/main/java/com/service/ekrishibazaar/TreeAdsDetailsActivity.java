@@ -1,5 +1,6 @@
 package com.service.ekrishibazaar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,14 +10,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.service.ekrishibazaar.adapter.SliderAdapterExample;
 import com.service.ekrishibazaar.model.SliderItem;
+import com.service.ekrishibazaar.util.ApiHelper;
 import com.service.ekrishibazaar.util.MakeOfferSheet;
+import com.service.ekrishibazaar.util.PrefsHelper;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
@@ -38,8 +50,13 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
         init();
     }
 
+    String token;
+    private ApiHelper apiHelper;
+    MakeOfferSheet bottomSheet;
+
     void init() {
         context = this;
+        token = PrefsHelper.getString(context, "token");
         wood_name_tv = findViewById(R.id.wood_name_tv);
         wood_quantity_tv = findViewById(R.id.wood_quantity_tv);
 
@@ -150,8 +167,61 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
         );
     }
 
+    String phone, actual_price, offer_price;
+
     @Override
     public void onMakeOffer(String phone, String actual_price, String offer_price) {
+        MakeOfferApi(phone, actual_price, offer_price);
+        phone = this.phone;
+        actual_price = actual_price;
+    }
 
+    private void MakeOfferApi(String phone, String actual_price, String offer_price) {
+
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                okhttp3.Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", "Token " + token)
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl("https://ekrishibazaar.com/api/ads/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiHelper = retrofit.create(ApiHelper.class);
+        Call<String> loginCall = apiHelper.MakeOffer(post_id, category_type, actual_price, offer_price, user_mobile_no, vid);
+        loginCall.enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+
+                if (response.body() instanceof String) {
+                    String x = response.body();
+                    Toast.makeText(TreeAdsDetailsActivity.this, x, Toast.LENGTH_SHORT).show();
+                    bottomSheet.dismiss();
+                }
+
+//                if(response.isSuccessful()){
+//
+//                }else {
+//
+//                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call,
+                                  @NonNull Throwable t) {
+                Toast.makeText(TreeAdsDetailsActivity.this, "Offer is already sent", Toast.LENGTH_SHORT).show();
+                if (!call.isCanceled()) {
+                }
+                t.printStackTrace();
+            }
+        });
     }
 }

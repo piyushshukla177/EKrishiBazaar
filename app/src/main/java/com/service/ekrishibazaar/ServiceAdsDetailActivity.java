@@ -30,9 +30,10 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class CattleDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
+public class ServiceAdsDetailActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
-    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, cattle_type_tv, cattle_breed_tv, number_of_births_tv, milk_per_day_tv, if_pregnent_tv, additional_details_tv;
+    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, service_machine_name_tv,
+            service_tv, reaching_in_time_tv, price_tv, additional_details_tv;
 
     Context context;
 
@@ -40,32 +41,28 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
     ImageView back_image, profile_imageview;
 
     Button view_profile_btn, make_offer_btn;
-
     String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village, post_id;
+    private ApiHelper apiHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cattle_details);
+        setContentView(R.layout.activity_service_ads_detail);
         init();
     }
 
-    private ApiHelper apiHelper;
+    MakeOfferSheet bottomSheet;
 
     String token;
-    MakeOfferSheet bottomSheet;
 
     void init() {
         context = this;
         token = PrefsHelper.getString(context, "token");
-
-        back_image = findViewById(R.id.back_image);
-        cattle_type_tv = findViewById(R.id.cattle_type_tv);
-        cattle_breed_tv = findViewById(R.id.cattle_breed_tv);
-        number_of_births_tv = findViewById(R.id.number_of_births_tv);
-        milk_per_day_tv = findViewById(R.id.milk_per_day_tv);
-        if_pregnent_tv = findViewById(R.id.if_pregnent_tv);
-//        additional_details_tv = findViewById(R.id.additional_details_tv);
+        service_machine_name_tv = findViewById(R.id.service_machine_name_tv);
+        service_tv = findViewById(R.id.service_tv);
+        reaching_in_time_tv = findViewById(R.id.reaching_in_time_tv);
+        price_tv = findViewById(R.id.price_tv);
+        additional_details_tv = findViewById(R.id.additional_details_tv);
         name_tv = findViewById(R.id.name_tv);
         vid_tv = findViewById(R.id.vid_tv);
         mobile_number_tv = findViewById(R.id.mobile_number_tv);
@@ -77,28 +74,13 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         view_profile_btn = findViewById(R.id.view_profile_btn);
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
+        back_image = findViewById(R.id.back_image);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CattleDetailsActivity.super.onBackPressed();
-                    }
-                }
-        );
-        view_profile_btn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(CattleDetailsActivity.this, ViewProfileActivity.class);
-                        intent.putExtra("profile_url", profile_image);
-                        intent.putExtra("name", name_tv.getText());
-                        intent.putExtra("vid", vid_tv.getText());
-                        intent.putExtra("mobile_number", mobile_number_tv.getText());
-                        intent.putExtra("block", block_tv.getText());
-                        intent.putExtra("district", district_tv.getText());
-                        intent.putExtra("state", state_tv.getText());
-                        startActivity(intent);
+                        ServiceAdsDetailActivity.super.onBackPressed();
                     }
                 }
         );
@@ -135,7 +117,7 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         slider_list.add(s2);
 
         SliderView sliderView = findViewById(R.id.imageSlider);
-        sliderView.setSliderAdapter(new SliderAdapterExample(CattleDetailsActivity.this, slider_list));
+        sliderView.setSliderAdapter(new SliderAdapterExample(ServiceAdsDetailActivity.this, slider_list));
         sliderView.run();
         Glide.with(context)
                 .load(profile_image)
@@ -153,11 +135,28 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         block_tv.setText(block);
         village_tv.setText(village);
 
-        cattle_type_tv.setText(intent.getStringExtra("cattle_type"));
-        cattle_breed_tv.setText(intent.getStringExtra("cattle_breed"));
-        number_of_births_tv.setText(intent.getStringExtra("number_of_births"));
-        milk_per_day_tv.setText(intent.getStringExtra("milk_per_day_tv"));
-        if_pregnent_tv.setText(intent.getStringExtra("If_preganent"));
+        service_machine_name_tv.setText(intent.getStringExtra("machine_type"));
+        service_tv.setText(intent.getStringExtra("work"));
+        price_tv.setText(intent.getStringExtra("price"));
+        reaching_in_time_tv.setText(intent.getStringExtra("reaching_on_time"));
+        additional_details_tv.setText(intent.getStringExtra("additional_details"));
+
+        view_profile_btn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ServiceAdsDetailActivity.this, ViewProfileActivity.class);
+                        intent.putExtra("profile_url", profile_image);
+                        intent.putExtra("name", name_tv.getText());
+                        intent.putExtra("vid", vid_tv.getText());
+                        intent.putExtra("mobile_number", mobile_number_tv.getText());
+                        intent.putExtra("block", block_tv.getText());
+                        intent.putExtra("district", district_tv.getText());
+                        intent.putExtra("state", state_tv.getText());
+                        startActivity(intent);
+                    }
+                }
+        );
         make_offer_btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -165,11 +164,11 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
                         MakeOfferSheet.actual_price = intent.getStringExtra("price");
                         bottomSheet = new MakeOfferSheet();
                         bottomSheet.show(getSupportFragmentManager(), "exampleBottomSheet");
+//
                     }
                 }
         );
     }
-
 
     String phone, actual_price, offer_price;
 
@@ -207,10 +206,9 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
 
                 if (response.body() instanceof String) {
                     String x = response.body();
-                    Toast.makeText(CattleDetailsActivity.this, x, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ServiceAdsDetailActivity.this, x, Toast.LENGTH_SHORT).show();
                     bottomSheet.dismiss();
                 }
-
 //                if(response.isSuccessful()){
 //
 //                }else {
@@ -221,7 +219,7 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
             @Override
             public void onFailure(@NonNull Call<String> call,
                                   @NonNull Throwable t) {
-                Toast.makeText(CattleDetailsActivity.this, "Offer is already sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ServiceAdsDetailActivity.this, "Offer is already sent", Toast.LENGTH_SHORT).show();
                 if (!call.isCanceled()) {
                 }
                 t.printStackTrace();

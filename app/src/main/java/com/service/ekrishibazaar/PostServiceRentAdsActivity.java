@@ -796,7 +796,6 @@ public class PostServiceRentAdsActivity extends AppCompatActivity {
                 }
                 return params;
             }
-
             /*
              * Here we are passing image by renaming it with a unique name
              */

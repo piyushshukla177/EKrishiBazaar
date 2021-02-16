@@ -511,6 +511,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setMobile_number(user_obj.getString("mobile_number"));
                                     m.setPost_id(obj.getString("post_id"));
                                     JSONObject service_machine_obj = obj.getJSONObject("service_machine");
+                                    JSONObject select_work_obj = obj.getJSONObject("select_work");
                                     m.setService_machine_name(service_machine_obj.getString("service_machine_name"));
                                     m.setPosted_on(obj.getString("posted_on"));
                                     m.setPrice(obj.getString("price"));
@@ -518,6 +519,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setProduct_image2(obj.getString("product_image2"));
                                     m.setProduct_image3(obj.getString("product_image3"));
                                     m.setAdditional_info(obj.getString("additional_information"));
+                                    m.setWork_name(select_work_obj.getString("work_name"));
                                     m.setCategory_name("Service in Rent");
 
                                     service_rent_list.add(m);
@@ -1129,7 +1131,7 @@ public class AdsListActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.v("response", response);
                         try {
-                            mProgressDialog.dismiss();
+
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
@@ -1173,7 +1175,6 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setCategory_name("Tree and Woods");
                                     m.setPost_id(obj.getString("post_id"));
                                     tree_and_woods_list.add(m);
-                                    Log.e("list_size", String.valueOf(tree_and_woods_list.size()));
                                 }
                             }
                             if (tree_and_woods_list.size() > 0) {
@@ -1182,7 +1183,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 treeAndWoodsAdapter = new TreeandWoodsAdapter(context, tree_and_woods_list);
                                 cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
-                                cattle_ads_recyclerview.setAdapter(machinaryAgriAdapter);
+                                cattle_ads_recyclerview.setAdapter(treeAndWoodsAdapter);
                                 mProgressDialog.dismiss();
 
                             } else {

@@ -188,89 +188,12 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
 
     @Override
     public void onMakeOffer(String phone, String actual_price, String offer_price) {
-        LoginApi(phone, actual_price, offer_price);
+        MakeOfferApi(phone, actual_price, offer_price);
         phone = this.phone;
         actual_price = actual_price;
     }
 
-    private void MakeOffer(String phone, String actual_price, String offer_price) {
-        final ProgressDialog mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.show();
-
-        StringRequest postRequest = new StringRequest(Request.Method.POST, "https://ekrishibazaar.com/api/ads/offer/",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            Log.e("response", response.toString());
-                            mProgressDialog.dismiss();
-                            Object json = new JSONTokener(response).nextValue();
-                            if (json instanceof JSONObject) {
-                                JSONObject obj = new JSONObject(response);
-                                Toast.makeText(getApplicationContext(), obj.getString("detail"), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-                                bottomSheet.dismiss();
-                            }
-                            JSONObject jsonObject = new JSONObject(response);
-                            Log.e("Response", response.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                        mProgressDialog.dismiss();
-                        String errorCode = "";
-                        if (error instanceof TimeoutError) {
-                            errorCode = "Time out Error";
-                        } else if (error instanceof NoConnectionError) {
-                            errorCode = "No Internet Connection Error";
-                        } else if (error instanceof AuthFailureError) {
-                            errorCode = "Auth Failure Error";
-                        } else if (error instanceof ServerError) {
-                            errorCode = "Server Error";
-                        } else if (error instanceof NetworkError) {
-                            errorCode = "Network Error";
-                        } else if (error instanceof ParseError) {
-                            errorCode = "Parse Error";
-                        }
-                        Toast.makeText(context, "Enter Valid Details", Toast.LENGTH_SHORT).show();
-                    }
-                }
-        ) {
-
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("postid ", post_id);
-                params.put("category", category_type);
-                params.put("price", actual_price);
-                params.put("offered_price", offer_price);
-                params.put("phonenumber", user_mobile_no);
-                params.put("vid", vid_tv.getText().toString());
-                Log.e("params", params.toString());
-                return params;
-            }
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Token " + token);
-                return headers;
-            }
-        };
-        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        Volley.newRequestQueue(this).add(postRequest);
-    }
-
-    private void LoginApi(String phone, String actual_price, String offer_price) {
+    private void MakeOfferApi(String phone, String actual_price, String offer_price) {
 
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
             @Override
@@ -289,7 +212,7 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
                 .build();
 
         apiHelper = retrofit.create(ApiHelper.class);
-        Call<String> loginCall = apiHelper.getLoginInfo(post_id, "123456", actual_price, offer_price, user_mobile_no, vid);
+        Call<String> loginCall = apiHelper.MakeOffer(post_id, category_type, actual_price, offer_price, user_mobile_no, vid);
         loginCall.enqueue(new Callback<String>() {
 
             @Override
@@ -318,6 +241,85 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
             }
         });
     }
+
+//    private void MakeOffer(String phone, String actual_price, String offer_price) {
+//        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+//        mProgressDialog.setIndeterminate(true);
+//        mProgressDialog.setMessage("Loading...");
+//        mProgressDialog.show();
+//
+//        StringRequest postRequest = new StringRequest(Request.Method.POST, "https://ekrishibazaar.com/api/ads/offer/",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            Log.e("response", response.toString());
+//                            mProgressDialog.dismiss();
+//                            Object json = new JSONTokener(response).nextValue();
+//                            if (json instanceof JSONObject) {
+//                                JSONObject obj = new JSONObject(response);
+//                                Toast.makeText(getApplicationContext(), obj.getString("detail"), Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+//                                bottomSheet.dismiss();
+//                            }
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            Log.e("Response", response.toString());
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        error.printStackTrace();
+//                        mProgressDialog.dismiss();
+//                        String errorCode = "";
+//                        if (error instanceof TimeoutError) {
+//                            errorCode = "Time out Error";
+//                        } else if (error instanceof NoConnectionError) {
+//                            errorCode = "No Internet Connection Error";
+//                        } else if (error instanceof AuthFailureError) {
+//                            errorCode = "Auth Failure Error";
+//                        } else if (error instanceof ServerError) {
+//                            errorCode = "Server Error";
+//                        } else if (error instanceof NetworkError) {
+//                            errorCode = "Network Error";
+//                        } else if (error instanceof ParseError) {
+//                            errorCode = "Parse Error";
+//                        }
+//                        Toast.makeText(context, "Enter Valid Details", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//        ) {
+//
+//
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("postid ", post_id);
+//                params.put("category", category_type);
+//                params.put("price", actual_price);
+//                params.put("offered_price", offer_price);
+//                params.put("phonenumber", user_mobile_no);
+//                params.put("vid", vid_tv.getText().toString());
+//                Log.e("params", params.toString());
+//                return params;
+//            }
+//
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<>();
+//                headers.put("Authorization", "Token " + token);
+//                return headers;
+//            }
+//        };
+//        postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        Volley.newRequestQueue(this).add(postRequest);
+//    }
+
+
 }
 
 /*

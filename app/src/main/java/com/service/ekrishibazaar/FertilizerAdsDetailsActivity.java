@@ -1,5 +1,6 @@
 package com.service.ekrishibazaar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -9,16 +10,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.service.ekrishibazaar.adapter.SliderAdapterExample;
 import com.service.ekrishibazaar.model.SliderItem;
+import com.service.ekrishibazaar.util.ApiHelper;
 import com.service.ekrishibazaar.util.MakeOfferSheet;
+import com.service.ekrishibazaar.util.PrefsHelper;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class FertilizerAdsDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener{
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class FertilizerAdsDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, chemical_name_tv, type_of_chemical_tv, per_unit_tv,
             paking_tv, price_tv, additional_details_tv;
@@ -29,7 +41,7 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
     ImageView back_image, profile_imageview;
 
     Button view_profile_btn, make_offer_btn;
-    String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village,post_id;
+    String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village, post_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +50,14 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
         init();
     }
 
+    String token;
+    private ApiHelper apiHelper;
+    MakeOfferSheet bottomSheet;
+
     void init() {
         context = this;
+        token = PrefsHelper.getString(context, "token");
+
         chemical_name_tv = findViewById(R.id.chemical_name_tv);
         type_of_chemical_tv = findViewById(R.id.type_of_chemical_tv);
         per_unit_tv = findViewById(R.id.per_unit_tv);
@@ -162,7 +180,7 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
                     @Override
                     public void onClick(View v) {
                         MakeOfferSheet.actual_price = intent.getStringExtra("price");
-                        MakeOfferSheet bottomSheet = new MakeOfferSheet();
+                        bottomSheet = new MakeOfferSheet();
                         bottomSheet.show(getSupportFragmentManager(), "exampleBottomSheet");
 //
                     }
@@ -170,8 +188,61 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
         );
     }
 
+    String phone, actual_price, offer_price;
+
     @Override
     public void onMakeOffer(String phone, String actual_price, String offer_price) {
+        MakeOfferApi(phone, actual_price, offer_price);
+        phone = this.phone;
+        actual_price = actual_price;
+    }
 
+    private void MakeOfferApi(String phone, String actual_price, String offer_price) {
+
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+            @Override
+            public okhttp3.Response intercept(Chain chain) throws IOException {
+                okhttp3.Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", "Token " + token)
+                        .build();
+                return chain.proceed(newRequest);
+            }
+        }).build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl("https://ekrishibazaar.com/api/ads/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        apiHelper = retrofit.create(ApiHelper.class);
+        Call<String> loginCall = apiHelper.MakeOffer(post_id, category_type, actual_price, offer_price, user_mobile_no, vid);
+        loginCall.enqueue(new Callback<String>() {
+
+            @Override
+            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+
+                if (response.body() instanceof String) {
+                    String x = response.body();
+                    Toast.makeText(FertilizerAdsDetailsActivity.this, x, Toast.LENGTH_SHORT).show();
+                    bottomSheet.dismiss();
+                }
+
+//                if(response.isSuccessful()){
+//
+//                }else {
+//
+//                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call,
+                                  @NonNull Throwable t) {
+                Toast.makeText(FertilizerAdsDetailsActivity.this, "Offer is already sent", Toast.LENGTH_SHORT).show();
+                if (!call.isCanceled()) {
+                }
+                t.printStackTrace();
+            }
+        });
     }
 }

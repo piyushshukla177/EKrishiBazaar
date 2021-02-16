@@ -27,9 +27,7 @@ public class LabourinRentsAdapter extends RecyclerView.Adapter<com.service.ekris
     private Context context;
 
     public class LabourinRentsViewHolder extends RecyclerView.ViewHolder {
-//      public TextView labour_expertise_textview, available_hour_textview, state_textview, district_textview, block_textview, posted_on_textview;
-//      ImageView category_image;
-//      Button view_ads_btn;
+
         public TextView address_textview, price_textview;
         ImageView category_image;
         CardView cardview;
@@ -40,14 +38,6 @@ public class LabourinRentsAdapter extends RecyclerView.Adapter<com.service.ekris
             address_textview = itemView.findViewById(R.id.address_textview);
             price_textview = itemView.findViewById(R.id.price_textview);
             cardview = itemView.findViewById(R.id.cardview);
-//            category_image = itemView.findViewById(R.id.category_image);
-//            labour_expertise_textview = itemView.findViewById(R.id.labour_expertise_textview);
-//            available_hour_textview = itemView.findViewById(R.id.available_hour_textview);
-//            state_textview = itemView.findViewById(R.id.state_textview);
-//            district_textview = itemView.findViewById(R.id.district_textview);
-//            block_textview = itemView.findViewById(R.id.block_textview);
-//            posted_on_textview = itemView.findViewById(R.id.posted_on_textview);
-//            view_ads_btn = itemView.findViewById(R.id.view_ads_btn);
         }
     }
 
@@ -68,16 +58,8 @@ public class LabourinRentsAdapter extends RecyclerView.Adapter<com.service.ekris
     public void onBindViewHolder(@NonNull final LabourinRentsViewHolder holder, int i) {
         final LabourInRentModel currentItem = category_list.get(i);
         Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
-//        Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
-//        Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
         holder.address_textview.setText(currentItem.getBlock() + ", " + currentItem.getDistrict());
         holder.price_textview.setText("Price  " + "₹ " + currentItem.getPrice());
-//        holder.labour_expertise_textview.setText(currentItem.getExpertise() + " : " + currentItem.getPrice() + "/" + currentItem.getPrice_by());
-//        holder.state_textview.setText("State : " + currentItem.getState());
-//        holder.state_textview.setText("District : " + currentItem.getDistrict());
-//        holder.district_textview.setText("Block : " + currentItem.getBlock());
-//        holder.block_textview.setText("Village " + currentItem.getVillage_name());
-//        holder.posted_on_textview.setText("Posted On : " + currentItem.getPosted_on());
         holder.cardview.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

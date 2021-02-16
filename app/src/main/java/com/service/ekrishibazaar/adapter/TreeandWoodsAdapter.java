@@ -37,16 +37,6 @@ public class TreeandWoodsAdapter extends RecyclerView.Adapter<TreeandWoodsAdapte
             address_textview = itemView.findViewById(R.id.address_textview);
             price_textview = itemView.findViewById(R.id.price_textview);
             cardview = itemView.findViewById(R.id.cardview);
-//          category_image = itemView.findViewById(R.id.category_image);
-//            service_name_textview = itemView.findViewById(R.id.service_name_textview);
-//            service_rate_textview = itemView.findViewById(R.id.service_rate_textview);
-//            state_textview = itemView.findViewById(R.id.state_textview);
-//            district_textview = itemView.findViewById(R.id.district_textview);
-//            block_textview = itemView.findViewById(R.id.block_textview);
-//            posted_on_textview = itemView.findViewById(R.id.posted_on_textview);
-//            view_add_btn = itemView.findViewById(R.id.view_add_btn);
-//            new1_tv = itemView.findViewById(R.id.new1_tv);
-//            new2_tv = itemView.findViewById(R.id.new2_tv);
         }
     }
 
@@ -88,8 +78,8 @@ public class TreeandWoodsAdapter extends RecyclerView.Adapter<TreeandWoodsAdapte
                         intent.putExtra("district", currentItem.getDistrict());
                         intent.putExtra("block", currentItem.getBlock());
                         intent.putExtra("village", currentItem.getVillage_name());
-                        intent.putExtra("wood_name_tv", currentItem.getWood_name());
-                        intent.putExtra("wood_quantity_tv", currentItem.getQuantity());
+                        intent.putExtra("wood_name", currentItem.getWood_name());
+                        intent.putExtra("wood_quantity", currentItem.getQuantity());
                         intent.putExtra("posted_on", currentItem.getPosted_on());
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("additional_details", currentItem.getAdditional_information());

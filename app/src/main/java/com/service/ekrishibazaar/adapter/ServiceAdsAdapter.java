@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.service.ekrishibazaar.CattleDetailsActivity;
 import com.service.ekrishibazaar.R;
+import com.service.ekrishibazaar.ServiceAdsDetailActivity;
 import com.service.ekrishibazaar.model.CattleAdsModel;
 import com.service.ekrishibazaar.model.ServiceAdsModel;
 import com.squareup.picasso.Picasso;
@@ -72,7 +73,7 @@ public class ServiceAdsAdapter extends RecyclerView.Adapter<ServiceAdsAdapter.Se
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(context, CattleDetailsActivity.class);
+                        Intent intent = new Intent(context, ServiceAdsDetailActivity.class);
                         intent.putExtra("category_type", "agricultural");
                         intent.putExtra("image1", currentItem.getProduct_image1());
                         intent.putExtra("image2", currentItem.getProduct_image2());

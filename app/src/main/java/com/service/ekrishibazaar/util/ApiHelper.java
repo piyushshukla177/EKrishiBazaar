@@ -15,7 +15,7 @@ public interface ApiHelper {
 
     @FormUrlEncoded
     @POST("offer/")
-    Call<String> getLoginInfo(@Field("postid") String postid, @Field("category") String category, @Field("price") String price, @Field("offered_price") String offered_price, @Field("phonenumber") String phonenumber, @Field("vid") String vid);
+    Call<String> MakeOffer(@Field("postid") String postid, @Field("category") String category, @Field("price") String price, @Field("offered_price") String offered_price, @Field("phonenumber") String phonenumber, @Field("vid") String vid);
 
 //    @Headers({"Content-Type: application/json"})
 //    @POST("getInvoiceData")

@@ -10,7 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -32,6 +34,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
     ArrayList category_list = new ArrayList();
     Context context;
     String super_category;
+    ImageView back_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class SelectCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seelct_category);
         context = this;
         select_product_category_spinner = findViewById(R.id.select_product_category_spinner);
+        back_image = findViewById(R.id.back_image);
 
         super_category = getIntent().getStringExtra("super_category");
         category_list.add("Select Product Category");
@@ -90,8 +94,14 @@ public class SelectCategoryActivity extends AppCompatActivity {
                         intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);
-                    } else if (s.toString().equalsIgnoreCase("Tree and Woods")) {
+                    }
+                    else if (s.toString().equalsIgnoreCase("Tree and Woods")) {
                         Intent intent = new Intent(context, PostTreeAndWoodsAdsActivity.class);
+                        intent.putExtra("super_category", super_category);
+                        intent.putExtra("category", s.toString());
+                        startActivity(intent);
+                    }  else if (s.toString().equalsIgnoreCase("Agricultural machinary")) {
+                        Intent intent = new Intent(context, PostAgriculturalMachinaryAdsActivity.class);
                         intent.putExtra("super_category", super_category);
                         intent.putExtra("category", s.toString());
                         startActivity(intent);
@@ -99,6 +109,14 @@ public class SelectCategoryActivity extends AppCompatActivity {
                 }
             }
         });
+        back_image.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SelectCategoryActivity.super.onBackPressed();
+                    }
+                }
+        );
         getAllCategories();
     }
 
