@@ -1,7 +1,9 @@
 package com.service.ekrishibazaar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -21,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
@@ -60,7 +63,8 @@ public class PostSellAdsActivity extends AppCompatActivity {
     String post_id;
     Context context;
     Button submit_btn;
-    MaterialBetterSpinner select_product_spinner, select_product_breed_spinner, select_product_status_spinner, select_uom_spinner_for_qty, packaging_availability_spinner, who_pay_charges_spinner, state_spinner, district_spinner, block_spinner, select_uom_spinner_for_price, packaging_type_spinner;
+    MaterialBetterSpinner select_product_spinner, select_product_breed_spinner, select_product_status_spinner, select_uom_spinner_for_qty, packaging_availability_spinner, who_pay_charges_spinner, state_spinner, district_spinner, block_spinner, select_uom_spinner_for_price,
+            packaging_type_spinner;
     EditText quantity_et, price_et, village_name_et, additional_info_et;
     ImageView back_image, product_image_imageview1, product_image_imageview2, product_image_imageview3, clear_imageview1, clear_imageview2, clear_imageview3;
 
@@ -68,6 +72,7 @@ public class PostSellAdsActivity extends AppCompatActivity {
     ArrayList product_breed_list = new ArrayList();
     ArrayList product_status_list = new ArrayList();
     ArrayList uom_list = new ArrayList();
+    ArrayList uom_price_list = new ArrayList();
     ArrayList packiging_availability_list = new ArrayList();
     ArrayList who_pay_extra_list = new ArrayList();
     ArrayList state_list = new ArrayList();
@@ -246,12 +251,12 @@ public class PostSellAdsActivity extends AppCompatActivity {
         ArrayAdapter<String> whoAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, who_pay_extra_list);
         who_pay_charges_spinner.setAdapter(whoAdapter);
 
-        packaging_type_list.add("Box");
-        packaging_type_list.add("Jute Bag");
-        packaging_type_list.add("Polythene");
-        packaging_type_list.add("Cartoons");
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, packaging_type_list);
-        packaging_type_spinner.setAdapter(typeAdapter);
+//        packaging_type_list.add("Box");
+//        packaging_type_list.add("Jute Bag");
+//        packaging_type_list.add("Polythene");
+//        packaging_type_list.add("Cartoons");
+//        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, packaging_type_list);
+//        packaging_type_spinner.setAdapter(typeAdapter);
 
         uom_list.add("Quintal");
         uom_list.add("Kg");
@@ -263,8 +268,17 @@ public class PostSellAdsActivity extends AppCompatActivity {
         uom_list.add("Truck");
         ArrayAdapter<String> uomAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, uom_list);
         select_uom_spinner_for_qty.setAdapter(uomAdapter);
-//      ArrayAdapter<String> uomAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, uom_list);
-        select_uom_spinner_for_price.setAdapter(uomAdapter);
+
+        uom_price_list.add("Per Quintal");
+        uom_price_list.add("Per Kg");
+        uom_price_list.add("Per Pieces");
+        uom_price_list.add("Per Litre");
+        uom_price_list.add("Per Gram");
+        uom_price_list.add("Per Ton");
+        uom_price_list.add("Per Trolley");
+        uom_price_list.add("Per Truck");
+        ArrayAdapter<String> uomPriceAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, uom_price_list);
+        select_uom_spinner_for_price.setAdapter(uomPriceAdapter);
 
         district_list.add("Select District");
         ArrayAdapter<String> districtAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
@@ -376,8 +390,66 @@ public class PostSellAdsActivity extends AppCompatActivity {
 //      state_spinner.setText(PrefsHelper.getString());
         getProducts(category);
         getStates();
-//        getAllCategories();
+        getPackagingTypeList();
     }
+
+    void getPackagingTypeList() {
+        packaging_type_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://ekrishibazaar.com/api/ads/productpackaging/",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                packaging_type_list.add((obj.getString("product_packaging_type")));
+                            }
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, packaging_type_list);
+                            packaging_type_spinner.setAdapter(productAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        packaging_type_list.add("--Select Packaging Type--");
+                        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, packaging_type_list);
+                        packaging_type_spinner.setAdapter(productAdapter);
+                        mProgressDialog.dismiss();
+                        // Do something when error occurred
+                    }
+                }
+        );
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
 
     public int PERMISSION_CODE = 100;
 
