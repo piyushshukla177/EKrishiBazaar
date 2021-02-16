@@ -24,7 +24,7 @@
                 android:id="@+id/phone_number_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone Number"
+                android:hint="@string/Mobile_Number"
                 android:maxLines="1"
                 android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:hint="Actual Price"
+                android:hint="@string/Actual_Price"
                 android:maxLines="1"
                 android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -63,7 +63,7 @@
                 android:id="@+id/offer_price_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Offer Price"
+                android:hint="@string/Offer_Price"
                 android:maxLines="1"
                 android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -76,7 +76,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:background="@drawable/corner_round_btn_shape"
-            android:text="Make Offer"
+            android:text="@string/Make_Offer"
             android:textAllCaps="false"
             app:backgroundTint="@null"
             app:layout_constraintStart_toStartOf="parent"

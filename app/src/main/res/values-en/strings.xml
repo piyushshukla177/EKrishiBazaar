@@ -60,4 +60,18 @@
     <string name="Submit">Submit</string>
     <string name="Post_Ads">Post Ads</string>
 
+    <string name="Select_Cattle_Type">Select Cattle Type</string>
+    <string name="Select_Cattle_Breed">Select Cattle Breed</string>
+    <string name="Number_of_Births">Number of Births</string>
+    <string name="Milk_Produced_Per_Day">Milk Produced Per Day</string>
+    <string name="Preganent">Preganent</string>
+    <string name="Preganency_Month">Preganency Month</string>
+    <string name="Mobile_Number">Mobile Number</string>
+    <string name="Actual_Price">Actual Price</string>
+    <string name="Offer_Price">Offer Price</string>
+    <string name="Make_Offer">Make Offer</string>
+    <string name="View_Profile">View Profile</string>
+    <string name="Profile_Details">Profile Details</string>
+    <string name="Location_Details">Location Details</string>
+    <string name="Product_Details">Product Details</string>
 </resources>

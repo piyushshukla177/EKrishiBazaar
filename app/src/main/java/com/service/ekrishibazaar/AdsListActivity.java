@@ -444,6 +444,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -568,6 +575,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -708,12 +722,12 @@ public class AdsListActivity extends AppCompatActivity {
 
         ) {
 
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("Accept-Language", language_code);
-//                return params;
-//            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
 
 //            @Override
 //            protected Map<String, String> getParams() {
@@ -841,6 +855,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -967,6 +988,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -1096,6 +1124,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -1219,12 +1254,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", super_category);
-//                return params;
-//            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
@@ -1342,12 +1378,13 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         ) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", super_category);
-//                return params;
-//            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Accept-Language", language_code);
+                return params;
+            }
+
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);

@@ -60,4 +60,18 @@
     <string name="Submit">सबमिट करें</string>
     <string name="Post_Ads">विज्ञापन पोस्ट करें</string>
 
+    <string name="Select_Cattle_Type">मवेशी प्रकार का चयन करें</string>
+    <string name="Select_Cattle_Breed">मवेशी नस्ल का चयन करें</string>
+    <string name="Number_of_Births">जन्म की संख्या</string>
+    <string name="Milk_Produced_Per_Day">प्रति दिन दूध का उत्पादन</string>
+    <string name="Preganent">गर्भवती</string>
+    <string name="Preganency_Month">गर्भवती माह</string>
+    <string name="Mobile_Number">मोबाइल नंबर</string>
+    <string name="Actual_Price">वास्तविक कीमत</string>
+    <string name="Offer_Price">ऑफर किया गया मूल्य</string>
+    <string name="Make_Offer">प्रस्ताव दे</string>
+    <string name="View_Profile">प्रोफ़ाइल देखें</string>
+    <string name="Profile_Details">प्रोफ़ाइल विवरण</string>
+    <string name="Location_Details">स्थान का विवरण</string>
+    <string name="Product_Details">उत्पाद विवरण</string>
 </resources>
