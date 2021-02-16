@@ -65,7 +65,7 @@ public class CategoryListAdapter extends BaseAdapter {
         holder.product_image = rowView.findViewById(R.id.product_image);
         final CategoryListModel m = product_list.get(position);
         holder.product_name_tv.setText(m.getProduct_name());
-        Picasso.get().load(m.getProduct_image()).resize(60, 60).into(holder.product_image);
+        Picasso.get().load(m.getProduct_image()).fit().into(holder.product_image);
         holder.relative_layout.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

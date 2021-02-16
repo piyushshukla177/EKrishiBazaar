@@ -13,9 +13,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +61,7 @@ import java.util.Map;
 
 public class AdsListActivity extends AppCompatActivity {
 
-    LinearLayout buy_linear, buyback_linear, scan_cardview;
+    LinearLayout scan_cardview;
     String language_code = "en";
     TextView no_record_tv;
     ArrayList<CattleAdsModel> cattle_list = new ArrayList();
@@ -82,6 +85,7 @@ public class AdsListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager cattleLayoutManager;
     String category = "";
     EditText search_edittext;
+    ImageView menu_imageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +96,7 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void init() {
         context = this;
-        buy_linear = findViewById(R.id.buy_linear);
-        buyback_linear = findViewById(R.id.buyback_linear);
+
         scan_cardview = findViewById(R.id.scan_cardview);
         if (PrefsHelper.getString(this, "lang_code") != null && !PrefsHelper.getString(this, "lang_code").isEmpty()) {
             language_code = PrefsHelper.getString(this, "lang_code");
@@ -101,6 +104,7 @@ public class AdsListActivity extends AppCompatActivity {
         no_record_tv = findViewById(R.id.no_record_tv);
         search_edittext = findViewById(R.id.search_edittext);
         cattle_ads_recyclerview = findViewById(R.id.cattle_ads_recyclerview);
+        menu_imageview = findViewById(R.id.menu_imageview);
         Intent intent = getIntent();
         category = intent.getStringExtra("category");
         if (category != null && !category.isEmpty() && category.equals("Cattle")) {
@@ -172,79 +176,120 @@ public class AdsListActivity extends AppCompatActivity {
                 }
             }
         });
-        buy_linear.setOnClickListener(
+
+        menu_imageview.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (category != null && !category.isEmpty() && category.equals("Cattle")) {
-                            getCattleList("BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
-                            getServiceList("BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
-                            getAgricultureList("Fruits", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
-                            getAgricultureList("Pulses", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
-                            getAgricultureList("Medicinal plants", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
-                            getAgricultureList("Dairy Product", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
-                            getAgricultureList("Vegetable", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
-                            getAgricultureList("Grains", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
-                            getAgricultureList("Flower", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
-                            getAgricultureList("oilseeds", "BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
-                            getLabourinrentsList("BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
-                            getOtherAgriProductList("BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
-                            getOtherAgriMachinary("BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
-                            getTreeAndWoodsList("BuyOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
-                            getFertilizersList("BuyOffer");
-                        }
-                    }
-                }
-        );
-        buyback_linear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (category != null && !category.isEmpty() && category.equals("Cattle")) {
-                            getCattleList("BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
-                            getServiceList("BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
-                            getAgricultureList("Fruits", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
-                            getAgricultureList("Pulses", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
-                            getAgricultureList("Medicinal plants", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
-                            getAgricultureList("Dairy Product", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
-                            getAgricultureList("Vegetable", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
-                            getAgricultureList("Grains", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
-                            getAgricultureList("Flower", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
-                            getAgricultureList("oilseeds", "BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
-                            getLabourinrentsList("BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
-                            getOtherAgriProductList("BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
-                            getOtherAgriMachinary("BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
-                            getTreeAndWoodsList("BuyBackOffer");
-                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
-                            getFertilizersList("BuyBackOffer");
-                        }
+
+                        PopupMenu popup = new PopupMenu(context, menu_imageview);
+                        //Inflating the Popup using xml file
+                        popup.getMenuInflater().inflate(R.menu.filter_ads_menu, popup.getMenu());
+                        //registering popup with OnMenuItemClickListener
+                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            public boolean onMenuItemClick(MenuItem item) {
+                                if (item.getTitle().equals("All Ads")) {
+                                    if (category != null && !category.isEmpty() && category.equals("Cattle")) {
+                                        getCattleList("Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
+                                        getServiceList("Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
+                                        getAgricultureList("Fruits", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
+                                        getAgricultureList("Pulses", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
+                                        getAgricultureList("Medicinal plants", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
+                                        getAgricultureList("Dairy Product", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
+                                        getAgricultureList("Vegetable", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
+                                        getAgricultureList("Grains", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
+                                        getAgricultureList("Flower", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
+                                        getAgricultureList("oilseeds", "Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
+                                        getLabourinrentsList("Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
+                                        getOtherAgriProductList("Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
+                                        getOtherAgriMachinary("Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
+                                        getTreeAndWoodsList("Sellads");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
+                                        getFertilizersList("Sellads");
+                                    }
+                                } else if (item.getTitle().equals("Buy Ads")) {
+
+                                    if (category != null && !category.isEmpty() && category.equals("Cattle")) {
+                                        getCattleList("BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
+                                        getServiceList("BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
+                                        getAgricultureList("Fruits", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
+                                        getAgricultureList("Pulses", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
+                                        getAgricultureList("Medicinal plants", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
+                                        getAgricultureList("Dairy Product", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
+                                        getAgricultureList("Vegetable", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
+                                        getAgricultureList("Grains", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
+                                        getAgricultureList("Flower", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
+                                        getAgricultureList("oilseeds", "BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
+                                        getLabourinrentsList("BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
+                                        getOtherAgriProductList("BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
+                                        getOtherAgriMachinary("BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
+                                        getTreeAndWoodsList("BuyOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
+                                        getFertilizersList("BuyOffer");
+                                    }
+                                } else if (item.getTitle().equals("BuyBack Ads")) {
+                                    if (category != null && !category.isEmpty() && category.equals("Cattle")) {
+                                        getCattleList("BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
+                                        getServiceList("BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
+                                        getAgricultureList("Fruits", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
+                                        getAgricultureList("Pulses", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
+                                        getAgricultureList("Medicinal plants", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
+                                        getAgricultureList("Dairy Product", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
+                                        getAgricultureList("Vegetable", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
+                                        getAgricultureList("Grains", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
+                                        getAgricultureList("Flower", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
+                                        getAgricultureList("oilseeds", "BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
+                                        getLabourinrentsList("BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
+                                        getOtherAgriProductList("BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
+                                        getOtherAgriMachinary("BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
+                                        getTreeAndWoodsList("BuyBackOffer");
+                                    } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
+                                        getFertilizersList("BuyBackOffer");
+                                    }
+                                }
+                                return true;
+                            }
+                        });
+                        popup.show(); //showing popup menu
                     }
                 }
         );
@@ -403,6 +448,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (cattle_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
@@ -534,6 +580,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (service_rent_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
@@ -678,6 +725,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (agriculture_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
@@ -721,21 +769,12 @@ public class AdsListActivity extends AppCompatActivity {
                 }
 
         ) {
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Accept-Language", language_code);
                 return params;
             }
-
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", super_category);
-////                Log.v("request", params.toString());
-//                return params;
-//            }
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
@@ -815,6 +854,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (labour_in_rent_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 labourAdapter = new LabourinRentsAdapter(context, labour_in_rent_list);
@@ -947,6 +987,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (other_agri_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 otherAgriAdapter = new OtherAgriAdapter(context, other_agri_list);
@@ -1083,6 +1124,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (machinary_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 machinaryAgriAdapter = new AgricultureMachinaryAdapter(context, machinary_list);
@@ -1213,6 +1255,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (tree_and_woods_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
@@ -1338,6 +1381,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (fertilizer_list.size() > 0) {
+                                no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);

@@ -10,33 +10,48 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/search_edittext"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"
-            android:background="@drawable/searchview_background"
-            android:drawableLeft="@drawable/ic_search"
-            android:hint="Find Any Agriculture Product and many more"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp"
+            android:layout_weight="0.9"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/search_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/searchview_background"
+                android:drawableLeft="@drawable/ic_search"
+                android:hint="Find Any Agriculture Product and many more"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10sdp" />
+
+            <ImageView
+                android:id="@+id/close_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="-20dp"
+                android:src="@drawable/icon_ionic_ios_close_circle"
+                android:visibility="gone" />
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/close_imageview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/menu_imageview"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_weight="0.1"
             android:layout_gravity="center"
-            android:layout_marginLeft="-20dp"
-            android:src="@drawable/icon_ionic_ios_close_circle"
-            android:visibility="gone" />
+            app:tint="@color/dark_green"
+            android:src="@drawable/menu_blue" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/scan_cardview"
@@ -45,91 +60,11 @@
         android:layout_below="@+id/toolbar"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:weightSum="2"
-        android:visibility="gone"
-        >
+        android:visibility="visible"
+        android:weightSum="2">
 
-        <LinearLayout
-            android:id="@+id/buy_linear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
 
-            <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/circular_old_sale">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/buy_order" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="90dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/old_sale_shape">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/Buy_Order"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/buyback_linear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:background="@drawable/circular_customers">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/buy_back_order" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="90dp"
-                android:layout_height="25dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/customers_shape">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/Buy_Back_Order"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9sdp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-        </LinearLayout>
 
         <!--        <LinearLayout-->
         <!--            android:id="@+id/llCreateBill"-->

@@ -197,6 +197,7 @@
 
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,6 +226,7 @@
                     android:textSize="@dimen/_8sdp"
                     app:backgroundTint="@null" />
             </RelativeLayout>
+
             <View
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
@@ -489,7 +491,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -517,34 +520,7 @@
 
                 </RelativeLayout>
 
-                <!--                <RelativeLayout-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content">-->
 
-                <!--                    <LinearLayout-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginLeft="@dimen/_10sdp"-->
-                <!--                        android:layout_marginTop="@dimen/_5sdp"-->
-                <!--                        android:layout_marginRight="@dimen/_10sdp"-->
-                <!--                        android:orientation="horizontal">-->
-
-                <!--                        <TextView-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:text="Additional Info : "-->
-                <!--                            android:textColor="@color/dark_green"-->
-                <!--                            android:textSize="@dimen/_12sdp" />-->
-
-                <!--                        <TextView-->
-                <!--                            android:id="@+id/additional_details_tv"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginLeft="@dimen/_10sdp"-->
-                <!--                            android:text=""-->
-                <!--                            android:textSize="@dimen/_12sdp" />-->
-                <!--                    </LinearLayout>-->
-                <!--                </RelativeLayout>-->
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

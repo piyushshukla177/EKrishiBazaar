@@ -953,26 +953,33 @@ public class PostSellAdsActivity extends AppCompatActivity {
                 long imagename = System.currentTimeMillis();
 
                 DataPart dp1 = null, dp2 = null, dp3 = null;
-//                String path1 = FileUtils.getPath(context, uri1);
-                File imgFile1 = new File(uri1.toString());
-                Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
-                if (test_image_bitmap1 != null) {
-                    dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
-                    params.put("photo1", dp1);
+                File imgFile1;
+                if (uri1 != null) {
+                    imgFile1 = new File(uri1.toString());
+                    Bitmap test_image_bitmap1 = BitmapFactory.decodeFile(imageFile1.getAbsolutePath());
+                    if (test_image_bitmap1 != null) {
+                        dp1 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap1));
+                        params.put("photo1", dp1);
+                    }
                 }
-//              String path2 = FileUtils.getPath(context, uri2);
-                File imgFile2 = new File(uri2.toString());
-                Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
-                if (test_image_bitmap2 != null) {
-                    dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
-                    params.put("photo2", dp2);
+                File imgFile2;
+                if (uri2 != null) {
+                    imgFile2 = new File(uri2.toString());
+                    Bitmap test_image_bitmap2 = BitmapFactory.decodeFile(imageFile2.getAbsolutePath());
+                    if (test_image_bitmap2 != null) {
+                        dp2 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap2));
+                        params.put("photo2", dp2);
+                    }
                 }
-//              String path3 = FileUtils.getPath(context, uri3);
-                File imgFile3 = new File(uri3.toString());
-                Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
-                if (test_image_bitmap3 != null) {
-                    dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
-                    params.put("photo3", dp3);
+
+                File imgFile3;
+                if (uri3 != null) {
+                    imgFile3 = new File(uri3.toString());
+                    Bitmap test_image_bitmap3 = BitmapFactory.decodeFile(imageFile3.getAbsolutePath());
+                    if (test_image_bitmap3 != null) {
+                        dp3 = new DataPart(imagename + ".png", getFileDataFromDrawable(test_image_bitmap3));
+                        params.put("photo3", dp3);
+                    }
                 }
                 Log.e("photo_params", params.toString());
                 return params;

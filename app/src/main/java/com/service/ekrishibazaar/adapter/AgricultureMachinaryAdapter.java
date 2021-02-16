@@ -51,7 +51,7 @@ public class AgricultureMachinaryAdapter extends RecyclerView.Adapter<Agricultur
     @Override
     public void onBindViewHolder(@NonNull final AgricultureMachinaryViewHolder holder, int i) {
         final AgricultureMachinaryModel currentItem = machinary_list.get(i);
-        Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
+        Picasso.get().load(currentItem.getProduct_image1()).fit().into(holder.category_image);
 //        Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
         holder.address_textview.setText(currentItem.getBlock() + ", " + currentItem.getDistrict());
         holder.price_textview.setText("Price  " + "₹ " + currentItem.getPrice());

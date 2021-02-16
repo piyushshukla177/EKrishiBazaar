@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/all_ads_menu"
+        android:title="All Ads" />
+    <item
+        android:id="@+id/buy_ads_menu"
+        android:title="Buy Ads" />
+    <item
+        android:id="@+id/buyback_ads_menu"
+        android:title="BuyBack Ads" />
+
+</menu>
