@@ -80,6 +80,7 @@ public class AgricultureAdsAdapter extends RecyclerView.Adapter<AgricultureAdsAd
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("pacakging", currentItem.getPackaging_cost_bearer());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("posted_on", currentItem.getPosted_on());
                         intent.putExtra("additional_info", currentItem.getAdditional_info());
                         context.startActivity(intent);
                     }

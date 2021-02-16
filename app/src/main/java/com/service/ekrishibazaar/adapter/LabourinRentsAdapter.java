@@ -84,6 +84,7 @@ public class LabourinRentsAdapter extends RecyclerView.Adapter<com.service.ekris
                         intent.putExtra("reaching_time_status_tv", currentItem.getReaching_time_status());
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("poste_on", currentItem.getPosted_on());
                         intent.putExtra("additional_details", currentItem.getAdditional_information());
                         context.startActivity(intent);
                     }

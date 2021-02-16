@@ -85,8 +85,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="Profile Details"
+                    android:textStyle="bold"
                     android:textColor="@color/black" />
             </RelativeLayout>
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:src="@drawable/check" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -242,6 +250,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="Location Details"
+                    android:textStyle="bold"
                     android:textColor="@color/black" />
             </RelativeLayout>
 
@@ -355,6 +364,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="Product Details"
+                    android:textStyle="bold"
                     android:textColor="@color/black" />
             </RelativeLayout>
 

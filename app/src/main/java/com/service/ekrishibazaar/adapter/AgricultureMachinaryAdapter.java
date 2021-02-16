@@ -81,6 +81,7 @@ public class AgricultureMachinaryAdapter extends RecyclerView.Adapter<Agricultur
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("additional_details", currentItem.getAdditional_info());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("posted_on", currentItem.getPosted_on());
                         context.startActivity(intent);
                     }
                 }

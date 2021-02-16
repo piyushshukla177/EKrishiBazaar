@@ -78,6 +78,7 @@ public class OtherAgriAdapter extends RecyclerView.Adapter<OtherAgriAdapter.Othe
                         intent.putExtra("additional_details", currentItem.getAdditional_information());
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("posted_on", currentItem.getPosted_on());
                         context.startActivity(intent);
                     }
                 }

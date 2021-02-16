@@ -84,6 +84,7 @@ public class TreeandWoodsAdapter extends RecyclerView.Adapter<TreeandWoodsAdapte
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("additional_details", currentItem.getAdditional_information());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("posted_on", currentItem.getPosted_on());
                         context.startActivity(intent);
                     }
                 }

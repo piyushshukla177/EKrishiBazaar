@@ -79,6 +79,7 @@ public class CattleAdsAdapter extends RecyclerView.Adapter<CattleAdsAdapter.Fres
                         intent.putExtra("If_preganent", currentItem.getIf_preganent());
                         intent.putExtra("price", currentItem.getPrice());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("posted_on", currentItem.getPosted_on());
 //                      intent.putExtra("additional_details", currentItem.getAd);
                         context.startActivity(intent);
                     }

@@ -83,6 +83,7 @@ public class FertilizerAdapter extends RecyclerView.Adapter<FertilizerAdapter.Fe
                         intent.putExtra("posted_on", currentItem.getPosted_on());
                         intent.putExtra("additional_details", currentItem.getAdditional_information());
                         intent.putExtra("post_id", currentItem.getPost_id());
+                        intent.putExtra("posted_on", currentItem.getPosted_on());
                         context.startActivity(intent);
                     }
                 }
