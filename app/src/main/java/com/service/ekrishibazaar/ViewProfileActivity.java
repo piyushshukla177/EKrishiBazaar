@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.service.ekrishibazaar.util.PrefsHelper;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -132,21 +133,12 @@ public class ViewProfileActivity extends AppCompatActivity {
                     }
                 }
         ) {
-
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("Authorization", "Token " + token);
                 return params;
             }
-
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", "Sellads");
-//                Log.v("request", params.toString());
-//                return params;
-//            }
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);

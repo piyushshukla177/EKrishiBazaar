@@ -64,7 +64,7 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
 
     ImageView back_image, profile_imageview;
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, product_name_tv, product_breed_tv, product_status_tv,
-            product_quantity_tv, packing_avialable_tv, posted_on_tv, additional_info_tv, post_id_tv;
+            product_quantity_tv, packing_avialable_tv, posted_on_tv, additional_info_tv, post_id_tv,price_tv;
     Button view_profile_btn, make_offer_btn;
 
     @Override
@@ -91,6 +91,7 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
         block_tv = findViewById(R.id.block_tv);
         village_tv = findViewById(R.id.village_tv);
         product_name_tv = findViewById(R.id.product_name_tv);
+        price_tv = findViewById(R.id.price_tv);
         product_breed_tv = findViewById(R.id.product_breed_tv);
         product_status_tv = findViewById(R.id.product_status_tv);
         product_quantity_tv = findViewById(R.id.product_quantity_tv);
@@ -185,6 +186,7 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
         additional_info_tv.setText(intent.getStringExtra("additional_info"));
         posted_on_tv.setText(intent.getStringExtra("posted_on"));
         post_id_tv.setText(intent.getStringExtra("post_id"));
+        price_tv.setText("₹ "+intent.getStringExtra("price"));
 
         make_offer_btn.setOnClickListener(
                 new View.OnClickListener() {

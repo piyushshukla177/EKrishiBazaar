@@ -50,7 +50,7 @@ public class AgricultureAdsAdapter extends RecyclerView.Adapter<AgricultureAdsAd
     public void onBindViewHolder(@NonNull final AgricultureViewHolder holder, int i) {
         final AgricultureAdsModel currentItem = category_list.get(i);
         Picasso.get().load(currentItem.getProduct_image1()).fit().into(holder.category_image);
-//        Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
+//      Picasso.get().load(currentItem.getProduct_image1()).resize(60, 60).into(holder.category_image);
         holder.address_textview.setText(currentItem.getBlock() + ", " + currentItem.getDistrict());
         holder.price_textview.setText("Price  " + "₹ " + currentItem.getPrice());
 

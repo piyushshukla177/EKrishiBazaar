@@ -241,6 +241,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="Location Details"
+                    android:textStyle="bold"
                     android:textColor="@color/black" />
             </RelativeLayout>
 
@@ -355,6 +356,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:text="Product Details"
+                    android:textStyle="bold"
                     android:textColor="@color/black" />
             </RelativeLayout>
 
