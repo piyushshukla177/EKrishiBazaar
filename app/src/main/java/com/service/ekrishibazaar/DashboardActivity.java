@@ -1,13 +1,17 @@
 package com.service.ekrishibazaar;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.service.ekrishibazaar.fragments.HomeFragment;
 import com.service.ekrishibazaar.fragments.MyAccountFragment;
 import com.service.ekrishibazaar.fragments.MyAdsFragment;
 import com.service.ekrishibazaar.fragments.HelpFregment;
 import com.service.ekrishibazaar.util.LocaleHelper;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -30,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity {
         bottom_navigation.setOnNavigationItemSelectedListener(navListener);
     }
 
-//bottom menu click events
+    //bottom menu click events
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -52,6 +56,10 @@ public class DashboardActivity extends AppCompatActivity {
                         case R.id.navigation_myaccount:
                             selectedFragment = new MyAccountFragment();
                             break;
+                        case R.id.navigation_chat:
+                            Toast.makeText(DashboardActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+//                            selectedFragment = new MyAccountFragment();
+                            break;
                     }
                     if (selectedFragment != null) {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -60,7 +68,8 @@ public class DashboardActivity extends AppCompatActivity {
                     return true;
                 }
             };
- //    @Override
+
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        MenuInflater inflater = getMenuInflater();
 //        inflater.inflate(R.menu.searchview_menu, menu);
