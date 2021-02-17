@@ -64,7 +64,7 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
 
     ImageView back_image, profile_imageview;
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, product_name_tv, product_breed_tv, product_status_tv,
-            product_quantity_tv, packing_avialable_tv,additional_info_tv;
+            product_quantity_tv, packing_avialable_tv, posted_on_tv, additional_info_tv, post_id_tv;
     Button view_profile_btn, make_offer_btn;
 
     @Override
@@ -98,6 +98,8 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
         additional_info_tv = findViewById(R.id.additional_info_tv);
         view_profile_btn = findViewById(R.id.view_profile_btn);
         make_offer_btn = findViewById(R.id.make_offer_btn);
+        post_id_tv = findViewById(R.id.post_id_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
         token = PrefsHelper.getString(context, "token");
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -141,6 +143,7 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
         block = intent.getStringExtra("block");
         village = intent.getStringExtra("village");
         post_id = intent.getStringExtra("post_id");
+
         SliderItem s = new SliderItem();
         s.setDescription("");
         s.setImageUrl(image1);
@@ -180,6 +183,8 @@ public class AdaDetailsActivity extends AppCompatActivity implements MakeOfferSh
         product_quantity_tv.setText(intent.getStringExtra("quantity"));
         packing_avialable_tv.setText(intent.getStringExtra("pacakging"));
         additional_info_tv.setText(intent.getStringExtra("additional_info"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
 
         make_offer_btn.setOnClickListener(
                 new View.OnClickListener() {

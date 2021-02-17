@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MachinaryAdsDetailActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, machine_type_tv, machine_brand_tv, warranty_status_tv,
-            who_pay_pkg_charges_tv, price_tv, additional_details_tv;
+            who_pay_pkg_charges_tv, price_tv, posted_on_tv, additional_details_tv, post_id_tv;
 
     Context context;
 
@@ -44,7 +44,7 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
     ImageView back_image, profile_imageview;
 
     Button view_profile_btn, make_offer_btn;
-    String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village,post_id;
+    String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village, post_id;
 
 
     @Override
@@ -57,6 +57,7 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
     String token;
     private ApiHelper apiHelper;
     MakeOfferSheet bottomSheet;
+
     void init() {
         context = this;
         token = PrefsHelper.getString(context, "token");
@@ -80,6 +81,8 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
         back_image = findViewById(R.id.back_image);
+        post_id_tv = findViewById(R.id.post_id_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -145,6 +148,8 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
         warranty_status_tv.setText(intent.getStringExtra("warranty_status"));
         who_pay_pkg_charges_tv.setText(intent.getStringExtra("who_pay_pkg_charges"));
         price_tv.setText(intent.getStringExtra("price"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
         additional_details_tv.setText(intent.getStringExtra("additional_details"));
 
         view_profile_btn.setOnClickListener(
@@ -168,7 +173,7 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
                     @Override
                     public void onClick(View v) {
                         MakeOfferSheet.actual_price = intent.getStringExtra("price");
-                       bottomSheet = new MakeOfferSheet();
+                        bottomSheet = new MakeOfferSheet();
                         bottomSheet.show(getSupportFragmentManager(), "exampleBottomSheet");
                     }
                 }
@@ -216,7 +221,7 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
                 .build();
 
         apiHelper = retrofit.create(ApiHelper.class);
-        Call<String> loginCall = apiHelper.MakeOffer(post_id,category_type, actual_price, offer_price, user_mobile_no, vid);
+        Call<String> loginCall = apiHelper.MakeOffer(post_id, category_type, actual_price, offer_price, user_mobile_no, vid);
         loginCall.enqueue(new Callback<String>() {
 
             @Override

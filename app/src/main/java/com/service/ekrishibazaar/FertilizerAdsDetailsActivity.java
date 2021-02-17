@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FertilizerAdsDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, chemical_name_tv, type_of_chemical_tv, per_unit_tv,
-            paking_tv, price_tv, additional_details_tv;
+            paking_tv, price_tv, additional_details_tv, posted_on_tv,post_id_tv;
 
     Context context;
 
@@ -66,6 +66,7 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
         per_unit_tv = findViewById(R.id.per_unit_tv);
         price_tv = findViewById(R.id.price_tv);
         paking_tv = findViewById(R.id.paking_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
 
         additional_details_tv = findViewById(R.id.additional_details_tv);
         name_tv = findViewById(R.id.name_tv);
@@ -80,6 +81,7 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
         back_image = findViewById(R.id.back_image);
+        post_id_tv = findViewById(R.id.post_id_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -160,6 +162,8 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
         per_unit_tv.setText(intent.getStringExtra("per_unit"));
         paking_tv.setText(intent.getStringExtra("paking"));
         price_tv.setText(intent.getStringExtra("price"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
         additional_details_tv.setText(intent.getStringExtra("additional_details"));
         view_profile_btn.setOnClickListener(
                 new View.OnClickListener() {

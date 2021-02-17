@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, wood_name_tv,
-            wood_quantity_tv, additional_details_tv;
+            wood_quantity_tv, additional_details_tv, post_id_tv, posted_on_tv;
 
     Context context;
 
@@ -62,8 +62,6 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
         token = PrefsHelper.getString(context, "token");
         wood_name_tv = findViewById(R.id.wood_name_tv);
         wood_quantity_tv = findViewById(R.id.wood_quantity_tv);
-
-
         additional_details_tv = findViewById(R.id.additional_details_tv);
         name_tv = findViewById(R.id.name_tv);
         vid_tv = findViewById(R.id.vid_tv);
@@ -76,6 +74,8 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
         view_profile_btn = findViewById(R.id.view_profile_btn);
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
+        post_id_tv = findViewById(R.id.post_id_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
         back_image = findViewById(R.id.back_image);
 
         back_image.setOnClickListener(
@@ -140,6 +140,8 @@ public class TreeAdsDetailsActivity extends AppCompatActivity implements MakeOff
         wood_name_tv.setText(intent.getStringExtra("wood_name"));
         wood_quantity_tv.setText(intent.getStringExtra("wood_quantity"));
         additional_details_tv.setText(intent.getStringExtra("additional_details"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
 
         view_profile_btn.setOnClickListener(
                 new View.OnClickListener() {

@@ -37,7 +37,7 @@ public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOf
 
 
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, labour_expertise_tv, available_hour_tv, price_tv,
-            reaching_time_status_tv, additional_information_tv;
+            reaching_time_status_tv, additional_information_tv, posted_on_tv, post_id_tv;
 
     Context context;
 
@@ -82,6 +82,8 @@ public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOf
         view_profile_btn = findViewById(R.id.view_profile_btn);
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
+        post_id_tv = findViewById(R.id.post_id_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -148,6 +150,8 @@ public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOf
         reaching_time_status_tv.setText(intent.getStringExtra("reaching_time_status"));
         additional_information_tv.setText(intent.getStringExtra("additional_information"));
         price_tv.setText(intent.getStringExtra("price"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
 
         view_profile_btn.setOnClickListener(
                 new View.OnClickListener() {

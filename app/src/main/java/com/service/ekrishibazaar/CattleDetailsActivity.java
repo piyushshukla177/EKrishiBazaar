@@ -35,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CattleDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
-    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, cattle_type_tv, cattle_breed_tv, number_of_births_tv, milk_per_day_tv, if_pregnent_tv, additional_details_tv;
+    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, cattle_type_tv, cattle_breed_tv, number_of_births_tv, milk_per_day_tv, if_pregnent_tv, posted_on_tv, post_id_tv;
 
     Context context;
 
@@ -80,6 +80,8 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         view_profile_btn = findViewById(R.id.view_profile_btn);
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
+        post_id_tv = findViewById(R.id.post_id_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -161,6 +163,8 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         number_of_births_tv.setText(intent.getStringExtra("number_of_births"));
         milk_per_day_tv.setText(intent.getStringExtra("milk_per_day_tv"));
         if_pregnent_tv.setText(intent.getStringExtra("If_preganent"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
         make_offer_btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

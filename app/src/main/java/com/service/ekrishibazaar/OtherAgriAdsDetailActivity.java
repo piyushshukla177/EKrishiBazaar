@@ -35,7 +35,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class OtherAgriAdsDetailActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
-    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, type_of_product_tv, product_name_tv, additional_details_tv;
+    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, type_of_product_tv, product_name_tv,
+            additional_details_tv, post_id_tv, posted_on_tv;
 
     Context context;
 
@@ -76,6 +77,8 @@ public class OtherAgriAdsDetailActivity extends AppCompatActivity implements Mak
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
         back_image = findViewById(R.id.back_image);
+        post_id_tv = findViewById(R.id.post_id_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -138,6 +141,8 @@ public class OtherAgriAdsDetailActivity extends AppCompatActivity implements Mak
 
         type_of_product_tv.setText(intent.getStringExtra("product_type"));
         product_name_tv.setText(intent.getStringExtra("product_name"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
 //      additional_details_tv.setText(intent.getStringExtra("additional_details"));
         view_profile_btn.setOnClickListener(
                 new View.OnClickListener() {

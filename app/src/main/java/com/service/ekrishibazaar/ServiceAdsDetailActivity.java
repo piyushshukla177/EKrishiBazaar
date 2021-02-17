@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceAdsDetailActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, service_machine_name_tv,
-            service_tv, reaching_in_time_tv, price_tv, additional_details_tv;
+            service_tv, reaching_in_time_tv, price_tv, additional_details_tv,post_id_tv,posted_on_tv;
 
     Context context;
 
@@ -78,6 +78,8 @@ public class ServiceAdsDetailActivity extends AppCompatActivity implements MakeO
         make_offer_btn = findViewById(R.id.make_offer_btn);
         profile_imageview = findViewById(R.id.profile_imageview);
         back_image = findViewById(R.id.back_image);
+        post_id_tv = findViewById(R.id.post_id_tv);
+        posted_on_tv = findViewById(R.id.posted_on_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -143,6 +145,8 @@ public class ServiceAdsDetailActivity extends AppCompatActivity implements MakeO
         price_tv.setText(intent.getStringExtra("price"));
         reaching_in_time_tv.setText(intent.getStringExtra("reaching_on_time"));
         additional_details_tv.setText(intent.getStringExtra("additional_details"));
+        post_id_tv.setText(intent.getStringExtra("post_id"));
+        posted_on_tv.setText(intent.getStringExtra("posted_on"));
 
         view_profile_btn.setOnClickListener(
                 new View.OnClickListener() {
