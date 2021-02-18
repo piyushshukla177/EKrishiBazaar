@@ -86,6 +86,7 @@ public class LabourinRentsAdapter extends RecyclerView.Adapter<com.service.ekris
                         intent.putExtra("post_id", currentItem.getPost_id());
                         intent.putExtra("posted_on", currentItem.getPosted_on());
                         intent.putExtra("additional_details", currentItem.getAdditional_information());
+                        intent.putExtra("verified", currentItem.getIsverified());
                         context.startActivity(intent);
                     }
                 }

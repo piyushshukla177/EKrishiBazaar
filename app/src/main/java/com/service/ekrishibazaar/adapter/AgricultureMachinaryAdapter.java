@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.service.ekrishibazaar.MachinaryAdsDetailActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.model.AgricultureMachinaryModel;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class AgricultureMachinaryAdapter extends RecyclerView.Adapter<AgricultureMachinaryAdapter.AgricultureMachinaryViewHolder> {
@@ -82,6 +85,7 @@ public class AgricultureMachinaryAdapter extends RecyclerView.Adapter<Agricultur
                         intent.putExtra("additional_details", currentItem.getAdditional_info());
                         intent.putExtra("post_id", currentItem.getPost_id());
                         intent.putExtra("posted_on", currentItem.getPosted_on());
+                        intent.putExtra("verified", currentItem.getIsverified());
                         context.startActivity(intent);
                     }
                 }

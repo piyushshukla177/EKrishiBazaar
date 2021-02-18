@@ -12,10 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.service.ekrishibazaar.MachinaryAdsDetailActivity;
 import com.service.ekrishibazaar.R;
 import com.service.ekrishibazaar.TreeAdsDetailsActivity;
-import com.service.ekrishibazaar.model.AgricultureMachinaryModel;
 import com.service.ekrishibazaar.model.TreeAndWoodsModel;
 import com.squareup.picasso.Picasso;
 
@@ -84,6 +82,7 @@ public class TreeandWoodsAdapter extends RecyclerView.Adapter<TreeandWoodsAdapte
                         intent.putExtra("additional_details", currentItem.getAdditional_information());
                         intent.putExtra("post_id", currentItem.getPost_id());
                         intent.putExtra("posted_on", currentItem.getPosted_on());
+                        intent.putExtra("verified", currentItem.getIsverified());
                         context.startActivity(intent);
                     }
                 }

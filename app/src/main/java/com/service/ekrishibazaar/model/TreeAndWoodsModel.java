@@ -24,6 +24,7 @@ public class TreeAndWoodsModel {
     private String type;
     private String category_name;
     private String category_image;
+    private String Isverified;
 
     public String getCategory_name() {
         return category_name;
@@ -199,5 +200,13 @@ public class TreeAndWoodsModel {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getIsverified() {
+        return Isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        Isverified = isverified;
     }
 }

@@ -15,9 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
+        <activity android:name=".UpdateProfileActivity"></activity>
         <activity
             android:name=".ServiceAdsDetailActivity"
-            android:theme="@style/Theme.Splash"></activity>
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostTreeAndWoodsAdsActivity"
             android:theme="@style/Theme.Splash" />

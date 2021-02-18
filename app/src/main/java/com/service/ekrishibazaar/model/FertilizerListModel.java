@@ -26,6 +26,7 @@ public class FertilizerListModel {
     private String type;
     private String additional_information;
     private String category_name;
+    private String Isverified;
 
     public String getCategory_name() {
         return category_name;
@@ -209,5 +210,13 @@ public class FertilizerListModel {
 
     public void setAdditional_information(String additional_information) {
         this.additional_information = additional_information;
+    }
+
+    public String getIsverified() {
+        return Isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        Isverified = isverified;
     }
 }

@@ -28,6 +28,7 @@ public class AgricultureAdsModel {
     private String product_price_by;
     private String packaging_cost_bearer;
     private String status;
+    private String isverified;
 
     public String getStatus() {
         return status;
@@ -235,5 +236,13 @@ public class AgricultureAdsModel {
 
     public void setPackaging_cost_bearer(String packaging_cost_bearer) {
         this.packaging_cost_bearer = packaging_cost_bearer;
+    }
+
+    public String getIsverified() {
+        return isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        this.isverified = isverified;
     }
 }

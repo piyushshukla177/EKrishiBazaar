@@ -35,14 +35,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
-
     TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, labour_expertise_tv, available_hour_tv, price_tv,
             reaching_time_status_tv, additional_information_tv, posted_on_tv, post_id_tv;
 
     Context context;
 
     ArrayList<SliderItem> slider_list = new ArrayList();
-    ImageView back_image, profile_imageview;
+    ImageView back_image, profile_imageview, verified_imageview;
 
     Button view_profile_btn, make_offer_btn;
 
@@ -84,6 +83,7 @@ public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOf
         profile_imageview = findViewById(R.id.profile_imageview);
         posted_on_tv = findViewById(R.id.posted_on_tv);
         post_id_tv = findViewById(R.id.post_id_tv);
+        verified_imageview = findViewById(R.id.verified_imageview);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -93,7 +93,6 @@ public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOf
                     }
                 }
         );
-
 
         Intent intent = getIntent();
         category_type = intent.getStringExtra("category_type");
@@ -181,6 +180,9 @@ public class LabourAdDetailsActivity extends AppCompatActivity implements MakeOf
                     }
                 }
         );
+        if (intent.getStringExtra("verified").equalsIgnoreCase("true")) {
+            verified_imageview.setVisibility(View.VISIBLE);
+        }
     }
 
     String phone, actual_price, offer_price;

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ServiceAdsDetailActivity">
 
-
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/linear_toolbar"
         android:layout_width="match_parent"
@@ -72,7 +71,7 @@
                     app:sliderIndicatorRadius="2dp"
                     app:sliderIndicatorSelectedColor="#5A5A5A"
                     app:sliderIndicatorUnselectedColor="#FFF"
-                    app:sliderScrollTimeInSec="1"
+                    app:sliderScrollTimeInSec="3"
                     app:sliderStartAutoCycle="true" />
 
             </androidx.cardview.widget.CardView>
@@ -92,6 +91,7 @@
                     android:textColor="@color/black" />
             </RelativeLayout>
             <ImageView
+                android:id="@+id/verified_imageview"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="right"

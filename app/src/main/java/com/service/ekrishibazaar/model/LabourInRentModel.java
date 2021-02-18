@@ -25,6 +25,7 @@ public class LabourInRentModel {
     private String price_by;
     private String additional_information;
     private String catgeory_name;
+    private String Isverified;
 
     public String getUser_first_name() {
         return user_first_name;
@@ -200,5 +201,13 @@ public class LabourInRentModel {
 
     public void setCatgeory_name(String catgeory_name) {
         this.catgeory_name = catgeory_name;
+    }
+
+    public String getIsverified() {
+        return Isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        Isverified = isverified;
     }
 }

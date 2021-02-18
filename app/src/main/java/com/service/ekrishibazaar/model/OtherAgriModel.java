@@ -27,6 +27,7 @@ public class OtherAgriModel {
     private String paking;
     private String category_name;
     private String category_image;
+    private String Isverified;
 
     public String getCategory_name() {
         return category_name;
@@ -210,5 +211,13 @@ public class OtherAgriModel {
 
     public void setPaking(String paking) {
         this.paking = paking;
+    }
+
+    public String getIsverified() {
+        return Isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        Isverified = isverified;
     }
 }

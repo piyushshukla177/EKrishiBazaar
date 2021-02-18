@@ -26,6 +26,7 @@ public class ServiceAdsModel {
     private String additional_info;
     private String reaching_on_time;
     private String price_by;
+    private String Isverified;
 
     public String getPrice_by() {
         return price_by;
@@ -217,5 +218,13 @@ public class ServiceAdsModel {
 
     public void setAdditional_info(String additional_info) {
         this.additional_info = additional_info;
+    }
+
+    public String getIsverified() {
+        return Isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        Isverified = isverified;
     }
 }

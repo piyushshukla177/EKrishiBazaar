@@ -26,6 +26,8 @@ public class AgricultureMachinaryModel {
     private String months_in_use;
     private String warranty_status;
     private String packed_by;
+    private String isverified;
+
 
     public String getUser_first_name() {
         return user_first_name;
@@ -209,5 +211,13 @@ public class AgricultureMachinaryModel {
 
     public void setPacked_by(String packed_by) {
         this.packed_by = packed_by;
+    }
+
+    public String getIsverified() {
+        return isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        this.isverified = isverified;
     }
 }

@@ -41,7 +41,7 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
     Context context;
 
     ArrayList<SliderItem> slider_list = new ArrayList();
-    ImageView back_image, profile_imageview;
+    ImageView back_image, profile_imageview,verified_image;
 
     Button view_profile_btn, make_offer_btn;
     String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village, post_id;
@@ -82,6 +82,7 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
         profile_imageview = findViewById(R.id.profile_imageview);
         back_image = findViewById(R.id.back_image);
         post_id_tv = findViewById(R.id.post_id_tv);
+        verified_image = findViewById(R.id.verified_image);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -181,7 +182,9 @@ public class FertilizerAdsDetailsActivity extends AppCompatActivity implements M
                     }
                 }
         );
-
+        if (intent.getStringExtra("verified").equalsIgnoreCase("true")) {
+            verified_image.setVisibility(View.VISIBLE);
+        }
         make_offer_btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

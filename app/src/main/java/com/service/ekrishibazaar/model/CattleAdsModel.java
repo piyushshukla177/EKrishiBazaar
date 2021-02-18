@@ -21,11 +21,13 @@ public class CattleAdsModel {
     private String price;
     private String posted_on;
     private String post_id;
+    private String additional_info;
     private String product_image1;
     private String product_image2;
     private String product_image3;
     private String category_image;
     private String category_name;
+    private String isverified;
 
     public String getPost_id() {
         return post_id;
@@ -217,5 +219,21 @@ public class CattleAdsModel {
 
     public void setCategory_image(String category_image) {
         this.category_image = category_image;
+    }
+
+    public String getAdditional_info() {
+        return additional_info;
+    }
+
+    public void setAdditional_info(String additional_info) {
+        this.additional_info = additional_info;
+    }
+
+    public String getIsverified() {
+        return isverified;
+    }
+
+    public void setIsverified(String isverified) {
+        this.isverified = isverified;
     }
 }

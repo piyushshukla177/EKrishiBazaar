@@ -70,7 +70,7 @@
                     app:sliderIndicatorRadius="2dp"
                     app:sliderIndicatorSelectedColor="#5A5A5A"
                     app:sliderIndicatorUnselectedColor="#FFF"
-                    app:sliderScrollTimeInSec="1"
+                    app:sliderScrollTimeInSec="3"
                     app:sliderStartAutoCycle="true" />
 
             </androidx.cardview.widget.CardView>
@@ -88,13 +88,16 @@
                     android:text="@string/Profile_Details"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
+
             </RelativeLayout>
 
             <ImageView
+                android:id="@+id/verified_imageview"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_gravity="right"
                 android:layout_marginTop="10dp"
+                android:visibility="gone"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:src="@drawable/check" />
 
@@ -132,7 +135,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Name"
+                            android:text=""
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
@@ -154,7 +157,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Name"
+                            android:text=""
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
@@ -176,7 +179,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Name"
+                            android:text=""
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
 
@@ -198,11 +201,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:text="Name"
+                            android:text=""
                             android:textSize="@dimen/_12sdp" />
                     </LinearLayout>
                 </LinearLayout>
-
 
             </RelativeLayout>
 

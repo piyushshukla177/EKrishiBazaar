@@ -41,7 +41,7 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
     Context context;
 
     ArrayList<SliderItem> slider_list = new ArrayList();
-    ImageView back_image, profile_imageview;
+    ImageView back_image, profile_imageview,verified_imageview;
 
     Button view_profile_btn, make_offer_btn;
     String category_type, image1, image2, image3, user_first_name, user_last_name, vid, date_joined, user_mobile_no, profile_image, state, district, block, village, post_id;
@@ -83,6 +83,7 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
         back_image = findViewById(R.id.back_image);
         post_id_tv = findViewById(R.id.post_id_tv);
         posted_on_tv = findViewById(R.id.posted_on_tv);
+        verified_imageview = findViewById(R.id.verified_imageview);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -178,6 +179,9 @@ public class MachinaryAdsDetailActivity extends AppCompatActivity implements Mak
                     }
                 }
         );
+        if (intent.getStringExtra("verified").equalsIgnoreCase("true")) {
+            verified_imageview.setVisibility(View.VISIBLE);
+        }
     }
 
     String phone, actual_price, offer_price;

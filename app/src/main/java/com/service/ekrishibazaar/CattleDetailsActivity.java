@@ -35,12 +35,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CattleDetailsActivity extends AppCompatActivity implements MakeOfferSheet.MakeOfferListener {
 
-    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, cattle_type_tv, cattle_breed_tv, number_of_births_tv, milk_per_day_tv, if_pregnent_tv, posted_on_tv, post_id_tv;
+    TextView name_tv, vid_tv, mobile_number_tv, joined_tv, state_tv, district_tv, block_tv, village_tv, cattle_type_tv, cattle_breed_tv, number_of_births_tv, milk_per_day_tv, if_pregnent_tv, posted_on_tv, post_id_tv, price_tv, additional_info_tv;
 
     Context context;
 
     ArrayList<SliderItem> slider_list = new ArrayList();
-    ImageView back_image, profile_imageview;
+    ImageView back_image, profile_imageview, verified_imageview;
 
     Button view_profile_btn, make_offer_btn;
 
@@ -63,12 +63,13 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         token = PrefsHelper.getString(context, "token");
 
         back_image = findViewById(R.id.back_image);
+        verified_imageview = findViewById(R.id.verified_imageview);
         cattle_type_tv = findViewById(R.id.cattle_type_tv);
         cattle_breed_tv = findViewById(R.id.cattle_breed_tv);
         number_of_births_tv = findViewById(R.id.number_of_births_tv);
         milk_per_day_tv = findViewById(R.id.milk_per_day_tv);
         if_pregnent_tv = findViewById(R.id.if_pregnent_tv);
-//        additional_details_tv = findViewById(R.id.additional_details_tv);
+        price_tv = findViewById(R.id.price_tv);
         name_tv = findViewById(R.id.name_tv);
         vid_tv = findViewById(R.id.vid_tv);
         mobile_number_tv = findViewById(R.id.mobile_number_tv);
@@ -82,6 +83,7 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         profile_imageview = findViewById(R.id.profile_imageview);
         post_id_tv = findViewById(R.id.post_id_tv);
         posted_on_tv = findViewById(R.id.posted_on_tv);
+        additional_info_tv = findViewById(R.id.additional_info_tv);
 
         back_image.setOnClickListener(
                 new View.OnClickListener() {
@@ -165,6 +167,8 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
         if_pregnent_tv.setText(intent.getStringExtra("If_preganent"));
         posted_on_tv.setText(intent.getStringExtra("posted_on"));
         post_id_tv.setText(intent.getStringExtra("post_id"));
+        price_tv.setText("₹ " + intent.getStringExtra("price"));
+        additional_info_tv.setText(intent.getStringExtra("additional_info"));
         make_offer_btn.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -175,8 +179,10 @@ public class CattleDetailsActivity extends AppCompatActivity implements MakeOffe
                     }
                 }
         );
+        if (intent.getStringExtra("verified").equalsIgnoreCase("true")) {
+            verified_imageview.setVisibility(View.VISIBLE);
+        }
     }
-
 
     String phone, actual_price, offer_price;
 

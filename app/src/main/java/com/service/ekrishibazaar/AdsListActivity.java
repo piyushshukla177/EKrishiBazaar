@@ -418,7 +418,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     JSONObject state_obj = user_obj.getJSONObject("state");
                                     JSONObject district_obj = user_obj.getJSONObject("district");
                                     JSONObject block_obj = user_obj.getJSONObject("block");
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     m.setState(state_obj.getString("state_name"));
                                     m.setDistrict(district_obj.getString("district_name"));
                                     m.setBlock(block_obj.getString("block_name"));
@@ -444,6 +444,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setProduct_image2(obj.getString("product_image2"));
                                     m.setProduct_image3(obj.getString("product_image3"));
                                     m.setPost_id(obj.getString("post_id"));
+                                    m.setAdditional_info(obj.getString("additional_information"));
                                     cattle_list.add(m);
                                 }
                             }
@@ -496,14 +497,6 @@ public class AdsListActivity extends AppCompatActivity {
                 params.put("Accept-Language", language_code);
                 return params;
             }
-
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", super_category);
-//                Log.v("cattle_params", params.toString());
-//                return params;
-//            }
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
@@ -554,7 +547,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     JSONObject district_obj = user_obj.getJSONObject("district");
                                     JSONObject block_obj = user_obj.getJSONObject("block");
                                     JSONObject reaching_on_time_obj = obj.getJSONObject("reaching_on_time");
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     m.setReaching_on_time(reaching_on_time_obj.getString("service_status"));
                                     m.setState(state_obj.getString("state_name"));
                                     m.setDistrict(district_obj.getString("district_name"));
@@ -628,14 +621,6 @@ public class AdsListActivity extends AppCompatActivity {
                 params.put("Accept-Language", language_code);
                 return params;
             }
-
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("super_category", super_category);
-//                Log.v("request", params.toString());
-//                return params;
-//            }
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
@@ -679,6 +664,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m = new AgricultureAdsModel();
                                     m.setUser_first_name(user_2_obj.getString("first_name"));
                                     m.setUser_last_name(user_2_obj.getString("last_name"));
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     m.setDate_joined(user_2_obj.getString("date_joined"));
                                     m.setProfile_image(user_obj.getString("image"));
                                     JSONObject state_obj = user_obj.getJSONObject("state");
@@ -832,7 +818,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setVillage_name(user_obj.getString("village_name"));
                                     m.setMobile_number(user_obj.getString("mobile_number"));
                                     m.setPost_id(obj.getString("post_id"));
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     JSONObject available_labour_obj = obj.getJSONObject("available_labour");
                                     JSONObject labour_expertise_obj = obj.getJSONObject("labour_expertise");
                                     JSONObject reaching_time_on_site = obj.getJSONObject("reaching_time_on_site");
@@ -965,7 +951,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setVillage_name(user_obj.getString("village_name"));
                                     m.setMobile_number(user_obj.getString("mobile_number"));
                                     m.setPost_id(obj.getString("post_id"));
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     JSONObject types_obj = obj.getJSONObject("types");
                                     JSONObject category_obj = types_obj.getJSONObject("category");
                                     m.setCategory_name(category_obj.getString("category_name"));
@@ -1103,7 +1089,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     JSONObject machine_obj = obj.getJSONObject("machine");
                                     JSONObject category_obj = machine_obj.getJSONObject("category");
                                     m.setMachine_name(machine_obj.getString("machine_name"));
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     JSONObject machine_brand_obj = obj.getJSONObject("machine_brand");
                                     JSONObject machine_status_obj = obj.getJSONObject("machine_status");
 
@@ -1208,7 +1194,6 @@ public class AdsListActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.v("response", response);
                         try {
-
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
@@ -1229,7 +1214,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     JSONObject state_obj = user_obj.getJSONObject("state");
                                     JSONObject district_obj = user_obj.getJSONObject("district");
                                     JSONObject block_obj = user_obj.getJSONObject("block");
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     m.setState(state_obj.getString("state_name"));
                                     m.setDistrict(district_obj.getString("district_name"));
                                     m.setBlock(block_obj.getString("block_name"));
@@ -1352,7 +1337,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     JSONObject state_obj = user_obj.getJSONObject("state");
                                     JSONObject district_obj = user_obj.getJSONObject("district");
                                     JSONObject block_obj = user_obj.getJSONObject("block");
-
+                                    m.setIsverified(user_obj.getString("is_verified"));
                                     m.setState(state_obj.getString("state_name"));
                                     m.setDistrict(district_obj.getString("district_name"));
                                     m.setBlock(block_obj.getString("block_name"));

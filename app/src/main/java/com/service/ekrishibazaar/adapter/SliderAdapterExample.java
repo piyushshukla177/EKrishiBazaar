@@ -88,5 +88,4 @@ public class SliderAdapterExample extends
             this.itemView = itemView;
         }
     }
-
 }
