@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +72,9 @@ public class AdsListActivity extends AppCompatActivity {
     int TOTAL_PAGES = 20;
     int limit = 20;
     int offset = 20;
+    Boolean isScrolling = false;
+    int currentItems, totalItems, scrollOutItems;
+
     RelativeLayout customize_relative;
     LinearLayout scan_cardview, searchLinear;
     String language_code = "en";
@@ -349,6 +353,33 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         );
+
+        cattleLayoutManager = new LinearLayoutManager(context);
+        cattle_ads_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                    isScrolling = true;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                currentItems = cattleLayoutManager.getChildCount();
+                totalItems = cattleLayoutManager.getItemCount();
+//                scrollOutItems = cattleLayoutManager.findFirstVisibleItemPosition();
+                scrollOutItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+
+                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
+                    offset = offset + 20;
+                    isScrolling = false;
+                    getCattleList(category);
+                }
+            }
+        });
+
         cattle_ads_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -532,6 +563,10 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         );
+        cattle_ads_recyclerview.setHasFixedSize(true);
+        cattleAdapter = new CattleAdsAdapter(context, cattle_list);
+        cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
+        cattle_ads_recyclerview.setAdapter(cattleAdapter);
         getProducts(category);
         getStates();
     }
@@ -619,7 +654,7 @@ public class AdsListActivity extends AppCompatActivity {
     }
 
     private void getCattleList(String super_category) {
-        cattle_list.clear();
+//        cattle_list.clear();
         searchLinear.setVisibility(View.GONE);
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -720,15 +755,14 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (cattle_list.size() > 0) {
-                                cattle_ads_recyclerview.setHasFixedSize(true);
-                                cattleLayoutManager = new LinearLayoutManager(context);
-                                cattleAdapter = new CattleAdsAdapter(context, cattle_list);
-                                cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
-                                cattle_ads_recyclerview.setAdapter(cattleAdapter);
+//                              cattle_ads_recyclerview.setHasFixedSize(true);
+//                              cattleAdapter = new CattleAdsAdapter(context, cattle_list);
+//                              cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
+//                              cattle_ads_recyclerview.setAdapter(cattleAdapter);
                                 no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
                                 customize_relative.setVisibility(View.VISIBLE);
-
+                                cattleAdapter.notifyDataSetChanged();
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 customize_relative.setVisibility(View.GONE);
