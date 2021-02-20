@@ -10,6 +10,11 @@
         android:icon="@drawable/advertisement"
         android:title="@string/MY_ADS" />
 
+
+    <item
+        android:id="@+id/navigation_sell"
+        android:icon="@drawable/add_post"
+        android:title="@string/Post_Ads" />
     <item
         android:id="@+id/navigation_myaccount"
         android:icon="@drawable/account"
@@ -20,8 +25,4 @@
         android:icon="@drawable/chat"
         android:title="CHAT" />
 
-    <item
-        android:id="@+id/navigation_sell"
-        android:icon="@drawable/sell"
-        android:title="@string/HELP" />
 </menu>

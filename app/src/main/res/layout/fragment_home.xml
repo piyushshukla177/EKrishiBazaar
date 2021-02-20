@@ -136,7 +136,9 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_centerInParent="true"
-                            android:src="@drawable/buy_order" />
+                            android:src="@drawable/sell"
+                            app:tint="@color/logo_color"
+                            />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -150,7 +152,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="@string/Sell"
+                            android:text="@string/HELP"
                             android:textAlignment="center"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_9sdp"

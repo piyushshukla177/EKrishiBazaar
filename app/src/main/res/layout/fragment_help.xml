@@ -6,357 +6,171 @@
     android:layout_height="match_parent"
     tools:context=".fragments.HelpFregment">
 
-    <ScrollView
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linear_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+<!--        <ImageView-->
+<!--            android:id="@+id/back_image"-->
+<!--            android:layout_width="@dimen/_25sdp"-->
+<!--            android:layout_height="@dimen/_20sdp"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_margin="@dimen/_5sdp"-->
+<!--            android:src="@drawable/back" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:text="Post Ads"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_15sdp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linear_toolbar"
+        android:background="@color/light_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/post_sell_ads_linear"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/linear_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@color/white"
-                android:orientation="horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circular_old_sale">
 
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/back_image"-->
-                <!--                    android:layout_width="@dimen/_25sdp"-->
-                <!--                    android:layout_height="@dimen/_20sdp"-->
-                <!--                    android:layout_gravity="center"-->
-                <!--                    android:layout_margin="@dimen/_5sdp"-->
-                <!--                    android:src="@drawable/back" />-->
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/buy_order" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/old_sale_shape">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_15sdp"
-                    android:text="Help"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15sdp" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                    android:layout_centerInParent="true"
+                    android:text="Post Sell Offer"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:textStyle="bold" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/light_gray"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linear_toolbar" />
+            </RelativeLayout>
 
-
-            <LinearLayout
-                android:id="@+id/terms_and_condition_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Terms and Conditions"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ads_posting_guidelines_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Ad Posting Guidelines"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/legal_privacy_policy_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Legal and Privacy Policy"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/trust_and_safety_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Trust and Safety"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/buyers_faqs_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Buyers FAQs"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/general_faqs_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="General FAQs"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/be_varified_user_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Be verified User"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/about_us_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="About Us"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contact_us_linear"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="Contact Us"
-                        android:textColor="@color/blk"
-                        android:textSize="@dimen/_12sdp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_10sdp"
-                        android:layout_height="@dimen/_10sdp"
-                        android:layout_alignParentRight="true"
-                        android:src="@drawable/right_arrow" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/toolbar_relative"
-                    android:background="@color/light_gray2" />
-            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+
+
+        <LinearLayout
+            android:id="@+id/post_buy_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circular_customers">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/buy_order" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/customers_shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Post Buy Offer"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/more_services_linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:background="@drawable/circular_new_bill">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/buy_back_order" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/new_bill_shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Post Buyback Offer"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>
