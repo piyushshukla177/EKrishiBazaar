@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.service.ekrishibazaar.adapter.AgricultureAdsAdapter;
 import com.service.ekrishibazaar.adapter.AgricultureMachinaryAdapter;
 import com.service.ekrishibazaar.adapter.CattleAdsAdapter;
@@ -62,7 +64,8 @@ import java.util.Map;
 
 public class AdsListActivity extends AppCompatActivity {
 
-    LinearLayout scan_cardview;
+    RelativeLayout customize_relative;
+    LinearLayout scan_cardview, searchLinear;
     String language_code = "en";
     TextView no_record_tv;
     ArrayList<CattleAdsModel> cattle_list = new ArrayList();
@@ -88,7 +91,6 @@ public class AdsListActivity extends AppCompatActivity {
     EditText search_edittext;
     ImageView menu_imageview;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +100,20 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void init() {
         context = this;
+        customize_relative = findViewById(R.id.customize_relative);
+        searchLinear = findViewById(R.id.searchLinear);
+        customize_relative.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (searchLinear.getVisibility() == View.VISIBLE) {
+
+                        } else {
+
+                        }
+                    }
+                }
+        );
         scan_cardview = findViewById(R.id.scan_cardview);
         if (PrefsHelper.getString(this, "lang_code") != null && !PrefsHelper.getString(this, "lang_code").isEmpty()) {
             language_code = PrefsHelper.getString(this, "lang_code");
@@ -358,7 +374,9 @@ public class AdsListActivity extends AppCompatActivity {
                 filteredList.add(item);
             }
         }
-        cattleAdapter.filterList(filteredList);
+        if (cattleAdapter != null) {
+            cattleAdapter.filterList(filteredList);
+        }
     }
 
     private void ServiceInRentFilter(String text) {
