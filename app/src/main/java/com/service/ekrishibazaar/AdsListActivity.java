@@ -15,6 +15,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,8 +56,11 @@ import com.service.ekrishibazaar.model.OtherAgriModel;
 import com.service.ekrishibazaar.model.ServiceAdsModel;
 import com.service.ekrishibazaar.model.TreeAndWoodsModel;
 import com.service.ekrishibazaar.util.PrefsHelper;
+import com.service.ekrishibazaar.util.VolleySingleton;
+import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -89,7 +94,12 @@ public class AdsListActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager cattleLayoutManager;
     String category = "";
     EditText search_edittext;
-    ImageView menu_imageview;
+    ImageView menu_imageview, up_imageview;
+    ArrayList<String> state_list = new ArrayList();
+    ArrayList<String> district_list = new ArrayList();
+    ArrayList blocks_list = new ArrayList();
+    ArrayList product_list = new ArrayList();
+    MaterialBetterSpinner state_spinner, district_spinner, block_spinner, select_product_spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,14 +112,28 @@ public class AdsListActivity extends AppCompatActivity {
         context = this;
         customize_relative = findViewById(R.id.customize_relative);
         searchLinear = findViewById(R.id.searchLinear);
+        up_imageview = findViewById(R.id.up_imageview);
+        state_spinner = findViewById(R.id.state_spinner);
+        district_spinner = findViewById(R.id.district_spinner);
+        block_spinner = findViewById(R.id.block_spinner);
+        select_product_spinner = findViewById(R.id.select_product_spinner);
+        String state = PrefsHelper.getString(context, "state");
+        if (state != null && !state.isEmpty()) {
+            state_spinner.setText(state);
+            district_spinner.setText(PrefsHelper.getString(context, "distict"));
+            block_spinner.setText(PrefsHelper.getString(context, "block"));
+        }
+
         customize_relative.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (searchLinear.getVisibility() == View.VISIBLE) {
-
+                            up_imageview.setImageResource(R.drawable.up_arrow);
+                            searchLinear.setVisibility(View.GONE);
                         } else {
-
+                            up_imageview.setImageResource(R.drawable.down_arrow);
+                            searchLinear.setVisibility(View.VISIBLE);
                         }
                     }
                 }
@@ -355,6 +379,54 @@ public class AdsListActivity extends AppCompatActivity {
                 }
             }
         });
+        district_list.add("Select District");
+        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
+        district_spinner.setAdapter(stateAdapter);
+
+        blocks_list.add("Block");
+        ArrayAdapter<String> x = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, blocks_list);
+        block_spinner.setAdapter(x);
+
+        product_list.add("Select Product");
+        ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
+        select_product_spinner.setAdapter(productAdapter);
+
+        state_spinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                getDistrict(s.toString());
+            }
+        });
+
+        district_spinner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s != null && !s.equals("Select District")) {
+                    getBlocks(s.toString());
+                }
+            }
+        });
+        getStates();
     }
 
     private void AgricultureAdsFilter(String text) {
@@ -1532,4 +1604,198 @@ public class AdsListActivity extends AppCompatActivity {
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
     }
+
+
+    void getStates() {
+        state_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new RequestQueue instance
+
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://ekrishibazaar.com/api/state/",
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                state_list.add(obj.getString("state_name"));
+                            }
+                            ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, state_list);
+                            state_spinner.setAdapter(stateAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.dismiss();
+                        state_list.add("Select State");
+                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, state_list);
+                        state_spinner.setAdapter(stateAdapter);
+                        // Do something when error occurred
+
+                    }
+                }
+        );
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
+    void getDistrict(String state_name) {
+        district_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new RequestQueue instance
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://ekrishibazaar.com/api/district/?search=" + state_name,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                district_list.add(obj.getString("district_name"));
+                            }
+                            ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
+                            district_spinner.setAdapter(stateAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.dismiss();
+                        district_list.add("Select District");
+                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
+                        district_spinner.setAdapter(stateAdapter);
+                        // Do something when error occurred
+
+                    }
+                }
+        ) {
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("search", state_name);
+//                return params;
+//            }
+        };
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
+    void getBlocks(String districtName) {
+        blocks_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new RequestQueue instance
+
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                "https://ekrishibazaar.com/api/block/?search=" + districtName,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                blocks_list.add(obj.getString("block_name"));
+                            }
+                            ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, blocks_list);
+                            block_spinner.setAdapter(stateAdapter);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.dismiss();
+                        blocks_list.add("Block");
+                        ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, blocks_list);
+                        block_spinner.setAdapter(stateAdapter);
+                        // Do something when error occurred
+                    }
+                }
+        ) {
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("search", districtName);
+//                return params;
+//            }
+        };
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
 }
