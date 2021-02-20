@@ -2087,9 +2087,19 @@ public class AdsListActivity extends AppCompatActivity {
                                 if (category.equalsIgnoreCase("Cattle")) {
                                     product_list.add((obj.getString("cattle_name")));
                                 } else if (category_name.equalsIgnoreCase("Fertilizers and Pesticides")) {
-                                    product_list.add((obj.getString("product_name")));
-                                } else {
                                     product_list.add((obj.getString("type_of_chemical")));
+                                } else if (category_name.equalsIgnoreCase("Labour in Rent")) {
+                                    product_list.add((obj.getString("expertise")));
+                                } else if (category_name.equalsIgnoreCase("Other Agri Product")) {
+                                    product_list.add((obj.getString("type_of_product")));
+                                } else if (category_name.equalsIgnoreCase("Service in Rent")) {
+                                    product_list.add((obj.getString("work_name")));
+                                } else if (category_name.equalsIgnoreCase("Tree and Woods")) {
+                                    product_list.add((obj.getString("wood_name")));
+                                } else if (category_name.equalsIgnoreCase("Agricultural machinary")) {
+                                    product_list.add((obj.getString("machine_name")));
+                                } else {
+                                    product_list.add((obj.getString("product_name")));
                                 }
                             }
                             ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
