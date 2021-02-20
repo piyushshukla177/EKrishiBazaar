@@ -10,8 +10,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="@dimen/_10sdp">
+        android:layout_margin="@dimen/_10sdp"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -47,11 +47,11 @@
             android:id="@+id/menu_imageview"
             android:layout_width="0dp"
             android:layout_height="@dimen/_20sdp"
-            android:layout_weight="0.1"
             android:layout_gravity="center"
-            app:tint="@color/dark_green"
             android:layout_marginLeft="@dimen/_5sdp"
-            android:src="@drawable/menu_blue" />
+            android:layout_weight="0.1"
+            android:src="@drawable/menu_blue"
+            app:tint="@color/dark_green" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,50 +64,6 @@
         android:visibility="visible"
         android:weightSum="2">
 
-
-
-
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/llCreateBill"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:orientation="vertical">-->
-
-        <!--            <RelativeLayout-->
-        <!--                android:layout_width="60dp"-->
-        <!--                android:layout_height="60dp"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:background="@drawable/circular_new_bill">-->
-
-        <!--                <ImageView-->
-        <!--                    android:layout_width="40dp"-->
-        <!--                    android:layout_height="40dp"-->
-        <!--                    android:layout_centerInParent="true"-->
-        <!--                    android:src="@drawable/more_services" />-->
-        <!--            </RelativeLayout>-->
-
-        <!--            <RelativeLayout-->
-        <!--                android:layout_width="90dp"-->
-        <!--                android:layout_height="25dp"-->
-        <!--                android:layout_gravity="center"-->
-        <!--                android:layout_marginTop="5dp"-->
-        <!--                android:background="@drawable/new_bill_shape">-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_centerInParent="true"-->
-        <!--                    android:text="@string/More_Services"-->
-        <!--                    android:textAlignment="center"-->
-        <!--                    android:textColor="@color/white"-->
-        <!--                    android:textSize="@dimen/_9sdp"-->
-        <!--                    android:textStyle="bold" />-->
-
-        <!--            </RelativeLayout>-->
-
-        <!--        </LinearLayout>-->
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -116,9 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/scan_cardview"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintRight_toRightOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/no_record_tv"
@@ -129,4 +83,12 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
         android:visibility="gone" />
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressbar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:visibility="gone" />-->
 </RelativeLayout>

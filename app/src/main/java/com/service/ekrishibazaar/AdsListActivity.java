@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,6 +88,7 @@ public class AdsListActivity extends AppCompatActivity {
     EditText search_edittext;
     ImageView menu_imageview;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +98,6 @@ public class AdsListActivity extends AppCompatActivity {
 
     private void init() {
         context = this;
-
         scan_cardview = findViewById(R.id.scan_cardview);
         if (PrefsHelper.getString(this, "lang_code") != null && !PrefsHelper.getString(this, "lang_code").isEmpty()) {
             language_code = PrefsHelper.getString(this, "lang_code");
@@ -293,6 +294,51 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
         );
+        cattle_ads_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (!recyclerView.canScrollVertically(1)) {
+                    Toast.makeText(AdsListActivity.this, "Last", Toast.LENGTH_LONG).show();
+
+                    if (next_url != null) {
+
+                        if (category != null && !category.isEmpty() && category.equals("Cattle")) {
+                            getCattleList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
+                            getServiceList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
+                            getAgricultureList("Fruits", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
+                            getAgricultureList("Pulses", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
+                            getAgricultureList("Medicinal plants", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
+                            getAgricultureList("Dairy Product", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
+                            getAgricultureList("Vegetable", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
+                            getAgricultureList("Grains", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
+                            getAgricultureList("Flower", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
+                            getAgricultureList("oilseeds", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
+                            getLabourinrentsList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
+                            getOtherAgriProductList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
+                            getOtherAgriMachinary("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
+                            getTreeAndWoodsList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
+                            getFertilizersList("Sellads");
+                        }
+                    }
+                }
+            }
+        });
     }
 
     private void AgricultureAdsFilter(String text) {
@@ -375,6 +421,7 @@ public class AdsListActivity extends AppCompatActivity {
         fertilizerAdapter.filterList(filteredList);
     }
 
+
     private void getCattleList(String super_category) {
         cattle_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
@@ -390,7 +437,13 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
+        Log.e("url", url);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -401,7 +454,7 @@ public class AdsListActivity extends AppCompatActivity {
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
-
+                            next_url = jsonObject.getString("next");
                             CattleAdsModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
@@ -444,6 +497,7 @@ public class AdsListActivity extends AppCompatActivity {
                                     m.setProduct_image2(obj.getString("product_image2"));
                                     m.setProduct_image3(obj.getString("product_image3"));
                                     m.setPost_id(obj.getString("post_id"));
+                                    Log.e("PostId", obj.getString("post_id"));
                                     m.setAdditional_info(obj.getString("additional_information"));
                                     cattle_list.add(m);
                                 }
@@ -517,7 +571,12 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -534,7 +593,7 @@ public class AdsListActivity extends AppCompatActivity {
                                 JSONObject obj = data_array.getJSONObject(i);
                                 boolean b = obj.getString("type").equals("serviceinrentads");
                                 Log.e("type", String.valueOf(b));
-
+                                next_url = jsonObject.getString("next");
                                 if (b) {
                                     JSONObject user_obj = obj.getJSONObject("user");
                                     JSONObject user_2_obj = user_obj.getJSONObject("user");
@@ -626,6 +685,8 @@ public class AdsListActivity extends AppCompatActivity {
         Volley.newRequestQueue(context).add(postRequest);
     }
 
+    String next_url = null;
+
     private void getAgricultureList(String catgeory_type, String super_category) {
         agriculture_list.clear();
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
@@ -641,7 +702,14 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "";
+
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
+        Log.e("url", url);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -652,7 +720,7 @@ public class AdsListActivity extends AppCompatActivity {
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
-
+                            next_url = jsonObject.getString("next");
                             AgricultureAdsModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
@@ -725,6 +793,7 @@ public class AdsListActivity extends AppCompatActivity {
                             }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
+
                             e.printStackTrace();
                             mProgressDialog.dismiss();
                         }
@@ -736,6 +805,7 @@ public class AdsListActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         error.printStackTrace();
                         mProgressDialog.dismiss();
+
                         String errorCode = "";
                         if (error instanceof TimeoutError) {
                             errorCode = "Time out Error";
@@ -753,7 +823,6 @@ public class AdsListActivity extends AppCompatActivity {
                         Toast.makeText(context, "Error.Response: " + errorCode, Toast.LENGTH_SHORT).show();
                     }
                 }
-
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -781,18 +850,24 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.v("response", response);
                         try {
+
                             mProgressDialog.dismiss();
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
-
+                            next_url = jsonObject.getString("next");
                             LabourInRentModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
@@ -915,7 +990,12 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -931,6 +1011,7 @@ public class AdsListActivity extends AppCompatActivity {
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
                                 boolean b = obj.getString("type").equals("otheragriads");
+                                next_url = jsonObject.getString("next");
                                 Log.e("type", String.valueOf(b));
                                 if (b) {
                                     JSONObject user_obj = obj.getJSONObject("user");
@@ -1049,7 +1130,12 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -1060,7 +1146,7 @@ public class AdsListActivity extends AppCompatActivity {
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
-
+                            next_url = jsonObject.getString("next");
                             AgricultureMachinaryModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
@@ -1187,7 +1273,12 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -1197,7 +1288,7 @@ public class AdsListActivity extends AppCompatActivity {
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
-
+                            next_url = jsonObject.getString("next");
                             TreeAndWoodsModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
@@ -1309,7 +1400,12 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url;
+        if (next_url != null) {
+            url = next_url;
+        } else {
+            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -1320,7 +1416,7 @@ public class AdsListActivity extends AppCompatActivity {
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
-
+                            next_url = jsonObject.getString("next");
                             FertilizerListModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
