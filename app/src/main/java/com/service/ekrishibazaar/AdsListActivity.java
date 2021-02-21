@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -55,6 +56,7 @@ import com.service.ekrishibazaar.model.LabourInRentModel;
 import com.service.ekrishibazaar.model.OtherAgriModel;
 import com.service.ekrishibazaar.model.ServiceAdsModel;
 import com.service.ekrishibazaar.model.TreeAndWoodsModel;
+import com.service.ekrishibazaar.util.PaginationListener;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -68,7 +70,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AdsListActivity extends AppCompatActivity {
-
+    int TOTAL_PAGES = 20;
+    int limit = 20;
+    int offset = 20;
     RelativeLayout customize_relative;
     LinearLayout scan_cardview, searchLinear;
     String language_code = "en";
@@ -93,13 +97,17 @@ public class AdsListActivity extends AppCompatActivity {
     private FertilizerAdapter fertilizerAdapter;
     private RecyclerView.LayoutManager cattleLayoutManager;
     String category = "";
-    EditText search_edittext;
+    EditText search_edittext, min_price_et, max_price_et;
     ImageView menu_imageview, up_imageview;
     ArrayList<String> state_list = new ArrayList();
     ArrayList<String> district_list = new ArrayList();
     ArrayList blocks_list = new ArrayList();
     ArrayList product_list = new ArrayList();
     MaterialBetterSpinner state_spinner, district_spinner, block_spinner, select_product_spinner;
+    //    select_product_spinner;
+    Button search_btn;
+
+    String search_state, search_district, search_block, min_price, max_price, search_product_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +115,12 @@ public class AdsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cattle_ads);
         init();
     }
+
+    //    private int currentPage = PAGE_START;
+    private boolean isLastPage = false;
+    private int totalPage = 10;
+    private boolean isLoading = false;
+    int itemCount = 0;
 
     private void init() {
         context = this;
@@ -116,6 +130,9 @@ public class AdsListActivity extends AppCompatActivity {
         state_spinner = findViewById(R.id.state_spinner);
         district_spinner = findViewById(R.id.district_spinner);
         block_spinner = findViewById(R.id.block_spinner);
+        search_btn = findViewById(R.id.search_btn);
+        min_price_et = findViewById(R.id.min_price_et);
+        max_price_et = findViewById(R.id.max_price_et);
         select_product_spinner = findViewById(R.id.select_product_spinner);
         String state = PrefsHelper.getString(context, "state");
         if (state != null && !state.isEmpty()) {
@@ -123,7 +140,6 @@ public class AdsListActivity extends AppCompatActivity {
             district_spinner.setText(PrefsHelper.getString(context, "distict"));
             block_spinner.setText(PrefsHelper.getString(context, "block"));
         }
-
         customize_relative.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -142,6 +158,7 @@ public class AdsListActivity extends AppCompatActivity {
         if (PrefsHelper.getString(this, "lang_code") != null && !PrefsHelper.getString(this, "lang_code").isEmpty()) {
             language_code = PrefsHelper.getString(this, "lang_code");
         }
+
         no_record_tv = findViewById(R.id.no_record_tv);
         search_edittext = findViewById(R.id.search_edittext);
         cattle_ads_recyclerview = findViewById(R.id.cattle_ads_recyclerview);
@@ -340,10 +357,9 @@ public class AdsListActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1)) {
-                    Toast.makeText(AdsListActivity.this, "Last", Toast.LENGTH_LONG).show();
-
+//                    Toast.makeText(AdsListActivity.this, "Last", Toast.LENGTH_LONG).show();
                     if (next_url != null) {
-
+                        offset = offset + 20;
                         if (category != null && !category.isEmpty() && category.equals("Cattle")) {
                             getCattleList("Sellads");
                         } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
@@ -379,6 +395,52 @@ public class AdsListActivity extends AppCompatActivity {
                 }
             }
         });
+
+//        cattle_ads_recyclerview.addOnScrollListener(new PaginationListener(new LinearLayoutManager(context)) {
+//            @Override
+//            protected void loadMoreItems() {
+//                isLoading = true;
+////              currentPage++;
+//                offset = offset + 20;
+//                getCattleList(category);
+//            }
+//
+//            @Override
+//            public int getTotalPageCount() {
+//                return TOTAL_PAGES;
+//            }
+//
+//            @Override
+//            public boolean isLastPage() {
+//                return isLastPage;
+//            }
+//
+//            @Override
+//            public boolean isLoading() {
+//                return isLoading;
+//            }
+//        });
+
+//        cattle_ads_recyclerview.addOnScrollListener(new PaginationListener(new LinearLayoutManager(context)) {
+//            @Override
+//            protected void loadMoreItems() {
+//                isLoading = true;
+//                currentPage++;
+//                offset = offset + 20;
+//                getCattleList(category);
+//            }
+//
+//            @Override
+//            public boolean isLastPage() {
+//                return isLastPage;
+//            }
+//
+//            @Override
+//            public boolean isLoading() {
+//                return isLoading;
+//            }
+//        });
+
         district_list.add("Select District");
         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, district_list);
         district_spinner.setAdapter(stateAdapter);
@@ -426,6 +488,53 @@ public class AdsListActivity extends AppCompatActivity {
                 }
             }
         });
+        search_btn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        search_state = state_spinner.getText().toString();
+                        search_district = district_spinner.getText().toString();
+                        search_block = block_spinner.getText().toString();
+                        min_price = min_price_et.getText().toString();
+                        max_price = max_price_et.getText().toString();
+                        search_product_name = select_product_spinner.getText().toString();
+
+                        if (category != null && !category.isEmpty() && category.equals("Cattle")) {
+                            getCattleList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equals("Service in Rent")) {
+                            getServiceList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equals("Fruits")) {
+                            getAgricultureList("Fruits", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Pulses")) {
+                            getAgricultureList("Pulses", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Medicinal plants")) {
+                            getAgricultureList("Medicinal plants", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Dairy Product")) {
+                            getAgricultureList("Dairy Product", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Vegetable")) {
+                            getAgricultureList("Vegetable", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Grains")) {
+                            getAgricultureList("Grains", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Flower")) {
+                            getAgricultureList("Flower", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("oilseeds")) {
+                            getAgricultureList("oilseeds", "Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Labour in Rent")) {
+                            getLabourinrentsList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Other Agri Product")) {
+                            getOtherAgriProductList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Agricultural machinary")) {
+                            getOtherAgriMachinary("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Tree and Woods")) {
+                            getTreeAndWoodsList("Sellads");
+                        } else if (category != null && !category.isEmpty() && category.equalsIgnoreCase("Fertilizers and Pesticides")) {
+                            getFertilizersList("Sellads");
+                        }
+                    }
+                }
+        );
+        getProducts(category);
         getStates();
     }
 
@@ -511,9 +620,9 @@ public class AdsListActivity extends AppCompatActivity {
         fertilizerAdapter.filterList(filteredList);
     }
 
-
     private void getCattleList(String super_category) {
         cattle_list.clear();
+        searchLinear.setVisibility(View.GONE);
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage("Loading...");
@@ -527,11 +636,27 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+
+//        if (next_url != null) {
+//            url = next_url;
+//        }
+//        else {
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
+        }
+        if (search_product_name != null && !search_product_name.isEmpty()) {
+            url = url + "&product=" + search_product_name;
         }
         Log.e("url", url);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -540,11 +665,15 @@ public class AdsListActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         Log.v("response", response);
                         try {
+                            isLoading = false;
                             mProgressDialog.dismiss();
                             response = new String(response.getBytes("ISO-8859-1"), "UTF-8");
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray data_array = jsonObject.getJSONArray("results");
                             next_url = jsonObject.getString("next");
+                            if (next_url == null) {
+                                isLastPage = true;
+                            }
                             CattleAdsModel m;
                             for (int i = 0; i < data_array.length(); i++) {
                                 JSONObject obj = data_array.getJSONObject(i);
@@ -593,17 +722,20 @@ public class AdsListActivity extends AppCompatActivity {
                                 }
                             }
                             if (cattle_list.size() > 0) {
-                                no_record_tv.setVisibility(View.GONE);
-                                scan_cardview.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 cattleAdapter = new CattleAdsAdapter(context, cattle_list);
                                 cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
                                 cattle_ads_recyclerview.setAdapter(cattleAdapter);
+                                no_record_tv.setVisibility(View.GONE);
+                                scan_cardview.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.VISIBLE);
 
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
@@ -661,11 +793,24 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+        ;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
         }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -724,6 +869,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (service_rent_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 serviceAdapter = new ServiceAdsAdapter(context, service_rent_list);
@@ -733,6 +879,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 scan_cardview.setVisibility(View.GONE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
@@ -792,12 +940,24 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url = "";
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
 
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
         }
         Log.e("url", url);
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
@@ -871,6 +1031,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (agriculture_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 agAdapter = new AgricultureAdsAdapter(context, agriculture_list);
@@ -880,6 +1041,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 scan_cardview.setVisibility(View.GONE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
@@ -940,11 +1103,23 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
         }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -1007,6 +1182,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (labour_in_rent_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 labourAdapter = new LabourinRentsAdapter(context, labour_in_rent_list);
                                 cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
@@ -1015,6 +1191,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 scan_cardview.setVisibility(View.GONE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
@@ -1052,7 +1230,6 @@ public class AdsListActivity extends AppCompatActivity {
                 params.put("Accept-Language", language_code);
                 return params;
             }
-
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
@@ -1080,11 +1257,23 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
         }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -1146,6 +1335,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (other_agri_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 otherAgriAdapter = new OtherAgriAdapter(context, other_agri_list);
                                 cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
@@ -1155,6 +1345,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 scan_cardview.setVisibility(View.GONE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
 
                         } catch (Exception e) {
@@ -1220,12 +1412,25 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//            u
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
         }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
+        }
+
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -1288,6 +1493,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (machinary_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 machinaryAgriAdapter = new AgricultureMachinaryAdapter(context, machinary_list);
                                 cattle_ads_recyclerview.setLayoutManager(cattleLayoutManager);
@@ -1297,6 +1503,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 scan_cardview.setVisibility(View.GONE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
 
                         } catch (Exception e) {
@@ -1363,11 +1571,23 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
         }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -1423,6 +1643,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (tree_and_woods_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 treeAndWoodsAdapter = new TreeandWoodsAdapter(context, tree_and_woods_list);
@@ -1433,6 +1654,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 no_record_tv.setVisibility(View.VISIBLE);
                                 scan_cardview.setVisibility(View.GONE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -1469,7 +1692,6 @@ public class AdsListActivity extends AppCompatActivity {
                 params.put("Accept-Language", language_code);
                 return params;
             }
-
         };
         postRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         Volley.newRequestQueue(context).add(postRequest);
@@ -1490,11 +1712,23 @@ public class AdsListActivity extends AppCompatActivity {
             }
         });
         mProgressDialog.show();
-        String url;
-        if (next_url != null) {
-            url = next_url;
-        } else {
-            url = "https://ekrishibazaar.com/api/ads/filterads/?super_category=" + super_category;
+        String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
+//        if (next_url != null) {
+//            url = next_url;
+//        } else {
+//
+//        }
+        if (search_state != null && !search_state.isEmpty()) {
+            url = url + "&state=" + search_state;
+        }
+        if (search_district != null && !search_district.isEmpty()) {
+            url = url + "&district=" + search_district;
+        }
+        if (min_price != null && !min_price.isEmpty()) {
+            url = url + "&product_price_min=" + min_price;
+        }
+        if (max_price != null && !max_price.isEmpty()) {
+            url = url + "&product_price_max=" + max_price;
         }
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
@@ -1554,6 +1788,7 @@ public class AdsListActivity extends AppCompatActivity {
                             if (fertilizer_list.size() > 0) {
                                 no_record_tv.setVisibility(View.GONE);
                                 scan_cardview.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.VISIBLE);
                                 cattle_ads_recyclerview.setHasFixedSize(true);
                                 cattleLayoutManager = new LinearLayoutManager(context);
                                 fertilizerAdapter = new FertilizerAdapter(context, fertilizer_list);
@@ -1562,6 +1797,8 @@ public class AdsListActivity extends AppCompatActivity {
                             } else {
                                 scan_cardview.setVisibility(View.GONE);
                                 no_record_tv.setVisibility(View.VISIBLE);
+                                customize_relative.setVisibility(View.GONE);
+                                searchLinear.setVisibility(View.GONE);
                             }
                             mProgressDialog.dismiss();
                         } catch (Exception e) {
@@ -1608,19 +1845,19 @@ public class AdsListActivity extends AppCompatActivity {
 
     void getStates() {
         state_list.clear();
-        final ProgressDialog mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage("Loading...");
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
-
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                // DO SOME STUFF HERE
-            }
-        });
-        mProgressDialog.show();
+//        final ProgressDialog mProgressDialog = new ProgressDialog(this);
+//        mProgressDialog.setIndeterminate(true);
+//        mProgressDialog.setMessage("Loading...");
+//        mProgressDialog.setCancelable(false);
+//        mProgressDialog.setCanceledOnTouchOutside(false);
+//        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+//
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//                // DO SOME STUFF HERE
+//            }
+//        });
+//        mProgressDialog.show();
         // Initialize a new RequestQueue instance
 
         // Initialize a new JsonArrayRequest instance
@@ -1635,7 +1872,7 @@ public class AdsListActivity extends AppCompatActivity {
                         //mTextView.setText(response.toString());
                         // Process the JSON
                         try {
-                            mProgressDialog.dismiss();
+//                            mProgressDialog.dismiss();
                             // Loop through the array elements
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
@@ -1646,14 +1883,14 @@ public class AdsListActivity extends AppCompatActivity {
                             state_spinner.setAdapter(stateAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            mProgressDialog.dismiss();
+//                            mProgressDialog.dismiss();
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        mProgressDialog.dismiss();
+//                        mProgressDialog.dismiss();
                         state_list.add("Select State");
                         ArrayAdapter<String> stateAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, state_list);
                         state_spinner.setAdapter(stateAdapter);
@@ -1798,4 +2035,83 @@ public class AdsListActivity extends AppCompatActivity {
         VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
+    void getProducts(String category_name) {
+
+        String url = "";
+        if (category.equals("Fruits") || category.equals("Pulses") || category.equals("Medicinal plants") || category.equals("Dairy Product") || category.equals("Vegetable") || category.equals("Grains")
+                || category.equals("Flower") || category.equals("oilseeds")) {
+            url = "https://ekrishibazaar.com/api/ads/products/?search=" + category_name;
+        } else if (category_name.equalsIgnoreCase("Cattle")) {
+            url = "https://ekrishibazaar.com/api/ads/cattletypes/";
+        } else if (category_name.equalsIgnoreCase("Fertilizers and Pesticides")) {
+            url = "https://ekrishibazaar.com/api/ads/chemicaltypes/";
+        } else if (category_name.equalsIgnoreCase("Labour in Rent")) {
+            url = "https://ekrishibazaar.com/api/ads/labourexpertise/";
+        } else if (category_name.equalsIgnoreCase("Other Agri Product")) {
+            url = "https://ekrishibazaar.com/api/ads/otheragriproducttypes/";
+        } else if (category_name.equalsIgnoreCase("Service in Rent")) {
+            url = "https://ekrishibazaar.com/api/ads/servicemachinary/";
+        } else if (category_name.equalsIgnoreCase("Tree and Woods")) {
+            url = "https://ekrishibazaar.com/api/ads/woodtype/";
+        } else if (category_name.equalsIgnoreCase("Agricultural machinary")) {
+            url = "https://ekrishibazaar.com/api/ads/agriculturalmachinary/";
+        }
+        product_list.clear();
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setOnCancelListener(new Dialog.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                // DO SOME STUFF HERE
+            }
+        });
+        mProgressDialog.show();
+        // Initialize a new JsonArrayRequest instance
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        // Process the JSON
+                        try {
+                            mProgressDialog.dismiss();
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject obj = response.getJSONObject(i);
+                                product_list.add((obj.getString("product_name")));
+                            }
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
+                            select_product_spinner.setAdapter(productAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            product_list.add("Select Product");
+                            ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
+                            select_product_spinner.setAdapter(productAdapter);
+                            mProgressDialog.dismiss();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        mProgressDialog.dismiss();
+                        product_list.add("Select Product");
+                        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
+                        select_product_spinner.setAdapter(categoryAdapter);
+                        // Do something when error occurred
+                    }
+                }
+        );
+        // Add JsonArrayRequest to the RequestQueue
+        VolleySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
 }

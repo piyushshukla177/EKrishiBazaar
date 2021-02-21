@@ -71,7 +71,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_30sdp"
         android:layout_below="@+id/scan_cardview"
-        android:background="@color/light_gray3">
+        android:background="@color/light_gray3"
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,7 +90,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/_10sdp"
-            android:src="@drawable/up_arrow" />
+            android:src="@drawable/up_arrow"
+            app:tint="@color/dark_green" />
     </RelativeLayout>
 
     <LinearLayout
@@ -147,7 +149,6 @@
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_10sdp"
-            android:autofillHints="Select Your District"
             android:hint="@string/Select_Product"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -167,8 +168,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Max Price"
-                android:maxLines="1"
                 android:inputType="numberDecimal"
+                android:maxLines="1"
                 android:textSize="@dimen/_10sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -191,7 +192,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/next_btn"
+            android:id="@+id/search_btn"
             android:layout_width="@dimen/_90sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
@@ -205,23 +206,29 @@
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cattle_ads_recyclerview"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchLinear"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        android:layout_below="@+id/searchLinear">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cattle_ads_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
 
     <TextView
         android:id="@+id/no_record_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="No Record Found"
+        android:text="Ads Not Found"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
         android:visibility="gone" />
