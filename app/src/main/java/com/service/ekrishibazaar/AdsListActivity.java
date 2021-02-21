@@ -21,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,7 +55,6 @@ import com.service.ekrishibazaar.model.LabourInRentModel;
 import com.service.ekrishibazaar.model.OtherAgriModel;
 import com.service.ekrishibazaar.model.ServiceAdsModel;
 import com.service.ekrishibazaar.model.TreeAndWoodsModel;
-import com.service.ekrishibazaar.util.PaginationListener;
 import com.service.ekrishibazaar.util.PrefsHelper;
 import com.service.ekrishibazaar.util.VolleySingleton;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
@@ -2041,19 +2039,19 @@ public class AdsListActivity extends AppCompatActivity {
         if (category.equals("Fruits") || category.equals("Pulses") || category.equals("Medicinal plants") || category.equals("Dairy Product") || category.equals("Vegetable") || category.equals("Grains")
                 || category.equals("Flower") || category.equals("oilseeds")) {
             url = "https://ekrishibazaar.com/api/ads/products/?search=" + category_name;
-        } else if (category_name.equalsIgnoreCase("Cattle")) {
+        } else if (category.equalsIgnoreCase("Cattle")) {
             url = "https://ekrishibazaar.com/api/ads/cattletypes/";
-        } else if (category_name.equalsIgnoreCase("Fertilizers and Pesticides")) {
+        } else if (category.equalsIgnoreCase("Fertilizers and Pesticides")) {
             url = "https://ekrishibazaar.com/api/ads/chemicaltypes/";
-        } else if (category_name.equalsIgnoreCase("Labour in Rent")) {
+        } else if (category.equalsIgnoreCase("Labour in Rent")) {
             url = "https://ekrishibazaar.com/api/ads/labourexpertise/";
-        } else if (category_name.equalsIgnoreCase("Other Agri Product")) {
+        } else if (category.equalsIgnoreCase("Other Agri Product")) {
             url = "https://ekrishibazaar.com/api/ads/otheragriproducttypes/";
-        } else if (category_name.equalsIgnoreCase("Service in Rent")) {
+        } else if (category.equalsIgnoreCase("Service in Rent")) {
             url = "https://ekrishibazaar.com/api/ads/servicemachinary/";
-        } else if (category_name.equalsIgnoreCase("Tree and Woods")) {
+        } else if (category.equalsIgnoreCase("Tree and Woods")) {
             url = "https://ekrishibazaar.com/api/ads/woodtype/";
-        } else if (category_name.equalsIgnoreCase("Agricultural machinary")) {
+        } else if (category.equalsIgnoreCase("Agricultural machinary")) {
             url = "https://ekrishibazaar.com/api/ads/agriculturalmachinary/";
         }
         product_list.clear();
@@ -2086,7 +2084,13 @@ public class AdsListActivity extends AppCompatActivity {
                             for (int i = 0; i < response.length(); i++) {
                                 // Get current json object
                                 JSONObject obj = response.getJSONObject(i);
-                                product_list.add((obj.getString("product_name")));
+                                if (category.equalsIgnoreCase("Cattle")) {
+                                    product_list.add((obj.getString("cattle_name")));
+                                } else if (category_name.equalsIgnoreCase("Fertilizers and Pesticides")) {
+                                    product_list.add((obj.getString("product_name")));
+                                } else {
+                                    product_list.add((obj.getString("type_of_chemical")));
+                                }
                             }
                             ArrayAdapter<String> productAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, product_list);
                             select_product_spinner.setAdapter(productAdapter);
