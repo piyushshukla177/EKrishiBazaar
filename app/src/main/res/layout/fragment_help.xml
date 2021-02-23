@@ -41,6 +41,7 @@
         android:background="@color/light_gray" />
 
     <LinearLayout
+        android:id="@+id/main_linear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view"
@@ -173,4 +174,25 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/sign_in_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_signin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:text="@string/Sign_In"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/_15sdp" />
+    </LinearLayout>
 </RelativeLayout>
