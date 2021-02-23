@@ -1,4 +1,4 @@
-package com.service.ekrishibazaar;
+package com.ekrishibazaar;
 
 import org.junit.Test;
 

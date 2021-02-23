@@ -101,7 +101,6 @@
             app:layout_constraintTop_toBottomOf="@+id/linear_toolbar" />
     </LinearLayout>
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -137,8 +136,7 @@
                             android:layout_height="40dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/sell"
-                            app:tint="@color/logo_color"
-                            />
+                            app:tint="@color/logo_color"/>
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -261,8 +259,7 @@
                     android:textSize="@dimen/_10sdp" />
             </RelativeLayout>
 
-
-            <com.service.ekrishibazaar.util.MyGridView
+            <com.ekrishibazaar.util.MyGridView
                 android:id="@+id/category_grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
