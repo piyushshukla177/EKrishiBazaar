@@ -369,18 +369,21 @@ public class AdsListActivity extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
                 currentItems = cattleLayoutManager.getChildCount();
                 totalItems = cattleLayoutManager.getItemCount();
-//                scrollOutItems = cattleLayoutManager.findFirstVisibleItemPosition();
+//              scrollOutItems = cattleLayoutManager.findFirstVisibleItemPosition();
                 scrollOutItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
                 if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
                     offset = offset + 20;
                     isScrolling = false;
-                    getCattleList(category);
+                    if(next_url!=null)
+                    {
+                        getCattleList(category);
+                    }
                 }
             }
         });
 
-        cattle_ads_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*cattle_ads_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -423,7 +426,7 @@ public class AdsListActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
+        });*/
 
 //        cattle_ads_recyclerview.addOnScrollListener(new PaginationListener(new LinearLayoutManager(context)) {
 //            @Override
@@ -654,7 +657,7 @@ public class AdsListActivity extends AppCompatActivity {
     }
 
     private void getCattleList(String super_category) {
-//        cattle_list.clear();
+//      cattle_list.clear();
         searchLinear.setVisibility(View.GONE);
         final ProgressDialog mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndeterminate(true);
@@ -671,6 +674,7 @@ public class AdsListActivity extends AppCompatActivity {
         mProgressDialog.show();
         String url = "https://ekrishibazaar.com/api/ads/filterads/?limit=" + limit + "&offset=" + offset + "&super_category=" + super_category;
 
+        Log.e("url",url);
 //        if (next_url != null) {
 //            url = next_url;
 //        }
