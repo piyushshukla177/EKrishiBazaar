@@ -84,4 +84,5 @@
     <string name="Confirm_Password">Confirm Password</string>
     <string name="Description">Description</string>
     <string name="Save">Save</string>
+    <string name="admob_app_id">ca-app-pub-3214240622497232/5112055838</string>
 </resources>
