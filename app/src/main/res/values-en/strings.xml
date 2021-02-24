@@ -74,4 +74,16 @@
     <string name="Profile_Details">Profile Details</string>
     <string name="Location_Details">Location Details</string>
     <string name="Product_Details">Product Details</string>
+    <string name="Change_Profile_Picture"><u>Change Profile Picture</u>.</string>
+    <string name="Delete"><u>Delete</u>.</string>
+    <string name="chat">Chat</string>
+    <string name="Update_Mobile_Number">Update Mobile Number</string>
+    <string name="Change_Passsword">Change Passsword</string>
+    <string name="User_Description">User Description</string>
+
+    <string name="Update">Update</string>
+    <string name="New_Password">New Password</string>
+    <string name="Confirm_Password">Confirm Password</string>
+    <string name="Description">Description</string>
+    <string name="Save">Save</string>
 </resources>

@@ -74,4 +74,16 @@
     <string name="Profile_Details">प्रोफ़ाइल विवरण</string>
     <string name="Location_Details">स्थान का विवरण</string>
     <string name="Product_Details">उत्पाद विवरण</string>
+    <string name="chat">चैट</string>
+    <string name="Change_Profile_Picture"><u>प्रोफ़ाइल चित्र बदलें</u>.</string>
+    <string name="Delete"><u>हटाएं</u>.</string>
+    <string name="Update_Mobile_Number">मोबाइल नंबर अपडेट करें</string>
+    <string name="Change_Passsword">पासस्वर्ड बदलें</string>
+    <string name="User_Description">उपयोगकर्ता का विवरण</string>
+
+    <string name="Update">अपडेट करें</string>
+    <string name="New_Password">नया पासवर्ड</string>
+    <string name="Confirm_Password">पासवर्ड की पुष्टि कीजिये</string>
+    <string name="Description">विवरण</string>
+    <string name="Save">सहेजें</string>
 </resources>
