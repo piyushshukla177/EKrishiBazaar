@@ -272,127 +272,18 @@
                 android:numColumns="3"
                 android:verticalSpacing="10dp" />
 
-            <!--            <TextView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginLeft="@dimen/_15sdp"-->
-            <!--                android:layout_marginTop="@dimen/_30sdp"-->
-            <!--                android:layout_marginBottom="@dimen/_15sdp"-->
-            <!--                android:text="Fresh Recommendation"-->
-            <!--                android:textColor="@color/dark_green"-->
-            <!--                android:textSize="@dimen/_10sdp" />-->
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:orientation="horizontal">-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/cattle_ads_linear"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="0.5"-->
-            <!--                    android:orientation="vertical">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:id="@+id/catttle_ads_imageview"-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="@dimen/_100sdp"-->
-            <!--                        android:src="@drawable/cattle" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:layout_margin="@dimen/_10sdp"-->
-            <!--                        android:text="Cattle Ads"-->
-            <!--                        android:textColor="@color/black"-->
-            <!--                        android:textSize="@dimen/_10sdp" />-->
-            <!--                </LinearLayout>-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/service_ads_linear"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="0.5"-->
-            <!--                    android:orientation="vertical">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="@dimen/_100sdp"-->
-            <!--                        android:src="@drawable/service_category" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:layout_margin="@dimen/_10sdp"-->
-            <!--                        android:text="Service Ads"-->
-            <!--                        android:textColor="@color/black"-->
-            <!--                        android:textSize="@dimen/_10sdp" />-->
-            <!--                </LinearLayout>-->
-            <!--            </LinearLayout>-->
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginBottom="@dimen/_20sdp"-->
-            <!--                android:orientation="horizontal">-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/agricultire_machinary_linear"-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="0.5"-->
-            <!--                    android:orientation="vertical">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="@dimen/_100sdp"-->
-            <!--                        android:src="@drawable/machinery_category" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:layout_margin="@dimen/_10sdp"-->
-            <!--                        android:text="Agriculture Machinary"-->
-            <!--                        android:textColor="@color/black"-->
-            <!--                        android:textSize="@dimen/_10sdp" />-->
-            <!--                </LinearLayout>-->
-
-            <!--                <LinearLayout-->
-            <!--                    android:layout_width="0dp"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="0.5"-->
-            <!--                    android:orientation="vertical">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="@dimen/_100sdp"-->
-            <!--                        android:src="@drawable/other_products" />-->
-
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:layout_margin="@dimen/_10sdp"-->
-            <!--                        android:text="Other Agri Ads"-->
-            <!--                        android:textColor="@color/black"-->
-            <!--                        android:textSize="@dimen/_10sdp" />-->
-            <!--                </LinearLayout>-->
-            <!--            </LinearLayout>-->
-
             <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/admob_app_id">
+                ads:adUnitId="ca-app-pub-3214240622497232/5112055838">
 
             </com.google.android.gms.ads.AdView>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

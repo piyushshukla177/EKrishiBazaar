@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".util.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,6 +16,10 @@
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
 
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+            <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-3214240622497232~9733811214" />
 
         <activity
             android:name=".UpdateProfileActivity"
