@@ -113,7 +113,8 @@
                     android:layout_centerHorizontal="true"
                     android:visibility="gone"
                     ads:adSize="BANNER"
-                    ads:adUnitId="ca-app-pub-3214240622497232/5112055838">
+                    android:layout_marginTop="@dimen/_10sdp"
+                    ads:adUnitId="ca-app-pub-3214240622497232/8284179938">
                 </com.google.android.gms.ads.AdView>
 
                 <!--                <TextView-->

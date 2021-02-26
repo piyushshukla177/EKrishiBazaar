@@ -7,8 +7,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".fragments.HomeFragment"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:ads="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -281,7 +280,7 @@
                 android:layout_alignParentBottom="true"
                 ads:adSize="BANNER"
                 android:layout_gravity="center"
-                ads:adUnitId="ca-app-pub-3214240622497232/5112055838">
+                ads:adUnitId="ca-app-pub-3214240622497232/8284179938">
 
             </com.google.android.gms.ads.AdView>
 
