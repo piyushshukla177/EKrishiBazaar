@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "517873123600",
+    "project_id": "comekrishibazaar",
+    "storage_bucket": "comekrishibazaar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:517873123600:android:6f0eaca4ed180c2c352595",
+        "android_client_info": {
+          "package_name": "com.ekrishibazaar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "517873123600-90l210dr8ohh8bojg29jv8545p3g4q2n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3IyTrFHR9bggiRdDz63z9YMmfUEFKcz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "517873123600-90l210dr8ohh8bojg29jv8545p3g4q2n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
