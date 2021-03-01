@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AdsListActivity">
 
+
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -65,6 +66,7 @@
         android:weightSum="2">
 
     </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/customize_relative"
@@ -197,32 +199,39 @@
             android:layout_height="@dimen/_30sdp"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/corner_round_btn_shape"
             android:text="Search"
             app:backgroundTint="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@+id/privacy_textview" />
 
     </LinearLayout>
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/searchLinear">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cattle_ads_recyclerview"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+           >
 
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cattle_ads_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <TextView
         android:id="@+id/no_record_tv"
