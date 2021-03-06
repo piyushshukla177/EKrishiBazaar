@@ -29,10 +29,10 @@
         android:layout_marginRight="@dimen/_30sdp"
         android:gravity="center_horizontal"
         android:padding="@dimen/_5sdp"
-        android:text=""
+        android:text="@string/Let_us_Provide_Information_about_your_area"
         android:textAlignment="center"
         android:textColor="@color/dark_green"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="@dimen/_18sdp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_language_btn" />
@@ -87,9 +87,9 @@
         android:id="@+id/privacy_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:text="@string/view_privacy"
-        android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/blue"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/terms_checkbox" />

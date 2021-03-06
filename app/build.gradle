@@ -9,8 +9,8 @@ android {
         applicationId "com.ekrishibazaar"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,6 +24,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
 }
 
@@ -54,8 +59,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'gun0912.ted:tedbottompicker:2.0.1'
     implementation 'com.google.android.gms:play-services-ads:19.7.0'
+    implementation 'eu.dkaratzas:android-inapp-update:1.0.5'
 //  implementation 'com.google.android.gms:play-services-ads:11.8.0'
 //  implementation 'com.loopj.android:android-async-http:1.4.9'
 //  implementation 'de.hdodenhof:circleimageview:3.1.0'
-
 }
