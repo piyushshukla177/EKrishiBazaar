@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NotificationActivity">
+    tools:context=".NotificationActivity"
+    android:background="#F2F2F2">
 
     <LinearLayout
         android:id="@+id/toolbar_linear"
@@ -49,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar_linear"
-        android:layout_marginTop="@dimen/_10sdp" />
+        android:layout_margin="@dimen/_10sdp" />
 
     <TextView
         android:id="@+id/no_msg_tv"
@@ -59,6 +60,12 @@
         android:text="@string/No_Message_to_show"
         android:textColor="@color/light_black"
         android:textSize="@dimen/_12sdp"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AdsListActivity">
 
-
     <LinearLayout
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -213,18 +212,17 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/progressbar"
         android:layout_below="@+id/searchLinear">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           >
+            android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cattle_ads_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent">
@@ -233,21 +231,36 @@
         </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <!--    <ProgressBar-->
+    <!--        android:id="@+id/progressbar"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:visibility="gone"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_centerHorizontal="true" />-->
+
     <TextView
         android:id="@+id/no_record_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Ads Not Found"
+        android:text="@string/Ads_Not_Found"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
         android:visibility="gone" />
 
-    <!--    <ProgressBar-->
-    <!--        android:id="@+id/progressbar"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:visibility="gone" />-->
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progressbar_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

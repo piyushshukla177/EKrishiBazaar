@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="Profile Details"
+                    android:text="@string/Product_Details"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -219,7 +219,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="1dp"
                         android:background="@color/dark_green"
-                        android:text="View Profile"
+                        android:text="@string/View_Profile"
                         android:textAllCaps="false"
                         android:textSize="@dimen/_8sdp"
                         app:backgroundTint="@null" />
@@ -252,7 +252,7 @@
                         android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentRight="true"
                         android:background="@color/dark_green"
-                        android:text="Make Offer"
+                        android:text="@string/Make_Offer"
                         android:textAllCaps="false"
                         android:textSize="@dimen/_8sdp"
                         app:backgroundTint="@null" />
@@ -276,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="Location Details"
+                    android:text="@string/Location_Details"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -390,7 +390,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
-                    android:text="Product Details"
+                    android:text="@string/Product_Details"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </RelativeLayout>

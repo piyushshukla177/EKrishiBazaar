@@ -18,115 +18,164 @@
         android:usesCleartextTraffic="true">
 
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-            <meta-data
-                android:name="com.google.android.gms.ads.APPLICATION_ID"
-                android:value="@string/ad_mob_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ad_mob_app_id" />
 
         <activity
             android:name=".UpdateProfileActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash"></activity>
         <activity
             android:name=".ServiceAdsDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostTreeAndWoodsAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostServiceRentAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostOtherAgriAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostAgriculturalMachinaryAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostLabourAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostFertilizerAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostCattleAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".SelectCategoryActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostSellAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".PostNewAdsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".MyAdsDetail"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".MoreServicesActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".AboutusActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".ContactUsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
-        <activity android:name=".AccountSettingsActivity" />
+        <activity
+            android:name=".AccountSettingsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".NotificationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".ViewProfileActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".FertilizerAdsDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".TreeAdsDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".TreeAndWoodDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".LabourAdDetailsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".OtherAgriAdsDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".MachinaryAdsDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".ServiceInRentDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".CattleDetailsActivity"
-            android:theme="@style/Theme.Splash" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"
+
+            />
         <activity
             android:name=".AdaDetailsActivity"
-            android:theme="@style/Theme.Splash" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"
+
+            />
         <activity
             android:name=".AdsListActivity"
-            android:theme="@style/Theme.Splash" />
-        <activity android:name=".AllCategoryList" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"
+
+            />
+        <activity
+            android:name=".AllCategoryList"
+            android:screenOrientation="portrait"
+
+            />
         <activity
             android:name=".SelectLanguageActivity"
-            android:theme="@style/Theme.Splash" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"
+
+            />
         <activity
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash"
+
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".AboutActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".RegistrationActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
