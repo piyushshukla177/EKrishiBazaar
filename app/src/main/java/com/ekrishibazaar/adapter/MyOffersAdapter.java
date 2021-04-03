@@ -1,17 +1,21 @@
 package com.ekrishibazaar.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ekrishibazaar.MyAdsDetail;
 import com.ekrishibazaar.R;
+import com.ekrishibazaar.ViewMyOfferAdsActivity;
 import com.ekrishibazaar.model.MyOffersModel;
 import com.squareup.picasso.Picasso;
 
@@ -25,6 +29,7 @@ public class MyOffersAdapter extends RecyclerView.Adapter<MyOffersAdapter.MyOffe
         public TextView offer_by_tv, offer_price_tv, contact_number_tv;
         ImageView profile_imageview;
         CardView cardview;
+        LinearLayout view_ads_linear;
 
         public MyOffersViewHolder(View itemView) {
             super(itemView);
@@ -33,6 +38,7 @@ public class MyOffersAdapter extends RecyclerView.Adapter<MyOffersAdapter.MyOffe
             offer_price_tv = itemView.findViewById(R.id.offer_price_tv);
             contact_number_tv = itemView.findViewById(R.id.contact_number_tv);
             cardview = itemView.findViewById(R.id.cardview);
+            view_ads_linear = itemView.findViewById(R.id.view_ads_linear);
         }
     }
 
@@ -56,6 +62,16 @@ public class MyOffersAdapter extends RecyclerView.Adapter<MyOffersAdapter.MyOffe
         holder.offer_by_tv.setText(currentItem.getOffer_by());
         holder.offer_price_tv.setText("₹ " + currentItem.getOffer_price());
         holder.contact_number_tv.setText(currentItem.getContact_number());
+        holder.view_ads_linear.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ViewMyOfferAdsActivity.class);
+                        intent.putExtra("post_id", currentItem.getPost_id());
+                        context.startActivity(intent);
+                    }
+                }
+        );
     }
 
     @Override

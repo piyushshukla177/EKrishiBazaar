@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EKrishiBazaar"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".ViewMyOfferAdsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Splash"></activity>
         <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
@@ -25,7 +28,7 @@
         <activity
             android:name=".UpdateProfileActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"></activity>
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".ServiceAdsDetailActivity"
             android:screenOrientation="portrait"
@@ -128,38 +131,27 @@
         <activity
             android:name=".CattleDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"
-
-            />
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".AdaDetailsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"
-
-            />
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".AdsListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"
-
-            />
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".AllCategoryList"
-            android:screenOrientation="portrait"
-
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SelectLanguageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Splash"
-
-            />
+            android:theme="@style/Theme.Splash" />
         <activity
             android:name=".DashboardActivity"
             android:label="@string/title_activity_dashboard"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Splash"
-
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".AboutActivity"
@@ -184,5 +176,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

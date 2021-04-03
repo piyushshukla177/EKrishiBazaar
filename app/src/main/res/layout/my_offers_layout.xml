@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/white"
@@ -111,6 +112,33 @@
                                 android:text=""
                                 android:textSize="@dimen/_12sdp" />
                         </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/view_ads_linear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/profile_imageview"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="View Ad"
+                                android:textColor="@color/dark_green"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_10sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:src="@drawable/double_right_arrow"
+                                app:tint="@color/dark_green" />
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

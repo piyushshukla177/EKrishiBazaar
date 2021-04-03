@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public interface ImageCompressTaskListener {
-    void onComplete(List<File> compressed);
+    void onComplete(List<File> compressed, String imagename);
 
     void onError(Throwable error);
 }

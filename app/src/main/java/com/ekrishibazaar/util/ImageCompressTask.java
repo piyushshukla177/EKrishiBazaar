@@ -19,13 +19,16 @@ public class ImageCompressTask implements Runnable {
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private List<File> result = new ArrayList<>();
     private ImageCompressTaskListener mIImageCompressTaskListener;
+    String imagename;
 
     public ImageCompressTask(Context context, String path,
-                             ImageCompressTaskListener compressTaskListener) {
+                             ImageCompressTaskListener compressTaskListener, String imagename) {
         originalPaths.add(path);
         mContext = context;
         mIImageCompressTaskListener = compressTaskListener;
+        this.imagename = imagename;
     }
+
     public ImageCompressTask(Context context, List<String> paths,
                              ImageCompressTaskListener compressTaskListener) {
         originalPaths = paths;
@@ -43,21 +46,19 @@ public class ImageCompressTask implements Runnable {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-
-                    if(mIImageCompressTaskListener != null)
-                        mIImageCompressTaskListener.onComplete(result);
+                    if (mIImageCompressTaskListener != null)
+                        mIImageCompressTaskListener.onComplete(result, imagename);
                 }
             });
-        }catch (final IOException ex) {
+        } catch (final IOException ex) {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(mIImageCompressTaskListener != null)
+                    if (mIImageCompressTaskListener != null)
                         mIImageCompressTaskListener.onError(ex);
                 }
             });
         }
     }
-
 }
 

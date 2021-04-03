@@ -38,6 +38,7 @@
         android:id="@+id/myoffer_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/progrssbar_bottom"
         android:layout_below="@+id/view"
         android:layout_margin="@dimen/_10sdp" />
 
@@ -51,10 +52,40 @@
         android:textSize="@dimen/_15sdp"
         android:visibility="gone" />
 
+    <LinearLayout
+        android:id="@+id/sign_in_linear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/user_signin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:text="@string/Sign_In"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/_15sdp" />
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/progrssbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progrssbar_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:visibility="gone" />
 </RelativeLayout>
