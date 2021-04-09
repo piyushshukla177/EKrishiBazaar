@@ -90,6 +90,7 @@
     <string name="Account_Settings">अकाउंट सेटिंग</string>
     <string name="Show_Mobile_Number">मोबाइल नंबर दिखाएं</string>
     <string name="My_Offers">मेरे प्रस्ताव</string>
+    <string name="My_Account">प्रोफ़ाइल</string>
     <string name="ad_mob_app_id">ca-app-pub-3214240622497232~9733811214</string>
     <string name="banner_ads_id">ca-app-pub-3214240622497232/5112055838</string>
 </resources>

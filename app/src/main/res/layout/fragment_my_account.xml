@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="My Account"
+                android:text="@string/My_Account"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_15sdp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -48,13 +48,14 @@
 
                 <com.mikhaellopez.circularimageview.CircularImageView
                     android:id="@+id/logo"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:background="@drawable/black_circle" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_toRightOf="@+id/logo"
                     android:orientation="vertical">
@@ -163,7 +164,7 @@
             </LinearLayout>
 
             <LinearLayout
-              android:id="@+id/settings_account"
+                android:id="@+id/settings_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -229,4 +230,11 @@
             android:textColor="@color/dark_green"
             android:textSize="@dimen/_15sdp" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

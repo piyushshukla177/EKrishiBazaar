@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_15sdp"
-            android:text="Post Ads"
+            android:text="@string/Post_Ads"
             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
