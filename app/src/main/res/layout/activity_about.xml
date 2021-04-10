@@ -37,39 +37,42 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/change_language_btn" />
 
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/state_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_45sdp"
         android:layout_marginLeft="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/spinner_background"
         android:hint="@string/Select_your_State"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/provide_info_tv" />
 
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/district_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_15sdp"
-        android:hint="@string/Select_your_District"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/spinner_background"
+        android:hint="@string/Select_your_State"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/state_spinner" />
 
-    <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/block_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_15sdp"
-        android:autofillHints="Select Your District"
-        android:hint="@string/Select_your_Block"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/spinner_background"
+        android:hint="@string/Select_your_State"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/district_spinner" />
