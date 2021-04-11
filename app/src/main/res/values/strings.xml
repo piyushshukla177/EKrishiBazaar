@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EKrishiBazaar</string>
+    <string name="app_name">eKrishiBazaar</string>
     <string name="title_activity_dashboard">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -88,6 +88,7 @@
     <string name="Show_Mobile_Number">Show Mobile Number</string>
     <string name="My_Offers">My Offers</string>
     <string name="My_Account">My Account</string>
+    <string name="offers_not_found">offers not found</string>
     <string name="ad_mob_app_id">ca-app-pub-3214240622497232~9733811214</string>
     <string name="banner_ads_id">ca-app-pub-3214240622497232/5112055838</string>
 </resources>
